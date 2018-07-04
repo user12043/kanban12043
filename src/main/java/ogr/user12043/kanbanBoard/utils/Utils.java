@@ -8,12 +8,12 @@ import java.io.File;
  */
 public class Utils {
     public static boolean isLangFileExists(String lang) {
-        File file = new File(Constants.languageDirName);
+        File file = new File(Constants.languageDirectory);
         if (!file.exists() || !file.isDirectory()) {
             String[] list = file.list();
             if (list != null) {
                 for (String fileName : list) {
-                    if (fileName.equals("lang_" + fileName + ".properties")) {
+                    if (fileName.equals(Constants.languageFileTemplate.replace("%lng%", fileName))) {
                         return true;
                     }
                 }

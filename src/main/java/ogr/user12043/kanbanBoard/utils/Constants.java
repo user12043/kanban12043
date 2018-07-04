@@ -6,7 +6,8 @@ package ogr.user12043.kanbanBoard.utils;
  */
 public class Constants {
     public static String settingsFileName = "kanban-board-config.json";
-    public static String languageDirName = "./lang";
+    public static String languageDirectory = "./lang";
+    public static String languageFileTemplate = "lang_%lng%.properties";
 
     //<editor-fold desc="Argument name">
     public static String args_languageArgumentName = "lang";

@@ -2,7 +2,6 @@ package ogr.user12043.kanbanBoard;
 
 import ogr.user12043.kanbanBoard.utils.Constants;
 import ogr.user12043.kanbanBoard.utils.Properties;
-import ogr.user12043.kanbanBoard.utils.Utils;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -16,11 +15,7 @@ public class Main {
     private static ResourceBundle langResourceBundle;
 
     private static void setLocale() {
-        if (Utils.isLangFileExists(Properties.lang)) {
-            locale = new Locale(Properties.lang);
-        } else {
-            locale = new Locale("en");
-        }
+        locale = new Locale(Properties.lang);
 
         //TODO create the langResourceBundle
     }
@@ -47,6 +42,6 @@ public class Main {
         setLocale();
 
         // Display GUI
-        new MainPane();
+        new MainPane().display();
     }
 }

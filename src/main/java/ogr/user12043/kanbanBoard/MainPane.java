@@ -11,7 +11,7 @@ public class MainPane {
     private JButton testButton;
     private JPanel jPanel_main;
     
-    public void display(String[] args) {
+    public void display() {
         createUIComponents();
         JFrame frame = new JFrame("MainPane");
         frame.setContentPane(new MainPane().jPanel_main);

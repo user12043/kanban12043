@@ -1,5 +1,6 @@
 package ogr.user12043.kanbanBoard.utils;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -8,9 +9,13 @@ import org.json.JSONObject;
  */
 public class Properties {
     public static void getProperties() {
-        JSONObject jsonObject = new JSONObject(Constants.settingsFileName);
-        Properties.lang = jsonObject.getString("lang");
+        try {
+            JSONObject jsonObject = new JSONObject(Constants.settingsFileName);
+            Properties.lang = jsonObject.getString("lang");
+        } catch (JSONException e) {
+            System.out.println("Configuration file (\"" + Constants.settingsFileName + "\") not found! Using default settings");
+        }
     }
 
-    public static String lang;
+    public static String lang = "en";
 }
