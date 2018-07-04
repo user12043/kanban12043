@@ -10,7 +10,7 @@ public class MainPane {
     private JLabel jlabel_windowTitle;
     private JButton testButton;
     private JPanel jPanel_main;
-
+    
     public void display(String[] args) {
         createUIComponents();
         JFrame frame = new JFrame("MainPane");
