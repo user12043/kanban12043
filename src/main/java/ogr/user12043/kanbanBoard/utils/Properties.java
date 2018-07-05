@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 /**
  * Created by ME99735 on 04.07.2018 - 18:55
  * Part of project: kanbanboard
@@ -15,12 +17,13 @@ public class Properties {
     // Read properties from file
     public static void initializeProperties() {
         try {
-            JSONObject jsonObject = new JSONObject(Constants.settingsFileName);
+            String fileContent = Utils.readFile(Constants.settingsFileName);
+            JSONObject jsonObject = new JSONObject(fileContent);
             Properties.lang = jsonObject.getString("lang");
-        } catch (JSONException e) {
+        } catch (JSONException | IOException e) {
             logger.warn("Failed to read configuration file (\"" + Constants.settingsFileName + "\")! Using default settings");
         }
     }
 
-    public static String lang = "en";
+    public static String lang = "en-US";
 }
