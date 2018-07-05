@@ -16,7 +16,10 @@ public class MainPane extends javax.swing.JFrame {
     public MainPane() {
         initComponents();
         setMinimumSize(new Dimension(300, 500));
-        
+    }
+
+    public void addContent(Component component) {
+        jPanel_mainContentPanel.add(component);
     }
 
     /**
@@ -29,13 +32,17 @@ public class MainPane extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel_title = new javax.swing.JLabel();
-        jPanel_mainContainer = new ogr.user12043.kanbanBoard.view.KanbanContainer();
+        jPanel_mainContentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(300, 600));
 
         jLabel_title.setFont(new java.awt.Font("Arial Narrow", 0, 36)); // NOI18N
         jLabel_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_title.setText(Utils.getTag("title"));
+
+        jPanel_mainContentPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel_mainContentPanel.setLayout(new java.awt.GridBagLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -43,9 +50,12 @@ public class MainPane extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel_title)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel_mainContainer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel_title)
+                        .addGap(0, 43, Short.MAX_VALUE))
+                    .addComponent(jPanel_mainContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -53,7 +63,8 @@ public class MainPane extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel_title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel_mainContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
+                .addComponent(jPanel_mainContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -96,6 +107,6 @@ public class MainPane extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_title;
-    private ogr.user12043.kanbanBoard.view.KanbanContainer jPanel_mainContainer;
+    private javax.swing.JPanel jPanel_mainContentPanel;
     // End of variables declaration//GEN-END:variables
 }

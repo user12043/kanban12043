@@ -5,7 +5,6 @@
  */
 package ogr.user12043.kanbanBoard.view;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -20,16 +19,15 @@ public class KanbanContainer extends javax.swing.JPanel {
     /**
      * Creates new form Kanban
      */
+    public KanbanContainer() {
+        initComponents();
+        removeAll();
+    }
+
     public KanbanContainer(boolean addVertical) {
         initComponents();
         removeAll();
         this.addVertical = addVertical;
-    }
-
-    public KanbanContainer() {
-        initComponents();
-        removeAll();
-        this.addVertical = false;
     }
 
     @Override
@@ -45,21 +43,9 @@ public class KanbanContainer extends javax.swing.JPanel {
         last++;
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
-        c.weighty = 1;
+//        c.weighty = 1;
         add(comp, c);
         return comp;
-    }
-
-    public static void main(String args[]) {
-        JFrame frame = new JFrame("TEST");
-        KanbanContainer kanbanContainer = new KanbanContainer(false);
-        frame.setContentPane(kanbanContainer);
-        kanbanContainer.add(new JButton("test1"));
-        kanbanContainer.add(new JButton("test2"));
-        kanbanContainer.add(new JButton("test3"));
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
     }
 
     /**
