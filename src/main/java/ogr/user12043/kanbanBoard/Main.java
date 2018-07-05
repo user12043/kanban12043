@@ -8,13 +8,12 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Created by user12043 on 04.07.2018 - 16:50
- * Part of project: kanbanboard
+ * Part of project: kanban-board
  */
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String args[]) {
-
         try {
             // Get properties from file
             Properties.initializeProperties();
