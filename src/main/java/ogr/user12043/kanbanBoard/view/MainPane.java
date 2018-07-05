@@ -2,6 +2,8 @@ package ogr.user12043.kanbanBoard.view;
 
 import ogr.user12043.kanbanBoard.utils.Utils;
 
+import java.awt.*;
+
 /**
  * Created by user12043 on 05.07.2018 - 10:27
  * Part of project: kanbanboard
@@ -13,6 +15,9 @@ public class MainPane extends javax.swing.JFrame {
      */
     public MainPane() {
         initComponents();
+        setMinimumSize(new Dimension(300, 500));
+        // Remove the test component
+        remove(testKanbanContainer);
     }
 
     /**
@@ -25,26 +30,31 @@ public class MainPane extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel_title = new javax.swing.JLabel();
+        testKanbanContainer = new ogr.user12043.kanbanBoard.view.KanbanContainer();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel_title.setFont(new java.awt.Font("Arial Narrow", 0, 36)); // NOI18N
+        jLabel_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_title.setText(Utils.getTag("title"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(jLabel_title)
-                .addContainerGap(178, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel_title)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(testKanbanContainer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_title)
-                .addContainerGap(275, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel_title)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(testKanbanContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
         );
 
         pack();
@@ -57,7 +67,7 @@ public class MainPane extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -87,5 +97,6 @@ public class MainPane extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_title;
+    private ogr.user12043.kanbanBoard.view.KanbanContainer testKanbanContainer;
     // End of variables declaration//GEN-END:variables
 }

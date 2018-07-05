@@ -48,7 +48,7 @@ public class Utils {
             tag = getLangResource().getString(key);
         } catch (Exception e) {
             logger.error("Can not get tag from lang resource for key: " + key, e);
-            tag = "";
+            tag = "unnamed";
         }
         return tag;
     }
