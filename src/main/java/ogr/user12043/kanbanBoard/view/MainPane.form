@@ -28,7 +28,7 @@
               <Component id="jLabel_title" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
-          <Component id="testKanbanContainer" alignment="1" max="32767" attributes="0"/>
+          <Component id="jPanel_mainContainer" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -37,7 +37,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel_title" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="testKanbanContainer" pref="362" max="32767" attributes="0"/>
+              <Component id="jPanel_mainContainer" pref="362" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,7 +54,7 @@
         </Property>
       </Properties>
     </Component>
-    <Container class="ogr.user12043.kanbanBoard.view.KanbanContainer" name="testKanbanContainer">
+    <Container class="ogr.user12043.kanbanBoard.view.KanbanContainer" name="jPanel_mainContainer">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
     </Container>

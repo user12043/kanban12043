@@ -34,7 +34,10 @@ public class Main {
             }
 
             // Display GUI
-            new MainPane().setVisible(true);
+            MainPane mainPane = new MainPane();
+            // TODO: init content
+            mainPane.pack();
+            mainPane.setVisible(true);
         } catch (Exception e) {
             logger.error("Unexpected error: ", e);
         }
