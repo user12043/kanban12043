@@ -25,12 +25,14 @@
     <!--<scope>test</scope>-->
     <!--</dependency>-->
 
+    <!--Json processing-->
     <dependency>
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <version>20180130</version>
     </dependency>
 
+    <!--Logging-->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>

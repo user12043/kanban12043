@@ -3,26 +3,14 @@ package ogr.user12043.kanbanBoard;
 import ogr.user12043.kanbanBoard.utils.Constants;
 import ogr.user12043.kanbanBoard.utils.Properties;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 /**
- * Created by ME99735 on 04.07.2018 - 16:50
+ * Created by user12043 on 04.07.2018 - 16:50
  * Part of project: kanbanboard
  */
 public class Main {
-    private static Locale locale;
-    private static ResourceBundle langResourceBundle;
-
-    private static void setLocale() {
-        locale = new Locale(Properties.lang);
-
-        //TODO create the langResourceBundle
-    }
-
     public static void main(String args[]) {
         // Get properties from file
-        Properties.getProperties();
+        Properties.initializeProperties();
 
         //Process program arguments
         if (args.length > 0) {
@@ -38,10 +26,7 @@ public class Main {
             }
         }
 
-        // Set locale
-        setLocale();
-
         // Display GUI
-        new MainPane().display();
+//        new MainPane().setVisible(true);
     }
 }
