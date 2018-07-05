@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by ME99735 on 04.07.2018 - 18:46
- * Part of project: kanbanboard
+ * Part of project: kanban-board
  */
 public class Constants {
     public static String settingsFileName = "kanban-board-config.json";

@@ -6,7 +6,7 @@ import java.awt.*;
 
 /**
  * Created by user12043 on 05.07.2018 - 10:27
- * Part of project: kanbanboard
+ * Part of project: kanban-board
  */
 public class MainPane extends javax.swing.JFrame {
 

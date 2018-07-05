@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  * Created by ME99735 on 04.07.2018 - 18:55
- * Part of project: kanbanboard
+ * Part of project: kanban-board
  */
 public class Properties {
     private static final Logger logger = LogManager.getLogger(Properties.class);

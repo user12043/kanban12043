@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by ME99735 on 04.07.2018 - 19:19
- * Part of project: kanbanboard
+ * Part of project: kanban-board
  */
 public class Utils {
     private static final Logger logger = LogManager.getLogger(Utils.class);

@@ -6,8 +6,8 @@
 package ogr.user12043.kanbanBoard.view;
 
 /**
- *
- * @author ME99735
+ * Created by user12043 on 05.07.2018 - 16:47
+ * Part of project: kanban-board
  */
 public class Kanban extends javax.swing.JPanel {
 
