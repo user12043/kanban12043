@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Created by user12043 on 04.07.2018 - 16:50
- * Part of project: kanban-board
+ * Part of project: kanban12043
  */
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
