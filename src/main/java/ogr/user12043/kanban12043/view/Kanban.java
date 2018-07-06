@@ -14,7 +14,7 @@ import java.awt.Dimension;
 public class Kanban extends javax.swing.JPanel {
 
     /**
-     * Creates new form Kanban
+     * Creates new form Task
      */
     public Kanban() {
         initComponents();
