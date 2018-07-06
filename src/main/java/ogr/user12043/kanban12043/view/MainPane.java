@@ -1,6 +1,6 @@
-package ogr.user12043.kanbanBoard.view;
+package ogr.user12043.kanban12043.view;
 
-import ogr.user12043.kanbanBoard.utils.Utils;
+import ogr.user12043.kanban12043.utils.Utils;
 
 import java.awt.*;
 
@@ -15,11 +15,14 @@ public class MainPane extends javax.swing.JFrame {
      */
     public MainPane() {
         initComponents();
-        setMinimumSize(new Dimension(300, 500));
     }
 
     public void addContent(Component component) {
-        jPanel_mainContentPanel.add(component);
+        GridBagConstraints c = new GridBagConstraints();
+        c.weightx = 1;
+        c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
+        jPanel_mainContentPanel.add(component, c);
     }
 
     /**
@@ -35,7 +38,6 @@ public class MainPane extends javax.swing.JFrame {
         jPanel_mainContentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(300, 600));
 
         jLabel_title.setFont(new java.awt.Font("Arial Narrow", 0, 36)); // NOI18N
         jLabel_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -63,7 +65,7 @@ public class MainPane extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel_title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel_mainContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                .addComponent(jPanel_mainContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

@@ -1,10 +1,10 @@
-package ogr.user12043.kanbanBoard;
+package ogr.user12043.kanban12043;
 
-import ogr.user12043.kanbanBoard.utils.Constants;
-import ogr.user12043.kanbanBoard.utils.Properties;
-import ogr.user12043.kanbanBoard.view.Kanban;
-import ogr.user12043.kanbanBoard.view.KanbanContainer;
-import ogr.user12043.kanbanBoard.view.MainPane;
+import ogr.user12043.kanban12043.utils.Constants;
+import ogr.user12043.kanban12043.utils.Properties;
+import ogr.user12043.kanban12043.view.Kanban;
+import ogr.user12043.kanban12043.view.KanbanContainer;
+import ogr.user12043.kanban12043.view.MainPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

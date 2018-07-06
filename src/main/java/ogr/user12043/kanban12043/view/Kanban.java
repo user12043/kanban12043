@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ogr.user12043.kanbanBoard.view;
+package ogr.user12043.kanban12043.view;
+
+import java.awt.Dimension;
 
 /**
  * Created by user12043 on 05.07.2018 - 16:47
@@ -32,6 +34,8 @@ public class Kanban extends javax.swing.JPanel {
         jPanel_tags = new javax.swing.JPanel();
         jLabel_bottomInfo = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(153, 204, 255));
+        setMaximumSize(new Dimension(400, getMaximumSize().height));
         setMinimumSize(new java.awt.Dimension(200, 100));
 
         jLabel_content.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -65,7 +69,7 @@ public class Kanban extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_content, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                    .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                     .addComponent(jSeparator, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -76,7 +80,7 @@ public class Kanban extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel_tags, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_content, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                        .addComponent(jLabel_content, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)

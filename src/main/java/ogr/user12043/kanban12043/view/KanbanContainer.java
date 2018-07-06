@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ogr.user12043.kanbanBoard.view;
+package ogr.user12043.kanban12043.view;
 
 import java.awt.*;
 
@@ -43,6 +43,7 @@ public class KanbanContainer extends javax.swing.JPanel {
         last++;
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
+        c.insets = new Insets(0, 3, 10, 3);
 //        c.weighty = 1;
         add(comp, c);
         return comp;

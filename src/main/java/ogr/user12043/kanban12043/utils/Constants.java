@@ -1,4 +1,4 @@
-package ogr.user12043.kanbanBoard.utils;
+package ogr.user12043.kanban12043.utils;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

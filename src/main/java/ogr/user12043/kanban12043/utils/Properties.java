@@ -1,4 +1,4 @@
-package ogr.user12043.kanbanBoard.utils;
+package ogr.user12043.kanban12043.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

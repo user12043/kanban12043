@@ -5,15 +5,15 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ogr.user12043</groupId>
-  <artifactId>kanban-board</artifactId>
+  <artifactId>kanban12043</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>kanban-board</name>
+  <name>kanban12043</name>
   <!--<url>http://www.example.com</url>-->
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.main-class>ogr.user12043.kanbanBoard.Main</project.main-class>
+    <project.main-class>ogr.user12043.kanban12043.Main</project.main-class>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
