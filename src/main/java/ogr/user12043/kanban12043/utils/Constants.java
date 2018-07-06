@@ -4,11 +4,11 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * Created by ME99735 on 04.07.2018 - 18:46
- * Part of project: kanban-board
+ * Created by user12043 on 04.07.2018 - 18:46
+ * Part of project: kanban12043
  */
 public class Constants {
-    public static String settingsFileName = "kanban-board-config.json";
+    public static String settingsFileName = "config.json";
     public static String languageDirectory = "lang";
 
     //<editor-fold desc="Argument name">

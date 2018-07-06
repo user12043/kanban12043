@@ -9,7 +9,7 @@ import java.awt.*;
 
 /**
  * Created by user12043 on 05.07.2018 - 14:11
- * Part of project: kanban-board
+ * Part of project: kanban12043
  */
 public class KanbanContainer extends javax.swing.JPanel {
     private int last = 0;
@@ -17,7 +17,7 @@ public class KanbanContainer extends javax.swing.JPanel {
     private boolean addVertical = false;
 
     /**
-     * Creates new form Kanban
+     * Creates new form KanbanContainer
      */
     public KanbanContainer() {
         initComponents();

@@ -10,8 +10,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * Created by ME99735 on 04.07.2018 - 19:19
- * Part of project: kanban-board
+ * Created by user12043 on 04.07.2018 - 19:19
+ * Part of project: kanban12043
  */
 public class Utils {
     private static final Logger logger = LogManager.getLogger(Utils.class);

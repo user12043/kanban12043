@@ -9,7 +9,7 @@ import java.awt.Dimension;
 
 /**
  * Created by user12043 on 05.07.2018 - 16:47
- * Part of project: kanban-board
+ * Part of project: kanban12043
  */
 public class Kanban extends javax.swing.JPanel {
 
