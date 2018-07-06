@@ -12,7 +12,7 @@ public class TaskView {
     private String name;
     private Color foregroundColor;
     private Color backgroundColor;
-    private List<Column> columns;
+    private List<KanbanColumn> kanbanColumns;
     private List<Topic> topics;
     private List<Tag> tags;
     private int[] statuses;

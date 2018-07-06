@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Task {
     private String id;
-    private Column column;
+    private KanbanColumn kanbanColumn;
     private Topic topic;
     private String content;
     private int priority;

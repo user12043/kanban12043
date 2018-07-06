@@ -2,8 +2,6 @@ package ogr.user12043.kanban12043;
 
 import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Properties;
-import ogr.user12043.kanban12043.view.Kanban;
-import ogr.user12043.kanban12043.view.KanbanContainer;
 import ogr.user12043.kanban12043.view.MainPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,15 +35,6 @@ public class Main {
             // Display GUI
             MainPane mainPane = new MainPane();
             // TODO: init content
-            KanbanContainer container1 = new KanbanContainer(true);
-            KanbanContainer container2 = new KanbanContainer(true);
-            container1.add(new Kanban());
-            container1.add(new Kanban());
-            container2.add(new Kanban());
-            container2.add(new Kanban());
-            mainPane.addContent(container1);
-            mainPane.addContent(container2);
-            mainPane.pack();
             mainPane.setVisible(true);
         } catch (Exception e) {
             logger.error("Unexpected error: ", e);
