@@ -1,5 +1,7 @@
 package ogr.user12043.kanban12043.utils;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -8,6 +10,8 @@ import java.util.ResourceBundle;
  * Part of project: kanban12043
  */
 public class Constants {
+    public static ClassPathXmlApplicationContext context;
+
     public static String settingsFileName = "config.json";
     public static String languageDirectory = "lang";
 

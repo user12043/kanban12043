@@ -2,6 +2,8 @@ package ogr.user12043.kanban12043.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.BeansException;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
 import java.io.FileReader;
@@ -16,6 +18,15 @@ import java.util.ResourceBundle;
 public class Utils {
     private static final Logger logger = LogManager.getLogger(Utils.class);
 
+    public static void buildContext() {
+        try {
+            Constants.context = new ClassPathXmlApplicationContext("application-context.xml");
+        } catch (BeansException e) {
+            logger.error("Error creating context");
+            System.exit(1);
+        }
+    }
+
     public static String readFile(String fileName) throws IOException {
         StringBuilder builder;
         try (FileReader reader = new FileReader(fileName)) {
@@ -27,14 +38,14 @@ public class Utils {
         return builder.toString();
     }
 
-    public static Locale getLocale() {
+    private static Locale getLocale() {
         if (Constants.locale == null) {
             Constants.locale = Locale.forLanguageTag(Properties.lang);
         }
         return Constants.locale;
     }
 
-    public static ResourceBundle getLangResource() {
+    private static ResourceBundle getLangResource() {
         if (Constants.langResourceBundle == null) {
             Constants.langResourceBundle = ResourceBundle.getBundle((Constants.languageDirectory + File.separator + Constants.args_languageArgumentName), getLocale());
         }

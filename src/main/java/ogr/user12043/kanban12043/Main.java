@@ -2,9 +2,13 @@ package ogr.user12043.kanban12043;
 
 import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Properties;
+import ogr.user12043.kanban12043.utils.Utils;
 import ogr.user12043.kanban12043.view.MainPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by user12043 on 04.07.2018 - 16:50
@@ -15,29 +19,40 @@ public class Main {
 
     public static void main(String args[]) {
         try {
-            // Get properties from file
-            Properties.initializeProperties();
+            // Initialize context
+            Utils.buildContext();
 
-            //Process program arguments
-            if (args.length > 0) {
-                for (int i = 0; i < args.length; i++) {
-                    String arg = args[i];
-                    if (arg.equals(("-" + Constants.args_languageArgumentName))) {
-                        i++;
-                        Properties.lang = args[i];
-                    } else {
-                        logger.error("Invalid argument: " + arg);
-                        System.exit(1);
-                    }
-                }
-            }
+            // Process program arguments
+            processArguments(args);
 
-            // Display GUI
+            // Create GUI
             MainPane mainPane = new MainPane();
-            // TODO: init content
-            mainPane.setVisible(true);
+
+            // Close context on window close
+            mainPane.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    Constants.context.close();
+                    super.windowClosed(e);
+                }
+            });
         } catch (Exception e) {
             logger.error("Unexpected error: ", e);
+        }
+    }
+
+    private static void processArguments(String args[]) {
+        if (args.length > 0) {
+            for (int i = 0; i < args.length; i++) {
+                String arg = args[i];
+                if (arg.equals(("-" + Constants.args_languageArgumentName))) {
+                    i++;
+                    Properties.lang = args[i];
+                } else {
+                    logger.error("Invalid argument: " + arg);
+                    System.exit(1);
+                }
+            }
         }
     }
 }

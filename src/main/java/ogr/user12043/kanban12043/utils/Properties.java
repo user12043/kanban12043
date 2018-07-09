@@ -14,12 +14,18 @@ import java.io.IOException;
 public class Properties {
     private static final Logger logger = LogManager.getLogger(Properties.class);
 
+    public Properties() {
+        initializeProperties();
+    }
+
     // Read properties from file
-    public static void initializeProperties() {
+    private void initializeProperties() {
         try {
             String fileContent = Utils.readFile(Constants.settingsFileName);
             JSONObject jsonObject = new JSONObject(fileContent);
-            Properties.lang = jsonObject.getString("lang");
+            if (fileContent.contains("\"" + Constants.args_languageArgumentName + "\":")) {
+                lang = jsonObject.getString(Constants.args_languageArgumentName);
+            }
         } catch (JSONException | IOException e) {
             logger.warn("Failed to read configuration file (\"" + Constants.settingsFileName + "\")! Using default settings");
         }
