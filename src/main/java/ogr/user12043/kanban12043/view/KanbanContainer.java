@@ -6,14 +6,15 @@
 package ogr.user12043.kanban12043.view;
 
 import java.awt.*;
+import ogr.user12043.kanban12043.utils.Constants;
 
 /**
  * Created by user12043 on 05.07.2018 - 14:11
  * Part of project: kanban12043
  */
 public class KanbanContainer extends javax.swing.JPanel {
-    private int last = 0;
 
+    private int last = 0;
     private boolean addVertical = false;
 
     /**
@@ -24,28 +25,22 @@ public class KanbanContainer extends javax.swing.JPanel {
         removeAll();
     }
 
-    public KanbanContainer(boolean addVertical) {
+    public KanbanContainer(String name) {
+        setName(name);  
         initComponents();
         removeAll();
-        this.addVertical = addVertical;
     }
 
-    @Override
-    public Component add(Component comp) {
+    public Component addKanban(Component comp) {
         GridBagConstraints c = new GridBagConstraints();
-        if (addVertical) {
-            c.gridy = last;
-            c.gridx = 0;
-        } else {
-            c.gridx = last;
-            c.gridy = 0;
-        }
+        c.gridy = last;
+        c.gridx = 0;
         last++;
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.insets = new Insets(0, 3, 10, 3);
 //        c.weighty = 1;
-        add(comp, c);
+        jPanel_content.add(comp, c);
         return comp;
     }
 
@@ -57,32 +52,39 @@ public class KanbanContainer extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        jButton_test1 = new javax.swing.JButton();
-        jButton_test2 = new javax.swing.JButton();
+        jLabel_name = new javax.swing.JLabel();
+        jPanel_content = new javax.swing.JPanel();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        setLayout(new java.awt.GridBagLayout());
+        setPreferredSize(new java.awt.Dimension(0, 0));
 
-        jButton_test1.setText("test1");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(jButton_test1, gridBagConstraints);
+        jLabel_name.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_name.setText(getName());
+        jLabel_name.setToolTipText("");
 
-        jButton_test2.setText("test2");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(jButton_test2, gridBagConstraints);
+        jPanel_content.setLayout(new java.awt.GridBagLayout());
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel_name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+            .addComponent(jPanel_content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel_name, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel_content, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_test1;
-    private javax.swing.JButton jButton_test2;
+    private javax.swing.JLabel jLabel_name;
+    private javax.swing.JPanel jPanel_content;
     // End of variables declaration//GEN-END:variables
 }
