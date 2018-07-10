@@ -16,7 +16,7 @@ public class Tag {
     @Column(name = "NAME")
     private String name;
     @Column(name = "COLOR")
-    private String color;
+    private int color;
     @Column(name = "IS_DEFAULT")
     private boolean isDefault;
 
@@ -36,11 +36,11 @@ public class Tag {
         this.name = name;
     }
 
-    public String getColor() {
+    public int getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(int color) {
         this.color = color;
     }
 

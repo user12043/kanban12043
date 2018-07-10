@@ -12,18 +12,18 @@ public class SubTask {
     @SequenceGenerator(name = "seq_subtask", allocationSize = 1)
     @GeneratedValue(generator = "seq_subtask", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
-    private String id;
+    private int id;
     @ManyToOne(targetEntity = Task.class)
     @JoinColumn(name = "ROOT_TASK")
     private Task rootTask;
     @Column(name = "CONTENT")
     private String content;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

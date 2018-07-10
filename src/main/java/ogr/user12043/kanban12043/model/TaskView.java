@@ -14,7 +14,7 @@ public class TaskView {
     @SequenceGenerator(name = "seq_task_view", allocationSize = 1)
     @GeneratedValue(generator = "seq_task_view", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
-    private String id;
+    private int id;
     @Column(name = "NAME")
     private String name;
     @Column(name = "FOREGROUND_COLOR")
@@ -30,11 +30,11 @@ public class TaskView {
     @Column(name = "STATUSES_CODE")
     private int statusesCode;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

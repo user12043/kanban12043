@@ -13,7 +13,7 @@ public class Topic {
     @SequenceGenerator(name = "seq_topic", allocationSize = 1)
     @GeneratedValue(generator = "seq_topic", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
-    private String id;
+    private int id;
     @Column(name = "NAME")
     private String name;
     @Column(name = "FOREGROUND_COLOR")
@@ -23,11 +23,11 @@ public class Topic {
     @Column(name = "IS_DEFAULT")
     private boolean isDefault;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
