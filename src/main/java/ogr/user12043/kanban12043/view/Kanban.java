@@ -5,19 +5,48 @@
  */
 package ogr.user12043.kanban12043.view;
 
-import java.awt.Dimension;
+import java.awt.*;
+
+import ogr.user12043.kanban12043.model.Tag;
+import ogr.user12043.kanban12043.model.Task;
+
+import javax.swing.*;
 
 /**
  * Created by user12043 on 05.07.2018 - 16:47
  * Part of project: kanban12043
  */
 public class Kanban extends javax.swing.JPanel {
-
+    private Task task;
     /**
      * Creates new form Task
      */
     public Kanban() {
         initComponents();
+    }
+
+    public Kanban(Task task) {
+        this.task = task;
+        initComponents();
+    }
+
+    /**
+     * Set kanban components' content from data
+     */
+    private void setFields() {
+        jLabel_content.setText(task.getContent());
+        int counter = 0;
+        for (Tag tag : task.getTags()) {
+            JPanel panel = new JPanel();
+            panel.setBackground(new Color(tag.getColor()));
+            GridBagConstraints c = new GridBagConstraints();
+            c.gridx = counter;
+            c.gridy = 0;
+            c.weightx = 1.0;
+            c.weighty = 1.0;
+            jPanel_tags.add(panel);
+        }
+        // TODO continue
     }
 
     /**
@@ -42,17 +71,7 @@ public class Kanban extends javax.swing.JPanel {
         jLabel_content.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel_tags.setBackground(new java.awt.Color(0, 0, 255));
-
-        javax.swing.GroupLayout jPanel_tagsLayout = new javax.swing.GroupLayout(jPanel_tags);
-        jPanel_tags.setLayout(jPanel_tagsLayout);
-        jPanel_tagsLayout.setHorizontalGroup(
-            jPanel_tagsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 29, Short.MAX_VALUE)
-        );
-        jPanel_tagsLayout.setVerticalGroup(
-            jPanel_tagsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jPanel_tags.setLayout(new java.awt.GridBagLayout());
 
         jLabel_bottomInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_bottomInfo.setText("initial");
