@@ -65,7 +65,7 @@ public class Utils {
         if (Constants.langResourceBundle == null) {
             Constants.langResourceBundle = ResourceBundle.getBundle((Constants.languageDirectory + File.separator + Constants.args_languageArgumentName), getLocale(), new ResourceBundle.Control() {
                 @Override
-                public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload) throws IllegalAccessException, InstantiationException, IOException {
+                public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload) throws IOException {
                     String bundleName = toBundleName(baseName, locale);
                     String resourceName = toResourceName(bundleName, "properties");
                     ResourceBundle bundle = null;

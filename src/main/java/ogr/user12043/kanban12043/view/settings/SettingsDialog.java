@@ -1,5 +1,6 @@
-package ogr.user12043.kanban12043.view;
+package ogr.user12043.kanban12043.view.settings;
 
+import ogr.user12043.kanban12043.view.settings.partial.KanbanColumnSettings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -89,6 +90,7 @@ public class SettingsDialog extends javax.swing.JDialog {
             CrudView topicCrudView = new CrudView(Topic.class, topicDao.findAll());
             topicCrudView.setName(Utils.getTag("entity.topics"));
             jTabbedPane_settings.add(topicCrudView);*/
+            jTabbedPane_settings.add(new KanbanColumnSettings());
         } catch (Exception e) {
             LOGGER.error("An error occurred on build settings", e);
         }

@@ -1,6 +1,7 @@
 package ogr.user12043.kanban12043.view;
 
 import ogr.user12043.kanban12043.utils.Utils;
+import ogr.user12043.kanban12043.view.settings.SettingsDialog;
 
 import java.awt.*;
 
