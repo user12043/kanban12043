@@ -19,11 +19,17 @@ public class Main {
 
     public static void main(String args[]) {
         try {
-            // Initialize context
-            Utils.buildContext();
+            // Read properties
+            Properties.initializeProperties();
 
             // Process program arguments
             processArguments(args);
+
+            // Initialize context
+            Utils.buildContext();
+
+            // Cache data
+            DataCache.refresh();
 
             // Create GUI
             MainPane mainPane = new MainPane();

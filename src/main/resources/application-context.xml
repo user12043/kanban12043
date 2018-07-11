@@ -13,7 +13,4 @@
   <!--DAO classes' location for spring-data-jpa-->
   <jpa:repositories base-package="ogr.user12043.kanban12043.dao"/>
 
-  <!--Bean for initialize properties from config file-->
-  <bean class="ogr.user12043.kanban12043.utils.Properties" id="properties"/>
-
 </beans>
