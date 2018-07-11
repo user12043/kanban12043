@@ -1,16 +1,5 @@
 package ogr.user12043.kanban12043.view;
 
-import ogr.user12043.kanban12043.dao.KanbanColumnDao;
-import ogr.user12043.kanban12043.dao.TagDao;
-import ogr.user12043.kanban12043.dao.TaskViewDao;
-import ogr.user12043.kanban12043.dao.TopicDao;
-import ogr.user12043.kanban12043.model.KanbanColumn;
-import ogr.user12043.kanban12043.model.Tag;
-import ogr.user12043.kanban12043.model.TaskView;
-import ogr.user12043.kanban12043.model.Topic;
-import ogr.user12043.kanban12043.utils.Constants;
-import ogr.user12043.kanban12043.utils.Utils;
-import ogr.user12043.kanban12043.view.viewUtil.CrudView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -81,7 +70,7 @@ public class SettingsDialog extends javax.swing.JDialog {
 
     private void buildContent() {
         try {
-            final KanbanColumnDao kanbanColumnDao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
+            /*final KanbanColumnDao kanbanColumnDao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
             CrudView kanbanColumnCrudView = new CrudView(KanbanColumn.class, kanbanColumnDao.findAll());
             kanbanColumnCrudView.setName(Utils.getTag("entity.kanbanColumns"));
             jTabbedPane_settings.add(kanbanColumnCrudView);
@@ -99,7 +88,7 @@ public class SettingsDialog extends javax.swing.JDialog {
             final TopicDao topicDao = Constants.context.getBean("topicDao", TopicDao.class);
             CrudView topicCrudView = new CrudView(Topic.class, topicDao.findAll());
             topicCrudView.setName(Utils.getTag("entity.topics"));
-            jTabbedPane_settings.add(topicCrudView);
+            jTabbedPane_settings.add(topicCrudView);*/
         } catch (Exception e) {
             LOGGER.error("An error occurred on build settings", e);
         }
@@ -118,6 +107,7 @@ public class SettingsDialog extends javax.swing.JDialog {
         jTabbedPane_settings = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
