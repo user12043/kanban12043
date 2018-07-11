@@ -1,6 +1,5 @@
 package ogr.user12043.kanban12043.view;
 
-import ogr.user12043.kanban12043.DataCache;
 import ogr.user12043.kanban12043.utils.Utils;
 
 import java.awt.*;
@@ -12,7 +11,6 @@ import java.awt.*;
 public class MainPane extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_saveChanges;
     private javax.swing.JButton jButton_settings;
     private javax.swing.JLabel jLabel_title;
     private javax.swing.JPanel jPanel_mainContentPanel;
@@ -85,7 +83,6 @@ public class MainPane extends javax.swing.JFrame {
         jPanel_mainContentPanel = new javax.swing.JPanel();
         jPanel_toolbar = new javax.swing.JPanel();
         jButton_settings = new javax.swing.JButton();
-        jButton_saveChanges = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 300));
@@ -106,21 +103,12 @@ public class MainPane extends javax.swing.JFrame {
             }
         });
 
-        jButton_saveChanges.setText(Utils.getTag("options.saveChanges"));
-        jButton_saveChanges.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_saveChangesActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel_toolbarLayout = new javax.swing.GroupLayout(jPanel_toolbar);
         jPanel_toolbar.setLayout(jPanel_toolbarLayout);
         jPanel_toolbarLayout.setHorizontalGroup(
                 jPanel_toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_toolbarLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_saveChanges)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton_settings)
                                 .addContainerGap())
         );
@@ -128,9 +116,7 @@ public class MainPane extends javax.swing.JFrame {
                 jPanel_toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_toolbarLayout.createSequentialGroup()
                                 .addContainerGap(12, Short.MAX_VALUE)
-                                .addGroup(jPanel_toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton_settings)
-                                        .addComponent(jButton_saveChanges))
+                                .addComponent(jButton_settings)
                                 .addContainerGap())
         );
 
@@ -166,8 +152,4 @@ public class MainPane extends javax.swing.JFrame {
         SettingsDialog settingsDialog = new SettingsDialog(this, true);
         settingsDialog.setVisible(true);
     }//GEN-LAST:event_jButton_settingsActionPerformed
-
-    private void jButton_saveChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveChangesActionPerformed
-        DataCache.flush();
-    }//GEN-LAST:event_jButton_saveChangesActionPerformed
 }

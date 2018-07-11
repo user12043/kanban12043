@@ -18,5 +18,5 @@ public @interface DisplayField {
 
     String keyParam() default "";
 
-    String method() default "";
+    String staticMethod() default "";
 }

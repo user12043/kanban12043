@@ -69,12 +69,16 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButton_add">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="Utils.getTag(&quot;options.add&quot;)" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton_delete">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Delete"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="Utils.getTag(&quot;options.delete&quot;)" type="code"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

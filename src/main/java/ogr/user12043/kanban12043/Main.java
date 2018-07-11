@@ -28,9 +28,6 @@ public class Main {
             // Initialize context
             Utils.buildContext();
 
-            // Cache data
-            DataCache.refresh();
-
             // Create GUI
             MainPane mainPane = new MainPane();
 

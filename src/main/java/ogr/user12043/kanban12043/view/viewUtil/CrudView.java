@@ -1,5 +1,8 @@
 package ogr.user12043.kanban12043.view.viewUtil;
 
+import ogr.user12043.kanban12043.utils.Utils;
+
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -29,6 +32,10 @@ public class CrudView extends javax.swing.JPanel {
         initTable(dataList);
     }
 
+    public JTable getTable() {
+        return jTable;
+    }
+
     private void initTable(List<?> dataList) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException {
         Field[] fields = clazz.getDeclaredFields();
         DefaultTableModel tableModel = new DefaultTableModel();
@@ -38,7 +45,7 @@ public class CrudView extends javax.swing.JPanel {
             DisplayField annotation = field.getAnnotation(DisplayField.class);
             if (annotation != null) {
                 final String key = annotation.keyParam();
-                final String methodDesc = annotation.method();
+                final String methodDesc = annotation.staticMethod();
                 if (!methodDesc.isEmpty()) {
                     // Resolve and invoke method
                     final int index = methodDesc.lastIndexOf('.');
@@ -102,9 +109,9 @@ public class CrudView extends javax.swing.JPanel {
         ));
         jScrollPane_table.setViewportView(jTable);
 
-        jButton_add.setText("Add");
+        jButton_add.setText(Utils.getTag("options.add"));
 
-        jButton_delete.setText("Delete");
+        jButton_delete.setText(Utils.getTag("options.delete"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
