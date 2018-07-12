@@ -71,25 +71,6 @@ public class SettingsDialog extends javax.swing.JDialog {
 
     private void buildContent() {
         try {
-            /*final KanbanColumnDao kanbanColumnDao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
-            CrudView kanbanColumnCrudView = new CrudView(KanbanColumn.class, kanbanColumnDao.findAll());
-            kanbanColumnCrudView.setName(Utils.getTag("entity.kanbanColumns"));
-            jTabbedPane_settings.add(kanbanColumnCrudView);
-
-            final TagDao tagDao = Constants.context.getBean("tagDao", TagDao.class);
-            CrudView tagCrudView = new CrudView(Tag.class, tagDao.findAll());
-            tagCrudView.setName(Utils.getTag("entity.tags"));
-            jTabbedPane_settings.add(tagCrudView);
-
-            final TaskViewDao taskViewDao = Constants.context.getBean("taskViewDao", TaskViewDao.class);
-            CrudView taskViewCrudView = new CrudView(TaskView.class, taskViewDao.findAll());
-            taskViewCrudView.setName(Utils.getTag("entity.taskViews"));
-            jTabbedPane_settings.add(taskViewCrudView);
-
-            final TopicDao topicDao = Constants.context.getBean("topicDao", TopicDao.class);
-            CrudView topicCrudView = new CrudView(Topic.class, topicDao.findAll());
-            topicCrudView.setName(Utils.getTag("entity.topics"));
-            jTabbedPane_settings.add(topicCrudView);*/
             jTabbedPane_settings.add(new KanbanColumnSettings());
         } catch (Exception e) {
             LOGGER.error("An error occurred on build settings", e);

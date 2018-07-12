@@ -1,15 +1,26 @@
 package ogr.user12043.kanban12043.view.settings.partial;
 
+import ogr.user12043.kanban12043.dao.KanbanColumnDao;
+import ogr.user12043.kanban12043.model.KanbanColumn;
+import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.data.domain.Sort;
+
+import javax.swing.table.TableModel;
+import java.util.List;
 
 /**
  * Created by user12043 on 11.07.2018 - 17:20
  * Part of project: kanban12043
  */
 public class KanbanColumnSettings extends javax.swing.JPanel {
+    private static final Logger LOGGER = LogManager.getLogger(KanbanColumnSettings.class);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ogr.user12043.kanban12043.view.settings.partial.RootPanel rootPanel1;
+    private ogr.user12043.kanban12043.view.settings.partial.RootPanel rootPanel;
+    // End of variables declaration//GEN-END:variables
 
     /**
      * Creates new form KanbanColumnSettings
@@ -17,6 +28,14 @@ public class KanbanColumnSettings extends javax.swing.JPanel {
     public KanbanColumnSettings() {
         initComponents();
         setName(Utils.getTag("entity.kanbanColumns"));
+        refreshTable();
+    }
+
+    private void refreshTable() {
+        final KanbanColumnDao dao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
+        List<KanbanColumn> kanbanColumns = dao.findAll(new Sort(Sort.Direction.DESC, "ordinal", "id"));
+        TableModel tableModel = Utils.generateTableModelFromList(kanbanColumns, KanbanColumn.class);
+        rootPanel.setTableModel(tableModel);
     }
 
     /**
@@ -28,7 +47,7 @@ public class KanbanColumnSettings extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        rootPanel1 = new ogr.user12043.kanban12043.view.settings.partial.RootPanel();
+        rootPanel = new ogr.user12043.kanban12043.view.settings.partial.RootPanel();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -36,16 +55,15 @@ public class KanbanColumnSettings extends javax.swing.JPanel {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rootPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rootPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rootPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rootPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-    // End of variables declaration//GEN-END:variables
 }

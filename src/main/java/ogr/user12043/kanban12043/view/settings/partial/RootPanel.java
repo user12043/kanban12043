@@ -2,6 +2,8 @@ package ogr.user12043.kanban12043.view.settings.partial;
 
 import ogr.user12043.kanban12043.utils.Utils;
 
+import javax.swing.table.TableModel;
+
 /**
  * Created by user12043 on 11.07.2018 - 17:11
  * Part of project: kanban12043
@@ -13,13 +15,17 @@ public class RootPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton_delete;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable_list;
-
+    // End of variables declaration//GEN-END:variables
 
     /**
      * Creates new form KanbanColum
      */
     public RootPanel() {
         initComponents();
+    }
+
+    void setTableModel(TableModel model) {
+        jTable_list.setModel(model);
     }
 
     /**
@@ -99,5 +105,4 @@ public class RootPanel extends javax.swing.JPanel {
     private void jButton_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_deleteActionPerformed
 
     }//GEN-LAST:event_jButton_deleteActionPerformed
-    // End of variables declaration//GEN-END:variables
 }

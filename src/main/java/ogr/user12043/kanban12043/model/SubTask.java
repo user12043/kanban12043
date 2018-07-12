@@ -1,5 +1,7 @@
 package ogr.user12043.kanban12043.model;
 
+import ogr.user12043.kanban12043.view.DisplayField;
+
 import javax.persistence.*;
 
 /**
@@ -12,11 +14,13 @@ public class SubTask {
     @SequenceGenerator(name = "seq_subtask", allocationSize = 1)
     @GeneratedValue(generator = "seq_subtask", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
+    @DisplayField("Id")
     private int id;
     @ManyToOne(targetEntity = Task.class)
     @JoinColumn(name = "ROOT_TASK")
     private Task rootTask;
     @Column(name = "CONTENT")
+    @DisplayField(key = "entity.common.content")
     private String content;
 
     public int getId() {

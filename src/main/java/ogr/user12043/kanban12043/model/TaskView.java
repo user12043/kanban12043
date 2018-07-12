@@ -1,5 +1,7 @@
 package ogr.user12043.kanban12043.model;
 
+import ogr.user12043.kanban12043.view.DisplayField;
+
 import javax.persistence.*;
 import java.awt.*;
 import java.util.List;
@@ -14,12 +16,16 @@ public class TaskView {
     @SequenceGenerator(name = "seq_task_view", allocationSize = 1)
     @GeneratedValue(generator = "seq_task_view", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
+    @DisplayField("Id")
     private int id;
     @Column(name = "NAME")
+    @DisplayField(key = "entity.common.name")
     private String name;
     @Column(name = "FOREGROUND_COLOR")
+    @DisplayField(key = "entity.common.foregroundColor")
     private Color foregroundColor;
     @Column(name = "BACKGROUND_COLOR")
+    @DisplayField(key = "entity.common.backgroundColor")
     private Color backgroundColor;
     @OneToMany(targetEntity = KanbanColumn.class)
     private List<KanbanColumn> kanbanColumns;
@@ -29,6 +35,8 @@ public class TaskView {
     private List<Tag> tags;
     @Column(name = "STATUSES_CODE")
     private int statusesCode;
+    @Column(name = "ORDINAL")
+    private int ordinal; // Change sort property "ordinal" on KanbanColumnSettings.refreshTable when change this property's name
 
     public int getId() {
         return id;
@@ -92,5 +100,13 @@ public class TaskView {
 
     public void setStatusesCode(int statusesCode) {
         this.statusesCode = statusesCode;
+    }
+
+    public int getOrdinal() {
+        return ordinal;
+    }
+
+    public void setOrdinal(int order) {
+        this.ordinal = order;
     }
 }

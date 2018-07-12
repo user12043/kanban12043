@@ -1,5 +1,7 @@
 package ogr.user12043.kanban12043.model;
 
+import ogr.user12043.kanban12043.view.DisplayField;
+
 import javax.persistence.*;
 import java.awt.*;
 
@@ -13,14 +15,19 @@ public class Topic {
     @SequenceGenerator(name = "seq_topic", allocationSize = 1)
     @GeneratedValue(generator = "seq_topic", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
+    @DisplayField("Id")
     private int id;
     @Column(name = "NAME")
+    @DisplayField(key = "entity.common.name")
     private String name;
     @Column(name = "FOREGROUND_COLOR")
+    @DisplayField(key = "entity.common.foregroundColor")
     private Color foregroundColor;
     @Column(name = "BACKGROUND_COLOR")
+    @DisplayField(key = "entity.common.backgroundColor")
     private Color backgroundColor;
     @Column(name = "IS_DEFAULT")
+    @DisplayField(key = "entity.common.isDefault")
     private boolean isDefault;
 
     public int getId() {

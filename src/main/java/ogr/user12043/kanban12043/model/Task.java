@@ -1,5 +1,7 @@
 package ogr.user12043.kanban12043.model;
 
+import ogr.user12043.kanban12043.view.DisplayField;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
@@ -14,6 +16,7 @@ public class Task {
     @SequenceGenerator(name = "seq_task", allocationSize = 1)
     @GeneratedValue(generator = "seq_task", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
+    @DisplayField("Id")
     private int id;
     @ManyToOne(targetEntity = KanbanColumn.class)
     @JoinColumn(name = "KANBAN_COLUMN")
@@ -22,18 +25,24 @@ public class Task {
     @JoinColumn(name = "TOPIC")
     private Topic topic;
     @Column(name = "CONTENT")
+    @DisplayField(key = "entity.common.content")
     private String content;
     @Column(name = "PRIORITY")
+    @DisplayField(key = "entity.task.priority")
     private int priority;
     @Column(name = "CREATED_DATE")
+    @DisplayField(key = "entity.task.createdDate")
     private Date createdDate;
     @Column(name = "UPDATED_DATE")
+    @DisplayField(key = "entity.task.updatedDate")
     private Date updatedDate;
     @Column(name = "DEADLINE")
+    @DisplayField(key = "entity.task.deadline")
     private Date deadLine;
     @Column(name = "HAS_DEAD_LINE")
     private boolean hasDeadLine;
     @Column(name = "FINISH_DATE")
+    @DisplayField(key = "entity.task.finishedDate")
     private Date finishDate;
     @Column(name = "STATUS")
     private int status;
