@@ -1,6 +1,6 @@
 package ogr.user12043.kanban12043.model;
 
-import ogr.user12043.kanban12043.view.DisplayField;
+import ogr.user12043.kanban12043.utils.DisplayField;
 
 import javax.persistence.*;
 import java.awt.*;

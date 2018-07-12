@@ -1,5 +1,6 @@
 package ogr.user12043.kanban12043.view.settings;
 
+import ogr.user12043.kanban12043.utils.Utils;
 import ogr.user12043.kanban12043.view.settings.partial.KanbanColumnSettings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +25,7 @@ public class SettingsDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         buildContent();
+        setTitle(Utils.getTag("toolbar.settings"));
     }
 
     /**

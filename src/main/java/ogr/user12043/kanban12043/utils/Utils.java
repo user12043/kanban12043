@@ -1,18 +1,19 @@
 package ogr.user12043.kanban12043.utils;
 
-import ogr.user12043.kanban12043.view.DisplayField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import java.awt.*;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by user12043 on 04.07.2018 - 19:19
@@ -134,7 +135,7 @@ public class Utils {
      * @param <T>         entity type
      * @return generated table model
      */
-    public static <T> TableModel generateTableModelFromList(List<T> list, Class entityClass) {
+    public static <T> DefaultTableModel generateTableModelFromList(List<T> list, Class entityClass) {
         DefaultTableModel tableModel = new DefaultTableModel();
         final Field[] fields = entityClass.getDeclaredFields();
         List<Field> displayFields = new ArrayList<>();
@@ -164,5 +165,10 @@ public class Utils {
         }
 
         return tableModel;
+    }
+
+    public static void errorDialog(Component parent, String message) {
+        String[] options = new String[]{getTag("options.ok")};
+        JOptionPane.showOptionDialog(parent, message, getTag("messages.error"), JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, options, options[0]);
     }
 }

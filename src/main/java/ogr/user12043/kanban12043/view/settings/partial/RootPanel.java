@@ -2,7 +2,9 @@ package ogr.user12043.kanban12043.view.settings.partial;
 
 import ogr.user12043.kanban12043.utils.Utils;
 
-import javax.swing.table.TableModel;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.util.Vector;
 
 /**
  * Created by user12043 on 11.07.2018 - 17:11
@@ -13,6 +15,7 @@ public class RootPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_add;
     private javax.swing.JButton jButton_delete;
+    private javax.swing.JButton jButton_save;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable_list;
     // End of variables declaration//GEN-END:variables
@@ -24,8 +27,16 @@ public class RootPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    void setTableModel(TableModel model) {
+    DefaultTableModel getTableModel() {
+        return (DefaultTableModel) jTable_list.getModel();
+    }
+
+    void setTableModel(DefaultTableModel model) {
         jTable_list.setModel(model);
+    }
+
+    void addSaveListener(ActionListener listener) {
+        jButton_save.addActionListener(listener);
     }
 
     /**
@@ -41,18 +52,8 @@ public class RootPanel extends javax.swing.JPanel {
         jTable_list = new javax.swing.JTable();
         jButton_add = new javax.swing.JButton();
         jButton_delete = new javax.swing.JButton();
+        jButton_save = new javax.swing.JButton();
 
-        jTable_list.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null}
-                },
-                new String[]{
-                        "Title 1", "Title 2", "Title 3", "Title 4"
-                }
-        ));
         jScrollPane.setViewportView(jTable_list);
 
         jButton_add.setText(Utils.getTag("options.add"));
@@ -69,6 +70,8 @@ public class RootPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton_save.setText(Utils.getTag("options.saveChanges"));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,8 +82,10 @@ public class RootPanel extends javax.swing.JPanel {
                                         .addComponent(jScrollPane)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jButton_add)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton_delete)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButton_delete)))
+                                                .addComponent(jButton_save)))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -89,7 +94,8 @@ public class RootPanel extends javax.swing.JPanel {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jButton_add)
-                                        .addComponent(jButton_delete))
+                                        .addComponent(jButton_delete)
+                                        .addComponent(jButton_save))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -99,10 +105,18 @@ public class RootPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_addActionPerformed
-
+        getTableModel().addRow(new Vector());
+        jTable_list.changeSelection(jTable_list.getRowCount() - 1, 0, false, false);
+        jTable_list.grabFocus();
+        jTable_list.editCellAt(jTable_list.getRowCount() - 1, 0);
     }//GEN-LAST:event_jButton_addActionPerformed
 
     private void jButton_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_deleteActionPerformed
-
+        int index = jTable_list.getSelectedRow();
+        if (index != -1) {
+            getTableModel().removeRow(index);
+        } else {
+            Utils.errorDialog(this, Utils.getTag("messages.error.notSelected"));
+        }
     }//GEN-LAST:event_jButton_deleteActionPerformed
 }
