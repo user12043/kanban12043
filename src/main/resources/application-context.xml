@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-  <context:component-scan base-package="ogr.user12043.kanban12043"/>
-  <tx:annotation-driven/>
+  <!--These are no longer necessary because of spring-data-jpa-->
+  <!--<context:component-scan base-package="ogr.user12043.kanban12043"/>
+  <tx:annotation-driven/>-->
 
   <import resource="jpa-context.xml"/>
 
-  <!--Bean for initialize properties from config file-->
-  <bean class="ogr.user12043.kanban12043.utils.Properties" id="properties"/>
+  <!--DAO classes' location for spring-data-jpa-->
+  <jpa:repositories base-package="ogr.user12043.kanban12043.dao"/>
+
 </beans>

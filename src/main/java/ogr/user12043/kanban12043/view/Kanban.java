@@ -5,19 +5,54 @@
  */
 package ogr.user12043.kanban12043.view;
 
-import java.awt.Dimension;
+import ogr.user12043.kanban12043.model.Tag;
+import ogr.user12043.kanban12043.model.Task;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by user12043 on 05.07.2018 - 16:47
  * Part of project: kanban12043
  */
 public class Kanban extends javax.swing.JPanel {
+    private Task task;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel_bottomInfo;
+    private javax.swing.JLabel jLabel_content;
+    private javax.swing.JPanel jPanel_tags;
+    private javax.swing.JSeparator jSeparator;
+    // End of variables declaration//GEN-END:variables
 
     /**
      * Creates new form Task
      */
     public Kanban() {
         initComponents();
+    }
+
+    public Kanban(Task task) {
+        this.task = task;
+        initComponents();
+    }
+
+    /**
+     * Set kanban components' content from data
+     */
+    private void setFields() {
+        jLabel_content.setText(task.getContent());
+        int counter = 0;
+        for (Tag tag : task.getTags()) {
+            JPanel panel = new JPanel();
+            panel.setBackground(new Color(tag.getColor()));
+            GridBagConstraints c = new GridBagConstraints();
+            c.gridx = counter;
+            c.gridy = 0;
+            c.weightx = 1.0;
+            c.weighty = 1.0;
+            jPanel_tags.add(panel);
+        }
+        // TODO continue
     }
 
     /**
@@ -35,7 +70,6 @@ public class Kanban extends javax.swing.JPanel {
         jLabel_bottomInfo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 204, 255));
-        setMaximumSize(new Dimension(400, getMaximumSize().height));
         setMinimumSize(new java.awt.Dimension(200, 100));
 
         jLabel_content.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -43,17 +77,7 @@ public class Kanban extends javax.swing.JPanel {
         jLabel_content.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel_tags.setBackground(new java.awt.Color(0, 0, 255));
-
-        javax.swing.GroupLayout jPanel_tagsLayout = new javax.swing.GroupLayout(jPanel_tags);
-        jPanel_tags.setLayout(jPanel_tagsLayout);
-        jPanel_tagsLayout.setHorizontalGroup(
-            jPanel_tagsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 29, Short.MAX_VALUE)
-        );
-        jPanel_tagsLayout.setVerticalGroup(
-            jPanel_tagsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jPanel_tags.setLayout(new java.awt.GridBagLayout());
 
         jLabel_bottomInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_bottomInfo.setText("initial");
@@ -62,38 +86,30 @@ public class Kanban extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel_tags, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_content, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                    .addComponent(jSeparator, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel_tags, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel_content, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                                        .addComponent(jSeparator, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel_tags, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_content, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jPanel_tags, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel_content, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(4, 4, 4)
+                                                .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel_bottomInfo;
-    private javax.swing.JLabel jLabel_content;
-    private javax.swing.JPanel jPanel_tags;
-    private javax.swing.JSeparator jSeparator;
-    // End of variables declaration//GEN-END:variables
 }

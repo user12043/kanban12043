@@ -13,23 +13,20 @@ import java.io.IOException;
  */
 public class Properties {
     private static final Logger logger = LogManager.getLogger(Properties.class);
-
-    public Properties() {
-        initializeProperties();
-    }
+    //<editor-fold desc="Property fields" defaultstate="collapsed">
+    public static String lang = "en-US";
+    //</editor-fold>
 
     // Read properties from file
-    private void initializeProperties() {
+    public static void initializeProperties() {
         try {
             String fileContent = Utils.readFile(Constants.settingsFileName);
             JSONObject jsonObject = new JSONObject(fileContent);
-            if (fileContent.contains("\"" + Constants.args_languageArgumentName + "\":")) {
+            if (jsonObject.has(Constants.args_languageArgumentName)) {
                 lang = jsonObject.getString(Constants.args_languageArgumentName);
             }
         } catch (JSONException | IOException e) {
             logger.warn("Failed to read configuration file (\"" + Constants.settingsFileName + "\")! Using default settings");
         }
     }
-
-    public static String lang = "en-US";
 }

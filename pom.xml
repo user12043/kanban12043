@@ -18,8 +18,10 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
     <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
+    <maven-dependency-plugin.version>3.1.0</maven-dependency-plugin.version>
     <json-version>20180130</json-version>
     <spring-version>5.0.7.RELEASE</spring-version>
+    <spring-data-jpa-version>2.0.8.RELEASE</spring-data-jpa-version>
     <hibernate-version>5.3.2.Final</hibernate-version>
     <log4j-version>2.11.0</log4j-version>
     <h2database-version>1.4.197</h2database-version>
@@ -66,6 +68,13 @@
       <version>${spring-version}</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>${spring-data-jpa-version}</version>
+    </dependency>
+
     <!--Hibernate-->
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -83,7 +92,8 @@
 
   <build>
     <plugins>
-      <plugin>
+      <!--Jar file include dependencies-->
+      <!--<plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>${maven-assembly-plugin.version}</version>
@@ -106,6 +116,26 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>${maven-dependency-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <!--Copy dependencies to lib folder-->
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+              <!--If this line was active instead of above, dependencies will be in output jar file-->
+              <!--<outputDirectory>${project.build.outputDirectory}/lib</outputDirectory>-->
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>
@@ -113,9 +143,15 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>${maven-jar-plugin.version}</version>
         <configuration>
+          <excludes>
+            <exclude>lang/lang_tr_TR.properties</exclude>
+          </excludes>
           <archive>
             <manifest>
               <mainClass>${project.main-class}</mainClass>
+              <!--Add classpath to find dependencies-->
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
             </manifest>
             <manifestEntries></manifestEntries>
           </archive>
@@ -144,7 +180,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>${maven-jar-plugin.version}</version>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>

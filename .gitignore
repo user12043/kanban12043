@@ -142,3 +142,6 @@ gen
 
 ### Maven output
 target
+
+### Netbeans files
+nb-configuration.xml

@@ -10,15 +10,13 @@ import java.util.ResourceBundle;
  * Part of project: kanban12043
  */
 public class Constants {
+    public static final String settingsFileName = "config.json";
+    public static final String languageDirectory = "lang";
+    public static final String defaultName = "unnamed";
+    //<editor-fold desc="Argument names">
+    public static final String args_languageArgumentName = "lang";
     public static ClassPathXmlApplicationContext context;
-
-    public static String settingsFileName = "config.json";
-    public static String languageDirectory = "lang";
-
-    //<editor-fold desc="Argument name">
-    public static String args_languageArgumentName = "lang";
     //</editor-fold>
-
 
     public static Locale locale;
 
