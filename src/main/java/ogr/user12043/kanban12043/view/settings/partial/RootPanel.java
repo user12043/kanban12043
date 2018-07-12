@@ -4,7 +4,6 @@ import ogr.user12043.kanban12043.utils.Utils;
 
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 /**
  * Created by user12043 on 11.07.2018 - 17:11
@@ -15,7 +14,7 @@ public class RootPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_add;
     private javax.swing.JButton jButton_delete;
-    private javax.swing.JButton jButton_save;
+    private javax.swing.JButton jButton_edit;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable_list;
     // End of variables declaration//GEN-END:variables
@@ -27,16 +26,24 @@ public class RootPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    DefaultTableModel getTableModel() {
+    public DefaultTableModel getTableModel() {
         return (DefaultTableModel) jTable_list.getModel();
     }
 
-    void setTableModel(DefaultTableModel model) {
+    public void setTableModel(DefaultTableModel model) {
         jTable_list.setModel(model);
     }
 
-    void addSaveListener(ActionListener listener) {
-        jButton_save.addActionListener(listener);
+    public void addAddListener(ActionListener listener) {
+        jButton_add.addActionListener(listener);
+    }
+
+    public void addEditListener(ActionListener listener) {
+        jButton_edit.addActionListener(listener);
+    }
+
+    public void addDeleteListener(ActionListener listener) {
+        jButton_delete.addActionListener(listener);
     }
 
     /**
@@ -52,25 +59,17 @@ public class RootPanel extends javax.swing.JPanel {
         jTable_list = new javax.swing.JTable();
         jButton_add = new javax.swing.JButton();
         jButton_delete = new javax.swing.JButton();
-        jButton_save = new javax.swing.JButton();
+        jButton_edit = new javax.swing.JButton();
 
+        jTable_list.setEnabled(false);
+        jTable_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane.setViewportView(jTable_list);
 
         jButton_add.setText(Utils.getTag("options.add"));
-        jButton_add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_addActionPerformed(evt);
-            }
-        });
 
         jButton_delete.setText(Utils.getTag("options.delete"));
-        jButton_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_deleteActionPerformed(evt);
-            }
-        });
 
-        jButton_save.setText(Utils.getTag("options.saveChanges"));
+        jButton_edit.setText(Utils.getTag("options.edit"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,7 +84,7 @@ public class RootPanel extends javax.swing.JPanel {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jButton_delete)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButton_save)))
+                                                .addComponent(jButton_edit)))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -95,7 +94,7 @@ public class RootPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jButton_add)
                                         .addComponent(jButton_delete)
-                                        .addComponent(jButton_save))
+                                        .addComponent(jButton_edit))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -103,20 +102,4 @@ public class RootPanel extends javax.swing.JPanel {
 
         jButton_add.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_addActionPerformed
-        getTableModel().addRow(new Vector());
-        jTable_list.changeSelection(jTable_list.getRowCount() - 1, 0, false, false);
-        jTable_list.grabFocus();
-        jTable_list.editCellAt(jTable_list.getRowCount() - 1, 0);
-    }//GEN-LAST:event_jButton_addActionPerformed
-
-    private void jButton_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_deleteActionPerformed
-        int index = jTable_list.getSelectedRow();
-        if (index != -1) {
-            getTableModel().removeRow(index);
-        } else {
-            Utils.errorDialog(this, Utils.getTag("messages.error.notSelected"));
-        }
-    }//GEN-LAST:event_jButton_deleteActionPerformed
 }

@@ -1,9 +1,10 @@
-package ogr.user12043.kanban12043.view.settings.partial;
+package ogr.user12043.kanban12043.view.settings;
 
 import ogr.user12043.kanban12043.dao.KanbanColumnDao;
 import ogr.user12043.kanban12043.model.KanbanColumn;
 import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
+import ogr.user12043.kanban12043.view.settings.partial.RootPanel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Sort;
@@ -12,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Created by user12043 on 11.07.2018 - 17:20
@@ -32,11 +32,11 @@ public class KanbanColumnSettings extends RootPanel {
         initComponents();
         setName(Utils.getTag("entity.kanbanColumns"));
         refreshTable();
-        // Add save action
-        rootPanel.addSaveListener(new ActionListener() {
+        // Add actions
+        rootPanel.addEditListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                save();
+
             }
         });
     }
@@ -48,13 +48,6 @@ public class KanbanColumnSettings extends RootPanel {
         rootPanel.setTableModel(tableModel);
     }
 
-    private void save() {
-        Vector<Vector> dataVector = rootPanel.getTableModel().getDataVector();
-        for (Vector vector : dataVector) {
-            KanbanColumn kanbanColumn = new KanbanColumn();
-            kanbanColumn.setName((String) vector.get(1));
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,17 +63,17 @@ public class KanbanColumnSettings extends RootPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(rootPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(rootPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(rootPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rootPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 }

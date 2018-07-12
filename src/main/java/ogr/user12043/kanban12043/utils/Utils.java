@@ -136,7 +136,13 @@ public class Utils {
      * @return generated table model
      */
     public static <T> DefaultTableModel generateTableModelFromList(List<T> list, Class entityClass) {
-        DefaultTableModel tableModel = new DefaultTableModel();
+        DefaultTableModel tableModel = new DefaultTableModel(){
+            // Make table non editable
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         final Field[] fields = entityClass.getDeclaredFields();
         List<Field> displayFields = new ArrayList<>();
         for (Field field : fields) {
