@@ -11,6 +11,7 @@ import ogr.user12043.kanban12043.utils.Utils;
  */
 public class KanbanColumnView extends javax.swing.JDialog {
     private KanbanColumn kanbanColumn;
+    private int currentOrdinal;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_cancel;
     private javax.swing.JButton jButton_save;
@@ -35,6 +36,10 @@ public class KanbanColumnView extends javax.swing.JDialog {
         jTextField_name.selectAll();
     }
 
+    public void setOrdinal(int ordinal) {
+        this.currentOrdinal = ordinal;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,11 +60,6 @@ public class KanbanColumnView extends javax.swing.JDialog {
         setAlwaysOnTop(true);
         setLocationByPlatform(true);
         setResizable(false);
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                formKeyPressed(evt);
-            }
-        });
 
         jButton_save.setText(Utils.getTag("options.save"));
         jButton_save.addActionListener(new java.awt.event.ActionListener() {
@@ -136,11 +136,9 @@ public class KanbanColumnView extends javax.swing.JDialog {
         }
         kanbanColumn.setName(name);
         kanbanColumn.setColumnLimit((Integer) jSpinner_limit.getValue());
+        kanbanColumn.setOrdinal(currentOrdinal);
+
         dao.save(kanbanColumn);
         dispose();
     }//GEN-LAST:event_jButton_saveActionPerformed
-
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        System.out.println(evt.getKeyCode());
-    }//GEN-LAST:event_formKeyPressed
 }

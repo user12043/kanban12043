@@ -25,7 +25,7 @@ public class KanbanColumn {
     private Integer columnLimit;
 
     @Column(name = "ORDINAL")
-    private Integer ordinal = getId(); // Change sort property "ordinal" on KanbanColumnSettings.refreshTable when change this property's name
+    private Integer ordinal; // Change sort property "ordinal" on KanbanColumnSettings.refreshTable when change this property's name
 
     public Integer getId() {
         return id;

@@ -5,6 +5,7 @@ import ogr.user12043.kanban12043.utils.Utils;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * Created by user12043 on 11.07.2018 - 17:11
@@ -67,6 +68,11 @@ public class RootPanel extends javax.swing.JPanel {
         jButton_edit = new javax.swing.JButton();
 
         jTable_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable_list.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable_listKeyPressed(evt);
+            }
+        });
         jScrollPane.setViewportView(jTable_list);
 
         jButton_add.setText(Utils.getTag("options.add"));
@@ -80,7 +86,7 @@ public class RootPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane)
                     .addGroup(layout.createSequentialGroup()
@@ -89,21 +95,27 @@ public class RootPanel extends javax.swing.JPanel {
                         .addComponent(jButton_edit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton_delete)))
-                .addContainerGap())
+                .addGap(1, 1, 1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_add)
                     .addComponent(jButton_delete)
                     .addComponent(jButton_edit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(1, 1, 1))
         );
 
         jButton_add.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable_listKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_listKeyPressed
+        if (evt.getKeyCode()==KeyEvent.VK_DELETE) {
+            jButton_delete.doClick();
+        }
+    }//GEN-LAST:event_jTable_listKeyPressed
 }
