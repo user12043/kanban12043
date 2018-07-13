@@ -22,7 +22,7 @@ import java.util.List;
 public class KanbanColumnSettings extends javax.swing.JPanel {
     private static final Logger LOGGER = LogManager.getLogger(KanbanColumnSettings.class);
     private final KanbanColumnDao dao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
-    List<KanbanColumn> kanbanColumns = new ArrayList<>();
+    private List<KanbanColumn> kanbanColumns = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_down;
     private javax.swing.JButton jButton_up;
@@ -50,7 +50,6 @@ public class KanbanColumnSettings extends javax.swing.JPanel {
     }
 
     private void refreshTable() {
-        final KanbanColumnDao dao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
         kanbanColumns = dao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
         DefaultTableModel tableModel = Utils.generateTableModelFromList(kanbanColumns, KanbanColumn.class);
         rootPanel.setTableModel(tableModel);

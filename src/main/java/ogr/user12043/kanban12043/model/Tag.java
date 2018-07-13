@@ -3,6 +3,7 @@ package ogr.user12043.kanban12043.model;
 import ogr.user12043.kanban12043.utils.DisplayField;
 
 import javax.persistence.*;
+import java.awt.*;
 
 /**
  * Created by user12043 on 06.07.2018 - 11:17
@@ -21,7 +22,7 @@ public class Tag {
     private String name;
     @Column(name = "COLOR")
     @DisplayField(key = "entity.tag.color")
-    private Integer color;
+    private Color color;
     @Column(name = "IS_DEFAULT")
     @DisplayField(key = "entity.common.isDefault")
     private Boolean isDefault;
@@ -42,11 +43,11 @@ public class Tag {
         this.name = name;
     }
 
-    public Integer getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(Integer color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 

@@ -6,7 +6,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.io.*;
 import java.lang.reflect.Field;
@@ -188,6 +190,18 @@ public class Utils {
         }
 
         return tableModel;
+    }
+
+    //
+    public static TableCellRenderer cellRendererForColor() {
+        return new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                JTextField cell = new JTextField();
+                cell.setBackground((Color) value);
+                return cell;
+            }
+        };
     }
 
     public static void errorDialog(Component parent, String message) {

@@ -44,7 +44,8 @@ public class Kanban extends javax.swing.JPanel {
         int counter = 0;
         for (Tag tag : task.getTags()) {
             JPanel panel = new JPanel();
-            panel.setBackground(new Color(tag.getColor()));
+//            panel.setBackground(new Color(tag.getColor()));
+            panel.setBackground(tag.getColor());
             GridBagConstraints c = new GridBagConstraints();
             c.gridx = counter;
             c.gridy = 0;

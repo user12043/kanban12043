@@ -73,6 +73,7 @@ public class SettingsDialog extends javax.swing.JDialog {
     private void buildContent() {
         try {
             jTabbedPane_settings.add(new KanbanColumnSettings());
+            jTabbedPane_settings.add(new TagSettings());
         } catch (Exception e) {
             LOGGER.error("An error occurred on build settings", e);
         }

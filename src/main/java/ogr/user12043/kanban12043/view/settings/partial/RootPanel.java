@@ -4,6 +4,7 @@ import ogr.user12043.kanban12043.utils.Utils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
@@ -74,6 +75,7 @@ public class RootPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane.setViewportView(jTable_list);
+        jTable_list.setDefaultRenderer(Color.class, Utils.cellRendererForColor());
 
         jButton_add.setText(Utils.getTag("options.add"));
 
@@ -114,7 +116,7 @@ public class RootPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable_listKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_listKeyPressed
-        if (evt.getKeyCode()==KeyEvent.VK_DELETE) {
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             jButton_delete.doClick();
         }
     }//GEN-LAST:event_jTable_listKeyPressed

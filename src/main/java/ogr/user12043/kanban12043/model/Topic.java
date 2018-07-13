@@ -22,10 +22,10 @@ public class Topic {
     private String name;
     @Column(name = "FOREGROUND_COLOR")
     @DisplayField(key = "entity.common.foregroundColor")
-    private Integer foregroundColor;
+    private Color foregroundColor;
     @Column(name = "BACKGROUND_COLOR")
     @DisplayField(key = "entity.common.backgroundColor")
-    private Integer backgroundColor;
+    private Color backgroundColor;
     @Column(name = "IS_DEFAULT")
     @DisplayField(key = "entity.common.isDefault")
     private Boolean isDefault;
@@ -46,19 +46,19 @@ public class Topic {
         this.name = name;
     }
 
-    public Integer getForegroundColor() {
+    public Color getForegroundColor() {
         return foregroundColor;
     }
 
-    public void setForegroundColor(Integer foregroundColor) {
+    public void setForegroundColor(Color foregroundColor) {
         this.foregroundColor = foregroundColor;
     }
 
-    public Integer getBackgroundColor() {
+    public Color getBackgroundColor() {
         return backgroundColor;
     }
 
-    public void setBackgroundColor(Integer backgroundColor) {
+    public void setBackgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
 
