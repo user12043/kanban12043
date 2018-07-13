@@ -15,7 +15,6 @@ public class Tag {
     @SequenceGenerator(name = "seq_tag", allocationSize = 1)
     @GeneratedValue(generator = "seq_tag", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
-    @DisplayField("Id")
     private Integer id;
     @Column(name = "NAME")
     @DisplayField(key = "entity.common.name")

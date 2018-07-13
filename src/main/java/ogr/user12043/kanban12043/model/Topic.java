@@ -15,7 +15,6 @@ public class Topic {
     @SequenceGenerator(name = "seq_topic", allocationSize = 1)
     @GeneratedValue(generator = "seq_topic", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
-    @DisplayField("Id")
     private Integer id;
     @Column(name = "NAME")
     @DisplayField(key = "entity.common.name")

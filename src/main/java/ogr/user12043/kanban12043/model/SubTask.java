@@ -14,7 +14,6 @@ public class SubTask {
     @SequenceGenerator(name = "seq_subtask", allocationSize = 1)
     @GeneratedValue(generator = "seq_subtask", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
-    @DisplayField("Id")
     private Integer id;
     @ManyToOne(targetEntity = Task.class)
     @JoinColumn(name = "ROOT_TASK")

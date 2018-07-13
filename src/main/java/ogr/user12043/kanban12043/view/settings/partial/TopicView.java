@@ -1,7 +1,7 @@
 package ogr.user12043.kanban12043.view.settings.partial;
 
-import ogr.user12043.kanban12043.dao.TagDao;
-import ogr.user12043.kanban12043.model.Tag;
+import ogr.user12043.kanban12043.dao.TopicDao;
+import ogr.user12043.kanban12043.model.Topic;
 import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
 
@@ -12,14 +12,16 @@ import java.awt.event.ActionEvent;
  * Created by user12043 on 12.07.2018 - 17:59
  * Part of project: kanban12043
  */
-public class TagView extends javax.swing.JDialog {
-    private Tag tag;
+public class TopicView extends javax.swing.JDialog {
+    private Topic topic;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_backgroundColor;
     private javax.swing.JButton jButton_cancel;
-    private javax.swing.JButton jButton_color;
+    private javax.swing.JButton jButton_foregroundColor;
     private javax.swing.JButton jButton_save;
     private javax.swing.JCheckBox jCheckBox_isDefault;
-    private javax.swing.JLabel jLabel_color;
+    private javax.swing.JLabel jLabel_backgroundColor;
+    private javax.swing.JLabel jLabel_foregroundColor;
     private javax.swing.JLabel jLabel_isDefault;
     private javax.swing.JLabel jLabel_name;
     private javax.swing.JTextField jTextField_name;
@@ -28,18 +30,18 @@ public class TagView extends javax.swing.JDialog {
     /**
      * Creates new form TagView
      */
-    public TagView(java.awt.Frame parent, boolean modal) {
+    public TopicView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    public void setTag(Tag tag) {
-        this.tag = tag;
-        jTextField_name.setText(tag.getName());
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+        jTextField_name.setText(topic.getName());
         jTextField_name.selectAll();
-//        jButton_color.setBackground(new Color(tag.getColor()));
-        jButton_color.setBackground(tag.getColor());
-        jCheckBox_isDefault.setSelected(tag.isDefault());
+        jButton_foregroundColor.setBackground(topic.getForegroundColor());
+        jButton_backgroundColor.setBackground(topic.getBackgroundColor());
+        jCheckBox_isDefault.setSelected(topic.isDefault());
     }
 
     /**
@@ -55,10 +57,12 @@ public class TagView extends javax.swing.JDialog {
         jButton_cancel = new javax.swing.JButton();
         jTextField_name = new javax.swing.JTextField();
         jLabel_name = new javax.swing.JLabel();
-        jLabel_color = new javax.swing.JLabel();
-        jButton_color = new javax.swing.JButton();
+        jLabel_foregroundColor = new javax.swing.JLabel();
+        jButton_foregroundColor = new javax.swing.JButton();
         jLabel_isDefault = new javax.swing.JLabel();
         jCheckBox_isDefault = new javax.swing.JCheckBox();
+        jLabel_backgroundColor = new javax.swing.JLabel();
+        jButton_backgroundColor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -81,15 +85,23 @@ public class TagView extends javax.swing.JDialog {
 
         jLabel_name.setText(Utils.getTag("entity.common.name") + "\t: ");
 
-        jLabel_color.setText(Utils.getTag("entity.tag.color") + "\t: ");
+        jLabel_foregroundColor.setText(Utils.getTag("entity.common.foregroundColor") + "\t: ");
 
-        jButton_color.addActionListener(new java.awt.event.ActionListener() {
+        jButton_foregroundColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_colorActionPerformed(evt);
+                jButton_foregroundColorActionPerformed(evt);
             }
         });
 
         jLabel_isDefault.setText(Utils.getTag("entity.common.isDefault"));
+
+        jLabel_backgroundColor.setText(Utils.getTag("entity.common.backgroundColor") + "\t: ");
+
+        jButton_backgroundColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_backgroundColorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,12 +123,14 @@ public class TagView extends javax.swing.JDialog {
                                                                 .addGap(22, 22, 22)
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addComponent(jLabel_name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(jLabel_color, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                                        .addComponent(jLabel_foregroundColor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLabel_backgroundColor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jButton_color, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                                        .addComponent(jButton_foregroundColor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                                         .addComponent(jCheckBox_isDefault, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                                        .addComponent(jTextField_name, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                        .addComponent(jTextField_name, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jButton_backgroundColor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
         );
@@ -129,8 +143,12 @@ public class TagView extends javax.swing.JDialog {
                                         .addComponent(jLabel_name, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel_color, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton_color, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel_foregroundColor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton_foregroundColor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel_backgroundColor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton_backgroundColor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel_isDefault, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,20 +164,20 @@ public class TagView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_saveActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
-        final TagDao dao = Constants.context.getBean("tagDao", TagDao.class);
-        if (tag == null) {
-            tag = new Tag();
+        final TopicDao dao = Constants.context.getBean("topicDao", TopicDao.class);
+        if (topic == null) {
+            topic = new Topic();
         }
         String name = jTextField_name.getText();
         if (name.isEmpty()) {
             name = Constants.defaultName;
         }
-        tag.setName(name);
-//        tag.setColor(jButton_color.getBackground().getRGB());
-        tag.setColor(jButton_color.getBackground());
-        tag.setDefault(jCheckBox_isDefault.isSelected());
+        topic.setName(name);
+        topic.setForegroundColor(jButton_foregroundColor.getBackground());
+        topic.setBackgroundColor(jButton_backgroundColor.getBackground());
+        topic.setDefault(jCheckBox_isDefault.isSelected());
 
-        dao.save(tag);
+        dao.save(topic);
         dispose();
     }//GEN-LAST:event_jButton_saveActionPerformed
 
@@ -167,8 +185,13 @@ public class TagView extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton_cancelActionPerformed
 
-    private void jButton_colorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_colorActionPerformed
-        Color color = Utils.selectColor(this, jButton_color.getBackground());
-        jButton_color.setBackground(color);
-    }//GEN-LAST:event_jButton_colorActionPerformed
+    private void jButton_foregroundColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_foregroundColorActionPerformed
+        Color color = Utils.selectColor(this, jButton_foregroundColor.getBackground());
+        jButton_foregroundColor.setBackground(color);
+    }//GEN-LAST:event_jButton_foregroundColorActionPerformed
+
+    private void jButton_backgroundColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_backgroundColorActionPerformed
+        Color color = Utils.selectColor(this, jButton_backgroundColor.getBackground());
+        jButton_backgroundColor.setBackground(color);
+    }//GEN-LAST:event_jButton_backgroundColorActionPerformed
 }

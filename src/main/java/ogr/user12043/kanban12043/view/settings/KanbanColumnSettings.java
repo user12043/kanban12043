@@ -72,6 +72,7 @@ public class KanbanColumnSettings extends javax.swing.JPanel {
         KanbanColumnView view = new KanbanColumnView(Main.mainPane, true);
         view.setTitle(Utils.getTag("options.edit"));
         view.setKanbanColum(kanbanColumns.get(index));
+        view.setOrdinal(index);
         view.setVisible(true);
         refreshTable();
     }

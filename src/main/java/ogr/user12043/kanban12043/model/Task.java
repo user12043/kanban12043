@@ -16,7 +16,6 @@ public class Task {
     @SequenceGenerator(name = "seq_task", allocationSize = 1)
     @GeneratedValue(generator = "seq_task", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
-    @DisplayField("Id")
     private Integer id;
     @ManyToOne(targetEntity = KanbanColumn.class)
     @JoinColumn(name = "KANBAN_COLUMN")

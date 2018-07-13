@@ -16,7 +16,6 @@ public class TaskView {
     @SequenceGenerator(name = "seq_task_view", allocationSize = 1)
     @GeneratedValue(generator = "seq_task_view", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
-    @DisplayField("Id")
     private Integer id;
     @Column(name = "NAME")
     @DisplayField(key = "entity.common.name")

@@ -214,4 +214,19 @@ public class Utils {
         final int i = JOptionPane.showOptionDialog(parent, getTag("messages.confirm"), "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         return (i == 0);
     }
+
+    public static Color selectColor(Dialog parent, Color initialColor) {
+        JColorChooser chooser = new JColorChooser(initialColor);
+        JDialog dialog = new JDialog(parent, true);
+        dialog.setLayout(new FlowLayout());
+        dialog.add(chooser);
+        JButton button = new JButton(Utils.getTag("options.ok"));
+        button.addActionListener(e -> dialog.dispose());
+        dialog.add(button);
+        dialog.pack();
+        dialog.setLocationByPlatform(true);
+        dialog.setResizable(false);
+        dialog.setVisible(true);
+        return chooser.getColor();
+    }
 }
