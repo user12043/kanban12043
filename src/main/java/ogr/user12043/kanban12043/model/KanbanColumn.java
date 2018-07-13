@@ -14,8 +14,7 @@ public class KanbanColumn {
     @SequenceGenerator(name = "seq_kanban_column", allocationSize = 1)
     @GeneratedValue(generator = "seq_kanban_column", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
-    @DisplayField("Id")
-    private int id;
+    private Integer id;
 
     @Column(name = "NAME", length = 50)
     @DisplayField(key = "entity.common.name")
@@ -23,16 +22,16 @@ public class KanbanColumn {
 
     @Column(name = "COLUMN_LIMIT")
     @DisplayField(key = "entity.kanbanColumn.columnLimit")
-    private int columnLimit;
+    private Integer columnLimit;
 
     @Column(name = "ORDINAL")
-    private int ordinal; // Change sort property "ordinal" on KanbanColumnSettings.refreshTable when change this property's name
+    private Integer ordinal = getId(); // Change sort property "ordinal" on KanbanColumnSettings.refreshTable when change this property's name
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -44,19 +43,19 @@ public class KanbanColumn {
         this.name = name;
     }
 
-    public int getColumnLimit() {
+    public Integer getColumnLimit() {
         return columnLimit;
     }
 
-    public void setColumnLimit(int limit) {
+    public void setColumnLimit(Integer limit) {
         this.columnLimit = limit;
     }
 
-    public int getOrdinal() {
+    public Integer getOrdinal() {
         return ordinal;
     }
 
-    public void setOrdinal(int order) {
+    public void setOrdinal(Integer order) {
         this.ordinal = order;
     }
 }

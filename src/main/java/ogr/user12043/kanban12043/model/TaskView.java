@@ -17,16 +17,16 @@ public class TaskView {
     @GeneratedValue(generator = "seq_task_view", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     @DisplayField("Id")
-    private int id;
+    private Integer id;
     @Column(name = "NAME")
     @DisplayField(key = "entity.common.name")
     private String name;
     @Column(name = "FOREGROUND_COLOR")
     @DisplayField(key = "entity.common.foregroundColor")
-    private Color foregroundColor;
+    private Integer foregroundColor;
     @Column(name = "BACKGROUND_COLOR")
     @DisplayField(key = "entity.common.backgroundColor")
-    private Color backgroundColor;
+    private Integer backgroundColor;
     @OneToMany(targetEntity = KanbanColumn.class)
     private List<KanbanColumn> kanbanColumns;
     @OneToMany(targetEntity = Topic.class)
@@ -34,15 +34,15 @@ public class TaskView {
     @OneToMany(targetEntity = Tag.class)
     private List<Tag> tags;
     @Column(name = "STATUSES_CODE")
-    private int statusesCode;
+    private Integer statusesCode;
     @Column(name = "ORDINAL")
-    private int ordinal; // Change sort property "ordinal" on KanbanColumnSettings.refreshTable when change this property's name
+    private Integer ordinal = getId(); // Change sort property "ordinal" on KanbanColumnSettings.refreshTable when change this property's name
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -54,19 +54,19 @@ public class TaskView {
         this.name = name;
     }
 
-    public Color getForegroundColor() {
+    public Integer getForegroundColor() {
         return foregroundColor;
     }
 
-    public void setForegroundColor(Color foregroundColor) {
+    public void setForegroundColor(Integer foregroundColor) {
         this.foregroundColor = foregroundColor;
     }
 
-    public Color getBackgroundColor() {
+    public Integer getBackgroundColor() {
         return backgroundColor;
     }
 
-    public void setBackgroundColor(Color backgroundColor) {
+    public void setBackgroundColor(Integer backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
 
@@ -94,19 +94,19 @@ public class TaskView {
         this.tags = tags;
     }
 
-    public int getStatusesCode() {
+    public Integer getStatusesCode() {
         return statusesCode;
     }
 
-    public void setStatusesCode(int statusesCode) {
+    public void setStatusesCode(Integer statusesCode) {
         this.statusesCode = statusesCode;
     }
 
-    public int getOrdinal() {
+    public Integer getOrdinal() {
         return ordinal;
     }
 
-    public void setOrdinal(int order) {
+    public void setOrdinal(Integer order) {
         this.ordinal = order;
     }
 }

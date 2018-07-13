@@ -15,22 +15,22 @@ public class Tag {
     @GeneratedValue(generator = "seq_tag", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     @DisplayField("Id")
-    private int id;
+    private Integer id;
     @Column(name = "NAME")
     @DisplayField(key = "entity.common.name")
     private String name;
     @Column(name = "COLOR")
     @DisplayField(key = "entity.tag.color")
-    private int color;
+    private Integer color;
     @Column(name = "IS_DEFAULT")
     @DisplayField(key = "entity.common.isDefault")
-    private boolean isDefault;
+    private Boolean isDefault;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,19 +42,19 @@ public class Tag {
         this.name = name;
     }
 
-    public int getColor() {
+    public Integer getColor() {
         return color;
     }
 
-    public void setColor(int color) {
+    public void setColor(Integer color) {
         this.color = color;
     }
 
-    public boolean isDefault() {
+    public Boolean isDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean aDefault) {
+    public void setDefault(Boolean aDefault) {
         isDefault = aDefault;
     }
 }

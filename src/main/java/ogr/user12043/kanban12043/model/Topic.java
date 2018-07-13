@@ -16,25 +16,25 @@ public class Topic {
     @GeneratedValue(generator = "seq_topic", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     @DisplayField("Id")
-    private int id;
+    private Integer id;
     @Column(name = "NAME")
     @DisplayField(key = "entity.common.name")
     private String name;
     @Column(name = "FOREGROUND_COLOR")
     @DisplayField(key = "entity.common.foregroundColor")
-    private Color foregroundColor;
+    private Integer foregroundColor;
     @Column(name = "BACKGROUND_COLOR")
     @DisplayField(key = "entity.common.backgroundColor")
-    private Color backgroundColor;
+    private Integer backgroundColor;
     @Column(name = "IS_DEFAULT")
     @DisplayField(key = "entity.common.isDefault")
-    private boolean isDefault;
+    private Boolean isDefault;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -46,27 +46,27 @@ public class Topic {
         this.name = name;
     }
 
-    public Color getForegroundColor() {
+    public Integer getForegroundColor() {
         return foregroundColor;
     }
 
-    public void setForegroundColor(Color foregroundColor) {
+    public void setForegroundColor(Integer foregroundColor) {
         this.foregroundColor = foregroundColor;
     }
 
-    public Color getBackgroundColor() {
+    public Integer getBackgroundColor() {
         return backgroundColor;
     }
 
-    public void setBackgroundColor(Color backgroundColor) {
+    public void setBackgroundColor(Integer backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
 
-    public boolean isDefault() {
+    public Boolean isDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean aDefault) {
+    public void setDefault(Boolean aDefault) {
         isDefault = aDefault;
     }
 }

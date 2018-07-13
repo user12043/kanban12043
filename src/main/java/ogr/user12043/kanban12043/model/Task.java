@@ -17,7 +17,7 @@ public class Task {
     @GeneratedValue(generator = "seq_task", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     @DisplayField("Id")
-    private int id;
+    private Integer id;
     @ManyToOne(targetEntity = KanbanColumn.class)
     @JoinColumn(name = "KANBAN_COLUMN")
     private KanbanColumn kanbanColumn;
@@ -29,7 +29,7 @@ public class Task {
     private String content;
     @Column(name = "PRIORITY")
     @DisplayField(key = "entity.task.priority")
-    private int priority;
+    private Integer priority;
     @Column(name = "CREATED_DATE")
     @DisplayField(key = "entity.task.createdDate")
     private Date createdDate;
@@ -40,25 +40,25 @@ public class Task {
     @DisplayField(key = "entity.task.deadline")
     private Date deadLine;
     @Column(name = "HAS_DEAD_LINE")
-    private boolean hasDeadLine;
+    private Boolean hasDeadLine;
     @Column(name = "FINISH_DATE")
     @DisplayField(key = "entity.task.finishedDate")
     private Date finishDate;
     @Column(name = "STATUS")
-    private int status;
+    private Integer status;
     @OneToMany(targetEntity = Tag.class)
     @JoinColumn(name = "TAG")
     private List<Tag> tags;
     @Column(name = "PROGRESS")
-    private int progress;
+    private Integer progress;
     @OneToMany(targetEntity = SubTask.class, mappedBy = "rootTask")
     private List<SubTask> subTasks;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -86,11 +86,11 @@ public class Task {
         this.content = content;
     }
 
-    public int getPriority() {
+    public Integer getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(Integer priority) {
         this.priority = priority;
     }
 
@@ -118,11 +118,11 @@ public class Task {
         this.deadLine = deadLine;
     }
 
-    public boolean isHasDeadLine() {
+    public Boolean isHasDeadLine() {
         return hasDeadLine;
     }
 
-    public void setHasDeadLine(boolean hasDeadLine) {
+    public void setHasDeadLine(Boolean hasDeadLine) {
         this.hasDeadLine = hasDeadLine;
     }
 
@@ -134,11 +134,11 @@ public class Task {
         this.finishDate = finishDate;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -150,11 +150,11 @@ public class Task {
         this.tags = tags;
     }
 
-    public int getProgress() {
+    public Integer getProgress() {
         return progress;
     }
 
-    public void setProgress(int progress) {
+    public void setProgress(Integer progress) {
         this.progress = progress;
     }
 

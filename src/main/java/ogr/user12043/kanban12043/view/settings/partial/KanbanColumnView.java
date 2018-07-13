@@ -1,6 +1,8 @@
 package ogr.user12043.kanban12043.view.settings.partial;
 
+import ogr.user12043.kanban12043.dao.KanbanColumnDao;
 import ogr.user12043.kanban12043.model.KanbanColumn;
+import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
 
 /**
@@ -9,13 +11,28 @@ import ogr.user12043.kanban12043.utils.Utils;
  */
 public class KanbanColumnView extends javax.swing.JDialog {
     private KanbanColumn kanbanColumn;
-    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_cancel;
+    private javax.swing.JButton jButton_save;
+    private javax.swing.JLabel jLabel_limit;
+    private javax.swing.JLabel jLabel_name;
+    private javax.swing.JSpinner jSpinner_limit;
+    private javax.swing.JTextField jTextField_name;
+    // End of variables declaration//GEN-END:variables
+
     /**
      * Creates new form KanbanColumnView
      */
     public KanbanColumnView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public void setKanbanColum(KanbanColumn kanbanColumn) {
+        this.kanbanColumn = kanbanColumn;
+        jTextField_name.setText(kanbanColumn.getName());
+        jSpinner_limit.setValue(kanbanColumn.getColumnLimit());
+        jTextField_name.selectAll();
     }
 
     /**
@@ -31,22 +48,36 @@ public class KanbanColumnView extends javax.swing.JDialog {
         jButton_cancel = new javax.swing.JButton();
         jTextField_name = new javax.swing.JTextField();
         jLabel_name = new javax.swing.JLabel();
-        jFormattedTextField_limit = new javax.swing.JFormattedTextField();
-        jLabel_name1 = new javax.swing.JLabel();
+        jLabel_limit = new javax.swing.JLabel();
+        jSpinner_limit = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
+        setLocationByPlatform(true);
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jButton_save.setText(Utils.getTag("options.save"));
+        jButton_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_saveActionPerformed(evt);
+            }
+        });
 
         jButton_cancel.setText(Utils.getTag("options.cancel"));
+        jButton_cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_cancelActionPerformed(evt);
+            }
+        });
 
-        jLabel_name.setText(Utils.getTag("entity.common.name") + ": ");
+        jLabel_name.setText(Utils.getTag("entity.common.name") + "\t: ");
 
-        jFormattedTextField_limit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-
-        jLabel_name1.setText(Utils.getTag("entity.common.name") + ": ");
+        jLabel_limit.setText(Utils.getTag("entity.kanbanColumn.columnLimit") + "\t: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,18 +86,18 @@ public class KanbanColumnView extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton_save)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jButton_cancel)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_name1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_limit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jFormattedTextField_limit)
-                    .addComponent(jTextField_name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_name, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jSpinner_limit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -78,8 +109,8 @@ public class KanbanColumnView extends javax.swing.JDialog {
                     .addComponent(jLabel_name, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField_limit, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_name1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_limit, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinner_limit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_save)
@@ -90,54 +121,26 @@ public class KanbanColumnView extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KanbanColumnView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KanbanColumnView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KanbanColumnView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KanbanColumnView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void jButton_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cancelActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton_cancelActionPerformed
+
+    private void jButton_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
+        final KanbanColumnDao dao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
+        if (kanbanColumn == null) {
+            kanbanColumn = new KanbanColumn();
         }
-        //</editor-fold>
+        String name = jTextField_name.getText();
+        if (name.isEmpty()) {
+            name = Constants.defaultName;
+        }
+        kanbanColumn.setName(name);
+        kanbanColumn.setColumnLimit((Integer) jSpinner_limit.getValue());
+        dao.save(kanbanColumn);
+        dispose();
+    }//GEN-LAST:event_jButton_saveActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                KanbanColumnView dialog = new KanbanColumnView(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_cancel;
-    private javax.swing.JButton jButton_save;
-    private javax.swing.JFormattedTextField jFormattedTextField_limit;
-    private javax.swing.JLabel jLabel_name;
-    private javax.swing.JLabel jLabel_name1;
-    private javax.swing.JTextField jTextField_name;
-    // End of variables declaration//GEN-END:variables
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        System.out.println(evt.getKeyCode());
+    }//GEN-LAST:event_formKeyPressed
 }

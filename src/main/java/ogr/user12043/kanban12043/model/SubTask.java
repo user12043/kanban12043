@@ -15,7 +15,7 @@ public class SubTask {
     @GeneratedValue(generator = "seq_subtask", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     @DisplayField("Id")
-    private int id;
+    private Integer id;
     @ManyToOne(targetEntity = Task.class)
     @JoinColumn(name = "ROOT_TASK")
     private Task rootTask;
@@ -23,11 +23,11 @@ public class SubTask {
     @DisplayField(key = "entity.common.content")
     private String content;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,26 +1,27 @@
 package ogr.user12043.kanban12043.view.settings;
 
+import ogr.user12043.kanban12043.Main;
 import ogr.user12043.kanban12043.dao.KanbanColumnDao;
 import ogr.user12043.kanban12043.model.KanbanColumn;
 import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
-import ogr.user12043.kanban12043.view.settings.partial.RootPanel;
+import ogr.user12043.kanban12043.view.settings.partial.KanbanColumnView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Sort;
 
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
-
+// TODO ordering buttons
 /**
  * Created by user12043 on 11.07.2018 - 17:20
  * Part of project: kanban12043
  */
-public class KanbanColumnSettings extends RootPanel {
+public class KanbanColumnSettings extends javax.swing.JPanel {
     private static final Logger LOGGER = LogManager.getLogger(KanbanColumnSettings.class);
-
+    private final KanbanColumnDao dao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
+    List<KanbanColumn> kanbanColumns = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ogr.user12043.kanban12043.view.settings.partial.RootPanel rootPanel;
     // End of variables declaration//GEN-END:variables
@@ -32,22 +33,47 @@ public class KanbanColumnSettings extends RootPanel {
         initComponents();
         setName(Utils.getTag("entity.kanbanColumns"));
         refreshTable();
-        // Add actions
-        rootPanel.addEditListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        addActions();
+    }
 
+    private void addActions() {
+        rootPanel.addAddListener(e -> {
+            KanbanColumnView view = new KanbanColumnView(Main.mainPane, true);
+            view.setTitle(Utils.getTag("options.add"));
+            view.setVisible(true);
+            refreshTable();
+        });
+        rootPanel.addEditListener(e -> {
+            final int index = rootPanel.getTable().getSelectedRow();
+            if (index == -1) {
+                Utils.errorDialog(this, Utils.getTag("messages.error.notSelected"));
+                return;
+            }
+            KanbanColumnView view = new KanbanColumnView(Main.mainPane, true);
+            view.setTitle(Utils.getTag("options.edit"));
+            view.setKanbanColum(kanbanColumns.get(index));
+            view.setVisible(true);
+            refreshTable();
+        });
+        rootPanel.addDeleteListener(e -> {
+            final int index = rootPanel.getTable().getSelectedRow();
+            if (index == -1) {
+                Utils.errorDialog(this, Utils.getTag("messages.error.notSelected"));
+                return;
+            }
+            if (Utils.confirmDialog(this)) {
+                dao.delete(kanbanColumns.get(index));
+                refreshTable();
             }
         });
     }
 
     private void refreshTable() {
         final KanbanColumnDao dao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
-        final List<KanbanColumn> kanbanColumns = dao.findAll(new Sort(Sort.Direction.DESC, "ordinal", "id"));
+        kanbanColumns = dao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
         DefaultTableModel tableModel = Utils.generateTableModelFromList(kanbanColumns, KanbanColumn.class);
         rootPanel.setTableModel(tableModel);
     }
-
 
 
     /**

@@ -136,32 +136,49 @@ public class Utils {
      * @return generated table model
      */
     public static <T> DefaultTableModel generateTableModelFromList(List<T> list, Class entityClass) {
-        DefaultTableModel tableModel = new DefaultTableModel(){
+        Field[] declaredFields = entityClass.getDeclaredFields();
+        List<Field> displayFields = new ArrayList<>();
+
+        // Get fields with annotation
+        for (Field field : declaredFields) {
+            final DisplayField annotation = field.getAnnotation(DisplayField.class);
+            if (annotation != null) {
+                displayFields.add(field);
+            }
+        }
+
+        List<Class<?>> fieldClasses = new ArrayList<>();
+        Vector<String> columnIdentifiers = new Vector<>();
+        for (Field field : displayFields) {
+            fieldClasses.add(field.getType());
+            final DisplayField annotation = field.getAnnotation(DisplayField.class);
+            String name;
+            if (!annotation.key().isEmpty()) {
+                name = Utils.getTag(annotation.key());
+            } else {
+                name = annotation.value();
+            }
+            columnIdentifiers.add(name);
+        }
+        DefaultTableModel tableModel = new DefaultTableModel() {
             // Make table non editable
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-        };
-        final Field[] fields = entityClass.getDeclaredFields();
-        List<Field> displayFields = new ArrayList<>();
-        for (Field field : fields) {
-            String name;
-            final DisplayField annotation = field.getAnnotation(DisplayField.class);
-            if (annotation != null) {
-                if (!annotation.key().isEmpty()) {
-                    name = Utils.getTag(annotation.key());
-                } else {
-                    name = annotation.value();
-                }
-                tableModel.addColumn(name);
-                displayFields.add(field);
+
+            // Set column types
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return fieldClasses.get(columnIndex);
             }
-        }
+        };
+        tableModel.setColumnIdentifiers(columnIdentifiers);
         for (T t : list) {
             Vector<Object> rowVector = new Vector<>();
             for (Field field : displayFields) {
                 try {
+                    field.setAccessible(true);
                     rowVector.add(field.get(t));
                 } catch (Exception e) {
                     logger.error("Can not get field value: " + field.getName());
@@ -176,5 +193,11 @@ public class Utils {
     public static void errorDialog(Component parent, String message) {
         String[] options = new String[]{getTag("options.ok")};
         JOptionPane.showOptionDialog(parent, message, getTag("messages.error"), JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, options, options[0]);
+    }
+
+    public static boolean confirmDialog(Component parent) {
+        String[] options = new String[]{getTag("options.yes"), getTag("options.no")};
+        final int i = JOptionPane.showOptionDialog(parent, getTag("messages.confirm"), "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        return (i == 0);
     }
 }

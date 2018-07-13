@@ -16,6 +16,7 @@ import java.awt.event.WindowEvent;
  */
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
+    public static MainPane mainPane;
 
     public static void main(String args[]) {
         try {
@@ -29,7 +30,7 @@ public class Main {
             Utils.buildContext();
 
             // Create GUI
-            MainPane mainPane = new MainPane();
+            mainPane = new MainPane();
 
             // Close context on window close
             mainPane.addWindowListener(new WindowAdapter() {
