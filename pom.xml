@@ -35,14 +35,14 @@
     <!--<scope>test</scope>-->
     <!--</dependency>-->
 
-    <!--Json processing-->
+    <!--=========================================JSON=========================================-->
     <dependency>
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <version>${json-version}</version>
     </dependency>
 
-    <!--Logging-->
+    <!--=========================================LOGGING=========================================-->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
@@ -55,7 +55,7 @@
       <version>${log4j-version}</version>
     </dependency>
 
-    <!--Spring-->
+    <!--=========================================SPRING=========================================-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
@@ -75,18 +75,46 @@
       <version>${spring-data-jpa-version}</version>
     </dependency>
 
-    <!--Hibernate-->
+    <!--=========================================HIBERNATE=========================================-->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
       <version>${hibernate-version}</version>
     </dependency>
 
+    <!--=========================================DATABASE=========================================-->
     <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
       <version>${h2database-version}</version>
+    </dependency>
+
+
+    <!--=========================================THEMES=========================================-->
+    <!-- https://mvnrepository.com/artifact/com.seaglasslookandfeel/seaglasslookandfeel -->
+    <dependency>
+      <groupId>com.seaglasslookandfeel</groupId>
+      <artifactId>seaglasslookandfeel</artifactId>
+      <version>0.2.1</version>
+    </dependency>
+
+    <!--IN LOCAL-->
+    <!--Darcula-->
+    <dependency>
+      <groupId>com.bulenkov</groupId>
+      <artifactId>darcula</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/theme/darcula.jar</systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>com.alee.laf</groupId>
+      <artifactId>weblaf</artifactId>
+      <version>1.28</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/theme/weblaf-complete-1.28.jar</systemPath>
     </dependency>
   </dependencies>
 
