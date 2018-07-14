@@ -23,7 +23,6 @@ public class MainPane extends javax.swing.JFrame {
      */
     public MainPane() {
         initComponents();
-        setVisible(true);
         setSize(800, 600);
         setTitle(Utils.getTag("title"));
     }

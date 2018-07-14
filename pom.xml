@@ -106,7 +106,7 @@
       <artifactId>darcula</artifactId>
       <version>1.0</version>
       <scope>system</scope>
-      <systemPath>${project.basedir}/lib/theme/darcula.jar</systemPath>
+      <systemPath>${project.basedir}/lib/darcula.jar</systemPath>
     </dependency>
 
     <dependency>
@@ -114,7 +114,7 @@
       <artifactId>weblaf</artifactId>
       <version>1.28</version>
       <scope>system</scope>
-      <systemPath>${project.basedir}/lib/theme/weblaf-complete-1.28.jar</systemPath>
+      <systemPath>${project.basedir}/lib/weblaf-complete-1.28.jar</systemPath>
     </dependency>
   </dependencies>
 

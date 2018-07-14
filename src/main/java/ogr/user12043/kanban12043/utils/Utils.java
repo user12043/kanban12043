@@ -1,5 +1,6 @@
 package ogr.user12043.kanban12043.utils;
 
+import ogr.user12043.kanban12043.Main;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeansException;
@@ -53,7 +54,6 @@ public class Utils {
         }
         return builder.toString();
     }
-
 
     /**
      * @return Current system locale
@@ -228,5 +228,29 @@ public class Utils {
         dialog.setResizable(false);
         dialog.setVisible(true);
         return chooser.getColor();
+    }
+
+    public static void setTheme(int themeIndex) {
+        if (themeIndex < 0 || themeIndex >= Constants.themes.length) {
+            return;
+        }
+        try {
+            String className = Constants.themes[themeIndex];
+            Class.forName(className);
+            UIManager.setLookAndFeel(className);
+            SwingUtilities.updateComponentTreeUI(Main.mainPane);
+        } catch (ClassNotFoundException e) {
+            Utils.errorDialog(Main.mainPane, Utils.getTag("messages.error.theme.themeNotFound"));
+            Properties.updateProperty(Constants.args_themeArgumentName, 1);
+            Properties.theme = 1;
+        } catch (IllegalAccessException | InstantiationException e) {
+            Utils.errorDialog(Main.mainPane, Utils.getTag("messages.error.theme.loadError"));
+            Properties.updateProperty(Constants.args_themeArgumentName, 1);
+            Properties.theme = 1;
+        } catch (UnsupportedLookAndFeelException e) {
+            Utils.errorDialog(Main.mainPane, Utils.getTag("messages.error.theme.unsupported"));
+            Properties.updateProperty(Constants.args_themeArgumentName, 1);
+            Properties.theme = 1;
+        }
     }
 }

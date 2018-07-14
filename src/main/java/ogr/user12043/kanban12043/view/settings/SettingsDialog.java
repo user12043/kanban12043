@@ -72,6 +72,7 @@ public class SettingsDialog extends javax.swing.JDialog {
 
     private void buildContent() {
         try {
+            jTabbedPane_settings.add(new AppSettings());
             jTabbedPane_settings.add(new KanbanColumnSettings());
             jTabbedPane_settings.add(new TagSettings());
             jTabbedPane_settings.add(new TopicSettings());

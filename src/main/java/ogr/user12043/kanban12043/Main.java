@@ -32,6 +32,9 @@ public class Main {
             // Create GUI
             mainPane = new MainPane();
 
+            // Set theme
+            Utils.setTheme(Properties.theme);
+
             // Close context on window close
             mainPane.addWindowListener(new WindowAdapter() {
                 @Override
@@ -40,6 +43,8 @@ public class Main {
                     super.windowClosed(e);
                 }
             });
+
+            mainPane.setVisible(true);
         } catch (Exception e) {
             logger.error("Unexpected error: ", e);
         }
