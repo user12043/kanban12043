@@ -1,11 +1,11 @@
 package ogr.user12043.kanban12043.view.settings;
 
 import ogr.user12043.kanban12043.Main;
-import ogr.user12043.kanban12043.dao.KanbanColumnDao;
-import ogr.user12043.kanban12043.model.KanbanColumn;
+import ogr.user12043.kanban12043.dao.TaskViewDao;
+import ogr.user12043.kanban12043.model.TaskView;
 import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
-import ogr.user12043.kanban12043.view.settings.partial.KanbanColumnView;
+import ogr.user12043.kanban12043.view.settings.partial.TaskViewView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Sort;
@@ -16,13 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by user12043 on 11.07.2018 - 17:20
+ * Created by user12043 on 15.07.2018 - 14:34
  * Part of project: kanban12043
  */
-public class KanbanColumnSettings extends javax.swing.JPanel {
-    private static final Logger LOGGER = LogManager.getLogger(KanbanColumnSettings.class);
-    private final KanbanColumnDao dao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
-    private List<KanbanColumn> kanbanColumns = new ArrayList<>();
+public class TaskViewSettings extends javax.swing.JPanel {
+    private static final Logger LOGGER = LogManager.getLogger(TaskViewSettings.class);
+    private final TaskViewDao dao = Constants.context.getBean("taskViewDao", TaskViewDao.class);
+    private List<TaskView> taskViews = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_down;
     private javax.swing.JButton jButton_up;
@@ -32,9 +32,9 @@ public class KanbanColumnSettings extends javax.swing.JPanel {
     /**
      * Creates new form KanbanColumnSettings
      */
-    public KanbanColumnSettings() {
+    public TaskViewSettings() {
         initComponents();
-        setName(Utils.getTag("entity.kanbanColumns"));
+        setName(Utils.getTag("entity.taskViews"));
         refreshTable();
         addActions();
     }
@@ -50,13 +50,13 @@ public class KanbanColumnSettings extends javax.swing.JPanel {
     }
 
     private void refreshTable() {
-        kanbanColumns = dao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
-        DefaultTableModel tableModel = Utils.generateTableModelFromList(kanbanColumns, KanbanColumn.class);
+        taskViews = dao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
+        DefaultTableModel tableModel = Utils.generateTableModelFromList(taskViews, TaskView.class);
         rootPanel.setTableModel(tableModel);
     }
 
     private void add(ActionEvent evt) {
-        KanbanColumnView view = new KanbanColumnView(Main.mainPane, true);
+        TaskViewView view = new TaskViewView(Main.mainPane, true);
         view.setTitle(Utils.getTag("options.add"));
         view.setOrdinal(rootPanel.getTable().getRowCount());
         view.setVisible(true);
@@ -69,9 +69,9 @@ public class KanbanColumnSettings extends javax.swing.JPanel {
             Utils.errorDialog(this, Utils.getTag("messages.error.notSelected"));
             return;
         }
-        KanbanColumnView view = new KanbanColumnView(Main.mainPane, true);
+        TaskViewView view = new TaskViewView(Main.mainPane, true);
         view.setTitle(Utils.getTag("options.edit"));
-        view.setKanbanColum(kanbanColumns.get(index));
+        view.setTaskView(taskViews.get(index));
         view.setOrdinal(index);
         view.setVisible(true);
         refreshTable();
@@ -84,14 +84,14 @@ public class KanbanColumnSettings extends javax.swing.JPanel {
             return;
         }
         if (Utils.confirmDialog(this)) {
-            List<KanbanColumn> changedKanbanColumns = new ArrayList<>();
-            for (int i = index + 1; i < kanbanColumns.size(); i++) {
-                KanbanColumn kanbanColumn = kanbanColumns.get(i);
-                kanbanColumn.setOrdinal(kanbanColumn.getOrdinal() - 1);
-                changedKanbanColumns.add(kanbanColumn);
+            List<TaskView> changedTaskViews = new ArrayList<>();
+            for (int i = index + 1; i < taskViews.size(); i++) {
+                TaskView taskView = taskViews.get(i);
+                taskView.setOrdinal(taskView.getOrdinal() - 1);
+                changedTaskViews.add(taskView);
             }
-            dao.delete(kanbanColumns.get(index));
-            dao.saveAll(changedKanbanColumns);
+            dao.delete(taskViews.get(index));
+            dao.saveAll(changedTaskViews);
             refreshTable();
         }
     }
@@ -99,12 +99,12 @@ public class KanbanColumnSettings extends javax.swing.JPanel {
     private void indexChange(int offset) {
         int index = rootPanel.getTable().getSelectedRow();
         if (index != -1) {
-            KanbanColumn kanbanColumn1 = kanbanColumns.get(index);
-            KanbanColumn kanbanColumn2 = kanbanColumns.get(index + offset);
-            kanbanColumn1.setOrdinal(index + offset);
-            kanbanColumn2.setOrdinal(index);
-            dao.save(kanbanColumn1);
-            dao.save(kanbanColumn2);
+            TaskView taskView1 = taskViews.get(index);
+            TaskView taskView2 = taskViews.get(index + offset);
+            taskView1.setOrdinal(index + offset);
+            taskView2.setOrdinal(index);
+            dao.save(taskView1);
+            dao.save(taskView2);
             refreshTable();
             rootPanel.getTable().changeSelection(index + offset, 0, true, false);
         } else {

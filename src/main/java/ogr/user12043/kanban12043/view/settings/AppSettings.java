@@ -6,8 +6,6 @@ import ogr.user12043.kanban12043.utils.Utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.swing.*;
-
 /**
  * Created by user12043 on 14.07.2018 - 17:06 Part of project: kanban12043
  */
@@ -44,7 +42,7 @@ public class AppSettings extends javax.swing.JPanel {
 
         jLabel_theme.setText(Utils.getTag("settings.theme") + "\t:");
 
-        jComboBox_theme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Basic", "Nimbus", "Metal", "Synth", "Darcula", "Seaglass", "WebLaF" }));
+        jComboBox_theme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Basic", "Nimbus", "Metal", "Synth", "Darcula", "Seaglass", "WebLaF"}));
         jComboBox_theme.setSelectedIndex(Properties.theme);
         jComboBox_theme.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
             public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
@@ -62,27 +60,27 @@ public class AppSettings extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_apply)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_theme)
-                        .addGap(77, 77, 77)
-                        .addComponent(jComboBox_theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(169, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton_apply)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel_theme)
+                                                .addGap(77, 77, 77)
+                                                .addComponent(jComboBox_theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_theme)
-                    .addComponent(jComboBox_theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
-                .addComponent(jButton_apply)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel_theme)
+                                        .addComponent(jComboBox_theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
+                                .addComponent(jButton_apply)
+                                .addContainerGap())
         );
     }//GEN-END:initComponents
 

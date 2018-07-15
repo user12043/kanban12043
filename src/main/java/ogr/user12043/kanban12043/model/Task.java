@@ -17,39 +17,52 @@ public class Task {
     @GeneratedValue(generator = "seq_task", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     private Integer id;
+
     @ManyToOne(targetEntity = KanbanColumn.class)
     @JoinColumn(name = "KANBAN_COLUMN")
     private KanbanColumn kanbanColumn;
+
     @ManyToOne(targetEntity = Topic.class)
     @JoinColumn(name = "TOPIC")
     private Topic topic;
+
     @Column(name = "CONTENT")
     @DisplayField(key = "entity.common.content")
     private String content;
+
     @Column(name = "PRIORITY")
     @DisplayField(key = "entity.task.priority")
     private Integer priority;
+
     @Column(name = "CREATED_DATE")
     @DisplayField(key = "entity.task.createdDate")
     private Date createdDate;
+
     @Column(name = "UPDATED_DATE")
     @DisplayField(key = "entity.task.updatedDate")
     private Date updatedDate;
+
     @Column(name = "DEADLINE")
     @DisplayField(key = "entity.task.deadline")
     private Date deadLine;
+
     @Column(name = "HAS_DEAD_LINE")
     private Boolean hasDeadLine;
+
     @Column(name = "FINISH_DATE")
     @DisplayField(key = "entity.task.finishedDate")
     private Date finishDate;
+
     @Column(name = "STATUS")
     private Integer status;
+
     @OneToMany(targetEntity = Tag.class)
     @JoinColumn(name = "TAG")
     private List<Tag> tags;
+
     @Column(name = "PROGRESS")
     private Integer progress;
+
     @OneToMany(targetEntity = SubTask.class, mappedBy = "rootTask")
     private List<SubTask> subTasks;
 

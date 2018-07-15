@@ -3,6 +3,7 @@ package ogr.user12043.kanban12043.model;
 import ogr.user12043.kanban12043.utils.DisplayField;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by user12043 on 06.07.2018 - 11:16
@@ -26,6 +27,9 @@ public class KanbanColumn {
 
     @Column(name = "ORDINAL")
     private Integer ordinal; // Change sort property "ordinal" on KanbanColumnSettings.refreshTable when change this property's name
+
+    @ManyToMany(targetEntity = TaskView.class, mappedBy = "kanbanColumns")
+    private List<TaskView> taskViews;
 
     public Integer getId() {
         return id;
@@ -57,5 +61,13 @@ public class KanbanColumn {
 
     public void setOrdinal(Integer order) {
         this.ordinal = order;
+    }
+
+    public List<TaskView> getTaskViews() {
+        return taskViews;
+    }
+
+    public void setTaskViews(List<TaskView> taskViews) {
+        this.taskViews = taskViews;
     }
 }

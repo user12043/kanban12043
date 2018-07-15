@@ -4,6 +4,7 @@ import ogr.user12043.kanban12043.utils.DisplayField;
 
 import javax.persistence.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  * Created by user12043 on 06.07.2018 - 11:17
@@ -16,15 +17,21 @@ public class Tag {
     @GeneratedValue(generator = "seq_tag", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     private Integer id;
+
     @Column(name = "NAME")
     @DisplayField(key = "entity.common.name")
     private String name;
+
     @Column(name = "COLOR")
     @DisplayField(key = "entity.tag.color")
     private Color color;
+
     @Column(name = "IS_DEFAULT")
     @DisplayField(key = "entity.common.isDefault")
     private Boolean isDefault;
+
+    @ManyToMany(targetEntity = TaskView.class, mappedBy = "tags")
+    private List<TaskView> taskViews;
 
     public Integer getId() {
         return id;
@@ -56,5 +63,13 @@ public class Tag {
 
     public void setDefault(Boolean aDefault) {
         isDefault = aDefault;
+    }
+
+    public List<TaskView> getTaskViews() {
+        return taskViews;
+    }
+
+    public void setTaskViews(List<TaskView> taskViews) {
+        this.taskViews = taskViews;
     }
 }

@@ -15,9 +15,11 @@ public class SubTask {
     @GeneratedValue(generator = "seq_subtask", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     private Integer id;
+
     @ManyToOne(targetEntity = Task.class)
     @JoinColumn(name = "ROOT_TASK")
     private Task rootTask;
+
     @Column(name = "CONTENT")
     @DisplayField(key = "entity.common.content")
     private String content;

@@ -42,7 +42,7 @@ public class Properties {
             String fileContent = Utils.readFile(Constants.settingsFileName);
             JSONObject jsonObject = new JSONObject(fileContent);
             jsonObject.put(key, value);
-            Writer writer = jsonObject.write(new FileWriter(Constants.settingsFileName), 2, 2);
+            Writer writer = jsonObject.write(new FileWriter(Constants.settingsFileName), 2, 0);
             writer.close();
 
         } catch (IOException e) {

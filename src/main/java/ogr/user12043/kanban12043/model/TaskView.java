@@ -1,6 +1,8 @@
 package ogr.user12043.kanban12043.model;
 
 import ogr.user12043.kanban12043.utils.DisplayField;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.awt.*;
@@ -17,23 +19,37 @@ public class TaskView {
     @GeneratedValue(generator = "seq_task_view", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     private Integer id;
+
     @Column(name = "NAME")
     @DisplayField(key = "entity.common.name")
     private String name;
+
     @Column(name = "FOREGROUND_COLOR")
     @DisplayField(key = "entity.common.foregroundColor")
-    private Integer foregroundColor;
+    private Color foregroundColor;
+
     @Column(name = "BACKGROUND_COLOR")
     @DisplayField(key = "entity.common.backgroundColor")
-    private Integer backgroundColor;
-    @OneToMany(targetEntity = KanbanColumn.class)
+    private Color backgroundColor;
+
+    @ManyToMany(targetEntity = KanbanColumn.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OrderColumn(name = "id")
     private List<KanbanColumn> kanbanColumns;
-    @OneToMany(targetEntity = Topic.class)
+
+    @ManyToMany(targetEntity = Topic.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OrderColumn(name = "id")
     private List<Topic> topics;
-    @OneToMany(targetEntity = Tag.class)
+
+    @ManyToMany(targetEntity = Tag.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OrderColumn(name = "id")
     private List<Tag> tags;
+
     @Column(name = "STATUSES_CODE")
     private Integer statusesCode;
+
     @Column(name = "ORDINAL")
     private Integer ordinal; // Change sort property "ordinal" on KanbanColumnSettings.refreshTable when change this property's name
 
@@ -53,19 +69,19 @@ public class TaskView {
         this.name = name;
     }
 
-    public Integer getForegroundColor() {
+    public Color getForegroundColor() {
         return foregroundColor;
     }
 
-    public void setForegroundColor(Integer foregroundColor) {
+    public void setForegroundColor(Color foregroundColor) {
         this.foregroundColor = foregroundColor;
     }
 
-    public Integer getBackgroundColor() {
+    public Color getBackgroundColor() {
         return backgroundColor;
     }
 
-    public void setBackgroundColor(Integer backgroundColor) {
+    public void setBackgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
 
