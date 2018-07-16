@@ -53,6 +53,10 @@ public class RootPanel extends javax.swing.JPanel {
         jButton_delete.addActionListener(listener);
     }
 
+    public void editing(boolean b) {
+        jButton_edit.setVisible(b);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

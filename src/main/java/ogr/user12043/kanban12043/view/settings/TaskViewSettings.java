@@ -51,7 +51,7 @@ public class TaskViewSettings extends javax.swing.JPanel {
 
     private void refreshTable() {
         taskViews = dao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
-        DefaultTableModel tableModel = Utils.generateTableModelFromList(taskViews, TaskView.class);
+        DefaultTableModel tableModel = Utils.generateTableModelFromList(taskViews, TaskView.class, false);
         rootPanel.setTableModel(tableModel);
     }
 

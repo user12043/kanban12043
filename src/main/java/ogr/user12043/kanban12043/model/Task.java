@@ -1,6 +1,8 @@
 package ogr.user12043.kanban12043.model;
 
 import ogr.user12043.kanban12043.utils.DisplayField;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -19,11 +21,11 @@ public class Task {
     private Integer id;
 
     @ManyToOne(targetEntity = KanbanColumn.class)
-    @JoinColumn(name = "KANBAN_COLUMN")
+    @JoinColumn(name = "KANBAN_COLUMN", referencedColumnName = "ID")
     private KanbanColumn kanbanColumn;
 
     @ManyToOne(targetEntity = Topic.class)
-    @JoinColumn(name = "TOPIC")
+    @JoinColumn(name = "TOPIC", referencedColumnName = "ID")
     private Topic topic;
 
     @Column(name = "CONTENT")
@@ -56,8 +58,8 @@ public class Task {
     @Column(name = "STATUS")
     private Integer status;
 
-    @OneToMany(targetEntity = Tag.class)
-    @JoinColumn(name = "TAG")
+    @ManyToMany(targetEntity = Tag.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Tag> tags;
 
     @Column(name = "PROGRESS")
@@ -130,7 +132,7 @@ public class Task {
         this.deadLine = deadLine;
     }
 
-    public Boolean isHasDeadLine() {
+    public Boolean hasDeadLine() {
         return hasDeadLine;
     }
 

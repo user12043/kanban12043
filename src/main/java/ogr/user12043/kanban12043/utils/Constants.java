@@ -14,10 +14,8 @@ public class Constants {
     public static final String languageDirectory = "lang";
     public static final String defaultName = "unnamed";
     public static final String[] themes = new String[]{
-            "javax.swing.plaf.basic.BasicLookAndFeel",
             "javax.swing.plaf.nimbus.NimbusLookAndFeel",
             "javax.swing.plaf.metal.MetalLookAndFeel",
-            "javax.swing.plaf.synth.SynthLookAndFeel",
             "com.bulenkov.darcula.DarculaLaf",
             "com.seaglasslookandfeel.SeaGlassLookAndFeel",
             "com.alee.laf.WebLookAndFeel"

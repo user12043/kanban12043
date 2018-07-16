@@ -17,12 +17,16 @@ public class SubTask {
     private Integer id;
 
     @ManyToOne(targetEntity = Task.class)
-    @JoinColumn(name = "ROOT_TASK")
+    @JoinColumn(name = "ROOT_TASK", referencedColumnName = "ID")
     private Task rootTask;
 
     @Column(name = "CONTENT")
     @DisplayField(key = "entity.common.content")
     private String content;
+
+    @Column(name = "COMPLETED")
+    @DisplayField(key = "entity.subTask.completed")
+    private Boolean completed;
 
     public Integer getId() {
         return id;
@@ -46,5 +50,13 @@ public class SubTask {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 }

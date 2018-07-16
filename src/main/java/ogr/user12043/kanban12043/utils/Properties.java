@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -46,7 +47,24 @@ public class Properties {
             writer.close();
 
         } catch (IOException e) {
-            logger.error("Failed to set update property: " + key);
+            logger.error("Failed to set update property: " + key, e);
+        }
+    }
+
+    // Generate properties
+    public static void generatePropertiesFileIfDoesNotExists() {
+        try {
+            File file = new File(Constants.settingsFileName);
+            if (file.exists()) {
+                return;
+            }
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put(Constants.args_languageArgumentName, lang);
+            jsonObject.put(Constants.args_themeArgumentName, theme);
+            Writer writer = jsonObject.write(new FileWriter(file), 2, 0);
+            writer.close();
+        } catch (IOException e) {
+            logger.error("Failed to generate configuration file!", e);
         }
     }
 }

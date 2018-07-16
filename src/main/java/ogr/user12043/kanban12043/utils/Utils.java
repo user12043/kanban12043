@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseWheelEvent;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
@@ -137,7 +139,7 @@ public class Utils {
      * @param <T>         entity type
      * @return generated table model
      */
-    public static <T> DefaultTableModel generateTableModelFromList(List<T> list, Class entityClass) {
+    public static <T> DefaultTableModel generateTableModelFromList(List<T> list, Class entityClass, boolean editable) {
         Field[] declaredFields = entityClass.getDeclaredFields();
         List<Field> displayFields = new ArrayList<>();
 
@@ -166,7 +168,7 @@ public class Utils {
             // Make table non editable
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+                return editable;
             }
 
             // Set column types
@@ -242,15 +244,47 @@ public class Utils {
         } catch (ClassNotFoundException e) {
             Utils.errorDialog(Main.mainPane, Utils.getTag("messages.error.theme.themeNotFound"));
             Properties.updateProperty(Constants.args_themeArgumentName, 1);
-            Properties.theme = 1;
+            Properties.theme = 0;
         } catch (IllegalAccessException | InstantiationException e) {
             Utils.errorDialog(Main.mainPane, Utils.getTag("messages.error.theme.loadError"));
             Properties.updateProperty(Constants.args_themeArgumentName, 1);
-            Properties.theme = 1;
+            Properties.theme = 0;
         } catch (UnsupportedLookAndFeelException e) {
             Utils.errorDialog(Main.mainPane, Utils.getTag("messages.error.theme.unsupported"));
             Properties.updateProperty(Constants.args_themeArgumentName, 1);
-            Properties.theme = 1;
+            Properties.theme = 0;
         }
+    }
+
+    public static JButton getColorableButton() {
+        JButton button = new JButton();
+        // Prevent theme's colors
+        button.setContentAreaFilled(false);
+        button.setOpaque(true);
+        return button;
+    }
+
+    public static JSpinner getSpinner(int minValue, int maxvalue) {
+        JSpinner spinner = new JSpinner();
+        spinner.addMouseWheelListener(new MouseAdapter() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                int rotation = e.getWheelRotation();
+                if (rotation < 0) {
+                    spinner.setValue(spinner.getNextValue());
+                } else {
+                    spinner.setValue(spinner.getPreviousValue());
+                }
+            }
+        });
+        spinner.addChangeListener(e -> {
+            if (minValue != -1 && ((int) spinner.getValue()) < minValue) {
+                spinner.setValue(minValue);
+            } else if (maxvalue != -1 && ((int) spinner.getValue()) > maxvalue) {
+                spinner.setValue(maxvalue);
+            }
+        });
+
+        return spinner;
     }
 }

@@ -49,7 +49,7 @@ public class TopicSettings extends javax.swing.JPanel {
 
     private void refreshTable() {
         topics = dao.findAll(new Sort(Sort.Direction.ASC, "id"));
-        DefaultTableModel tableModel = Utils.generateTableModelFromList(topics, Topic.class);
+        DefaultTableModel tableModel = Utils.generateTableModelFromList(topics, Topic.class, false);
         rootPanel.setTableModel(tableModel);
     }
 

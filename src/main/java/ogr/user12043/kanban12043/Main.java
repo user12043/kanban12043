@@ -40,6 +40,7 @@ public class Main {
                 @Override
                 public void windowClosing(WindowEvent e) {
                     Constants.context.close();
+                    Properties.generatePropertiesFileIfDoesNotExists();
                     super.windowClosed(e);
                 }
             });

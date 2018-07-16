@@ -112,6 +112,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="jSpinner_limit">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="Utils.getSpinner(0, -1)"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

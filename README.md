@@ -7,3 +7,6 @@ A simple kanban board <b><u>desktop</u></b> application with integrated pomodoro
 <b>WebLaF: </b><a>https://github.com/mgarin/weblaf</a>
 
 <b>Seaglass: </b><a>https://github.com/khuxtable/seaglass</a>
+
+#### Date picker library used in app
+<b>LGoodDatePicker: </b>https://github.com/LGoodDatePicker/LGoodDatePicker

@@ -51,7 +51,7 @@ public class KanbanColumnSettings extends javax.swing.JPanel {
 
     private void refreshTable() {
         kanbanColumns = dao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
-        DefaultTableModel tableModel = Utils.generateTableModelFromList(kanbanColumns, KanbanColumn.class);
+        DefaultTableModel tableModel = Utils.generateTableModelFromList(kanbanColumns, KanbanColumn.class, false);
         rootPanel.setTableModel(tableModel);
     }
 

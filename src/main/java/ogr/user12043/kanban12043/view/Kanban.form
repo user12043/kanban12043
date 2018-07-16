@@ -74,11 +74,6 @@
     <Component class="javax.swing.JSeparator" name="jSeparator">
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel_tags">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="0" red="0" type="rgb"/>
-        </Property>
-      </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
     </Container>

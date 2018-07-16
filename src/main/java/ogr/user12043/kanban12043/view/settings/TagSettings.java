@@ -49,7 +49,7 @@ public class TagSettings extends javax.swing.JPanel {
 
     private void refreshTable() {
         tags = dao.findAll(new Sort(Sort.Direction.ASC, "id"));
-        DefaultTableModel tableModel = Utils.generateTableModelFromList(tags, Tag.class);
+        DefaultTableModel tableModel = Utils.generateTableModelFromList(tags, Tag.class, false);
         rootPanel.setTableModel(tableModel);
     }
 

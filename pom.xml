@@ -116,6 +116,15 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/lib/weblaf-complete-1.28.jar</systemPath>
     </dependency>
+
+    <!--=========================================GUI COMPONENT=========================================-->
+    <!-- https://mvnrepository.com/artifact/com.github.lgooddatepicker/LGoodDatePicker -->
+    <dependency>
+      <groupId>com.github.lgooddatepicker</groupId>
+      <artifactId>LGoodDatePicker</artifactId>
+      <version>10.3.1</version>
+    </dependency>
+
   </dependencies>
 
   <build>

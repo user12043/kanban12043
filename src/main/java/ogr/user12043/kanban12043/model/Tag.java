@@ -33,6 +33,9 @@ public class Tag {
     @ManyToMany(targetEntity = TaskView.class, mappedBy = "tags")
     private List<TaskView> taskViews;
 
+    @ManyToMany(targetEntity = Task.class, mappedBy = "tags")
+    private List<Task> tasks;
+
     public Integer getId() {
         return id;
     }
@@ -71,5 +74,13 @@ public class Tag {
 
     public void setTaskViews(List<TaskView> taskViews) {
         this.taskViews = taskViews;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

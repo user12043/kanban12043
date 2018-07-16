@@ -1,6 +1,8 @@
 package ogr.user12043.kanban12043.model;
 
 import ogr.user12043.kanban12043.utils.DisplayField;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,6 +32,10 @@ public class KanbanColumn {
 
     @ManyToMany(targetEntity = TaskView.class, mappedBy = "kanbanColumns")
     private List<TaskView> taskViews;
+
+    @OneToMany(targetEntity = Task.class, mappedBy = "kanbanColumn")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Task> tasks;
 
     public Integer getId() {
         return id;
@@ -69,5 +75,13 @@ public class KanbanColumn {
 
     public void setTaskViews(List<TaskView> taskViews) {
         this.taskViews = taskViews;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }
