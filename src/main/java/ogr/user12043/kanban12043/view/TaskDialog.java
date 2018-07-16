@@ -9,6 +9,7 @@ import ogr.user12043.kanban12043.dao.TopicDao;
 import ogr.user12043.kanban12043.model.*;
 import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
+import org.springframework.data.domain.Sort;
 
 import javax.swing.*;
 import java.sql.Date;
@@ -27,7 +28,7 @@ public class TaskDialog extends javax.swing.JDialog {
     private List<Topic> topics = topicDao.findAll();
 
     private KanbanColumnDao kanbanColumnDao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
-    private List<KanbanColumn> kanbanColumns = kanbanColumnDao.findAll();
+    private List<KanbanColumn> kanbanColumns = kanbanColumnDao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
 
     private TagDao tagDao = Constants.context.getBean("tagDao", TagDao.class);
     private List<Tag> tags = tagDao.findAll();
@@ -320,12 +321,12 @@ public class TaskDialog extends javax.swing.JDialog {
         }
 
         final int selectedTopicIndex = jComboBox_topic.getSelectedIndex();
-        if (selectedTopicIndex != 0) {
+        if (selectedTopicIndex > 0) {
             task.setTopic(topics.get(selectedTopicIndex - 1));
         }
 
         final int selectedKanbanColumnIndex = jComboBox_kanbanColumn.getSelectedIndex();
-        if (selectedKanbanColumnIndex != 0) {
+        if (selectedKanbanColumnIndex > -1) {
             task.setKanbanColumn(kanbanColumns.get(selectedKanbanColumnIndex));
         }
 
@@ -352,5 +353,6 @@ public class TaskDialog extends javax.swing.JDialog {
 
         TaskDao taskDao = Constants.context.getBean("taskDao", TaskDao.class);
         taskDao.save(task);
+        dispose();
     }//GEN-LAST:event_jButton_saveActionPerformed
 }

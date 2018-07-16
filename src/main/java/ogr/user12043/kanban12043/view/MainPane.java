@@ -2,9 +2,7 @@ package ogr.user12043.kanban12043.view;
 
 import ogr.user12043.kanban12043.dao.KanbanColumnDao;
 import ogr.user12043.kanban12043.dao.TaskViewDao;
-import ogr.user12043.kanban12043.model.KanbanColumn;
-import ogr.user12043.kanban12043.model.Task;
-import ogr.user12043.kanban12043.model.TaskView;
+import ogr.user12043.kanban12043.model.*;
 import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
 import ogr.user12043.kanban12043.view.settings.SettingsDialog;
@@ -14,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by user12043 on 05.07.2018 - 10:27
@@ -21,6 +20,7 @@ import java.util.List;
  */
 public class MainPane extends javax.swing.JFrame {
     List<JButton> viewButtons = new ArrayList<>();
+    List<TaskView> taskViews;
     private int activeViewIndex = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_addTask;
@@ -38,7 +38,7 @@ public class MainPane extends javax.swing.JFrame {
         initComponents();
         setSize(800, 600);
         setTitle(Utils.getTag("title"));
-        initializeBoard(0);
+        initializeBoard();
         pack();
     }
 
@@ -77,9 +77,47 @@ public class MainPane extends javax.swing.JFrame {
         this.activeViewIndex = activeViewIndex;
         Font activeFont = viewButtons.get(activeViewIndex).getFont();
         viewButtons.get(activeViewIndex).setFont(new Font(activeFont.getName(), Font.BOLD, activeFont.getSize() + 4));
+
+        // Clear current content
+        jPanel_mainContentPanel.removeAll();
+
+        // Do filtering according to task views
+        for (TaskView taskView : taskViews) {
+            for (KanbanColumn kanbanColumn : taskView.getKanbanColumns()) {
+                final List<Task> tasks = kanbanColumn.getTasks();
+                final List<Tag> tags = taskView.getTags();
+                final List<Topic> topics = taskView.getTopics();
+                for (ListIterator<Task> iterator = tasks.listIterator(); iterator.hasNext(); ) {
+                    Task task = iterator.next();
+                    boolean remove = false;
+
+                    // Filter tags
+                    for (Tag tag : task.getTags()) {
+                        if (tags.indexOf(tag) == -1) {
+                            remove = true;
+                        }
+                    }
+
+                    // Filter topics
+                    if (topics.indexOf(task.getTopic()) == -1) {
+                        remove = true;
+                    }
+
+                    if (remove) {
+                        iterator.remove();
+                    }
+                }
+
+                KanbanContainer container = new KanbanContainer(kanbanColumn.getName());
+                for (Task task : tasks) {
+                    container.addKanban(new Kanban(task));
+                }
+                addContent(container);
+            }
+        }
     }
 
-    public void initializeBoard(int activeViewIndex) {
+    public void initializeBoard() {
         // Clear content
         jPanel_viewButtonsPanel.removeAll();
         jPanel_mainContentPanel.removeAll();
@@ -90,22 +128,23 @@ public class MainPane extends javax.swing.JFrame {
         List<KanbanColumn> kanbanColumns;
         if (taskViews.isEmpty()) {
             kanbanColumns = kanbanColumnDao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
+            for (KanbanColumn kanbanColumn : kanbanColumns) {
+                KanbanContainer container = new KanbanContainer(kanbanColumn.getName());
+                final List<Task> tasks = kanbanColumn.getTasks();
+                for (Task task : tasks) {
+                    Kanban kanban = new Kanban(task);
+                    container.addKanban(kanban);
+                }
+                addContent(container);
+            }
         } else {
+            this.taskViews = taskViews;
             for (TaskView taskView : taskViews) {
                 addViewButton(taskView);
             }
-            kanbanColumns = taskViews.get(activeViewIndex).getKanbanColumns();
             setActiveView(activeViewIndex, true);
         }
-        for (KanbanColumn kanbanColumn : kanbanColumns) {
-            KanbanContainer container = new KanbanContainer(kanbanColumn.getName());
-            final List<Task> tasks = kanbanColumn.getTasks();
-            for (Task task : tasks) {
-                Kanban kanban = new Kanban(task);
-                container.addKanban(kanban);
-            }
-            addContent(container);
-        }
+
     }
 
     /**
@@ -209,7 +248,7 @@ public class MainPane extends javax.swing.JFrame {
     private void jButton_settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_settingsActionPerformed
         SettingsDialog settingsDialog = new SettingsDialog(this, true);
         settingsDialog.setVisible(true);
-        initializeBoard(activeViewIndex);
+        initializeBoard();
     }//GEN-LAST:event_jButton_settingsActionPerformed
 
     private void jButton_addTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_addTaskActionPerformed
@@ -222,6 +261,6 @@ public class MainPane extends javax.swing.JFrame {
         final TaskDialog taskDialog = new TaskDialog(this, true);
         taskDialog.setTitle(Utils.getTag("options.add"));
         taskDialog.setVisible(true);
-        initializeBoard(activeViewIndex);
+        initializeBoard();
     }//GEN-LAST:event_jButton_addTaskActionPerformed
 }

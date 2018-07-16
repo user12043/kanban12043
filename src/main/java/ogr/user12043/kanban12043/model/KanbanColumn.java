@@ -33,7 +33,7 @@ public class KanbanColumn {
     @ManyToMany(targetEntity = TaskView.class, mappedBy = "kanbanColumns")
     private List<TaskView> taskViews;
 
-    @OneToMany(targetEntity = Task.class, mappedBy = "kanbanColumn")
+    @OneToMany(targetEntity = Task.class, mappedBy = "kanbanColumn", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Task> tasks;
 

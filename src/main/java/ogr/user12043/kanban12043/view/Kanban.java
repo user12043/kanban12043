@@ -1,7 +1,11 @@
 package ogr.user12043.kanban12043.view;
 
+import ogr.user12043.kanban12043.Main;
+import ogr.user12043.kanban12043.dao.TaskDao;
 import ogr.user12043.kanban12043.model.Tag;
 import ogr.user12043.kanban12043.model.Task;
+import ogr.user12043.kanban12043.utils.Constants;
+import ogr.user12043.kanban12043.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,11 +15,14 @@ import java.awt.*;
  * Part of project: kanban12043
  */
 public class Kanban extends javax.swing.JPanel {
+    private TaskDao taskDao = Constants.context.getBean("taskDao", TaskDao.class);
     private Task task;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_bottomInfo;
     private javax.swing.JLabel jLabel_content;
+    private javax.swing.JMenuItem jMenuItem_delete;
     private javax.swing.JPanel jPanel_tags;
+    private javax.swing.JPopupMenu jPopupMenu_kanban;
     private javax.swing.JSeparator jSeparator;
     // End of variables declaration//GEN-END:variables
 
@@ -42,13 +49,14 @@ public class Kanban extends javax.swing.JPanel {
             JPanel panel = new JPanel();
             panel.setBackground(tag.getColor());
             GridBagConstraints c = new GridBagConstraints();
-//            c.gridx = counter;
-//            c.gridy = 0;
+            c.gridx = counter;
+            c.gridy = 0;
             c.weightx = 1.0;
             c.weighty = 1.0;
             jPanel_tags.add(panel);
+            counter++;
         }
-        jLabel_bottomInfo.setText(task.getPriority() + " | " + task.getTopic().getName() + " | " + task.getCreatedDate().toLocalDate());
+        jLabel_bottomInfo.setText(task.getPriority() + " | " + ((task.getTopic() != null) ? (task.getTopic().getName() + " | ") : "") + task.getCreatedDate().toLocalDate());
     }
 
     /**
@@ -60,13 +68,26 @@ public class Kanban extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu_kanban = new javax.swing.JPopupMenu();
+        jMenuItem_delete = new javax.swing.JMenuItem();
         jLabel_content = new javax.swing.JLabel();
         jSeparator = new javax.swing.JSeparator();
         jPanel_tags = new javax.swing.JPanel();
         jLabel_bottomInfo = new javax.swing.JLabel();
 
+        jPopupMenu_kanban.setLabel(Utils.getTag("options"));
+
+        jMenuItem_delete.setText(Utils.getTag("options.delete"));
+        jMenuItem_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_deleteActionPerformed(evt);
+            }
+        });
+        jPopupMenu_kanban.add(jMenuItem_delete);
+
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 0));
+        setComponentPopupMenu(jPopupMenu_kanban);
         setMinimumSize(new java.awt.Dimension(200, 100));
 
         jLabel_content.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -108,4 +129,11 @@ public class Kanban extends javax.swing.JPanel {
                                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_deleteActionPerformed
+        if (task != null) {
+            taskDao.delete(task);
+        }
+        Main.mainPane.initializeBoard();
+    }//GEN-LAST:event_jMenuItem_deleteActionPerformed
 }
