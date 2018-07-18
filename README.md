@@ -1,7 +1,7 @@
 # kanban12043
 A simple kanban board <b><u>desktop</u></b> application with integrated pomodoro timer. Any pull request appreciated.
 
-Inspired from Portable Kanban (<link>https://dmitryivanov.net</link>)
+Inspired from Portable Kanban (<link>http://dmitryivanov.net/personal-kanban-app</link>)
 
 ##
 
