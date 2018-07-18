@@ -65,7 +65,7 @@ public class Task {
     @Column(name = "PROGRESS")
     private Integer progress;
 
-    @OneToMany(mappedBy = "rootTask", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<SubTask> subTasks;
 
@@ -179,13 +179,6 @@ public class Task {
 
     public void setSubTasks(List<SubTask> subTasks) {
         this.subTasks = subTasks;
-    }
-
-    // Priority levels
-    public enum Priority {
-        LOW,
-        MEDIUM,
-        HIGH
     }
 
     // Task statuses

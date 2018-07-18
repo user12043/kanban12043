@@ -24,11 +24,19 @@ public class Constants {
     public static final String args_languageArgumentName = "lang";
     public static final String args_themeArgumentName = "theme";
     //</editor-fold>
-
     // General fields of application
     public static ClassPathXmlApplicationContext context;
-
     public static Locale locale;
-
     public static ResourceBundle langResourceBundle;
+    public static String[] priorities = new String[]{
+            Utils.getTag("entity.task.priority.low"),
+            Utils.getTag("entity.task.priority.normal"),
+            Utils.getTag("entity.task.priority.high")
+    };
+
+    public static String[] statuses = new String[]{
+            Utils.getTag("entity.task.status.none"),
+            Utils.getTag("entity.task.status.cancelled"),
+            Utils.getTag("entity.task.status.completed")
+    };
 }

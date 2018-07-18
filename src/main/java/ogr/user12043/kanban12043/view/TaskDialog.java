@@ -65,16 +65,32 @@ public class TaskDialog extends javax.swing.JDialog {
 
     public void setTask(Task task) {
         jTextArea_content.setText(task.getContent());
-        jComboBox_priority.setSelectedIndex(Task.Priority.values()[task.getPriority()].ordinal());
+        jComboBox_priority.setSelectedIndex(task.getPriority());
         jSpinner_progress.setValue(task.getProgress());
         if (task.hasDeadLine()) {
             datePicker_deadline.setDate(task.getDeadLine().toLocalDate());
         }
-        jComboBox_topic.setSelectedIndex(topics.indexOf(task.getTopic()));
-        jComboBox_kanbanColumn.setSelectedIndex(kanbanColumns.indexOf(task.getKanbanColumn()));
+
+        Topic topic = task.getTopic();
+        if (topic != null) {
+            for (int i = 0; i < topics.size(); i++) {
+                Topic t = topics.get(i);
+                if (t.getId().equals(topic.getId())) {
+                    jComboBox_topic.setSelectedIndex(i + 1);
+                    break;
+                }
+            }
+        }
+
+        jComboBox_kanbanColumn.setSelectedIndex((task.getKanbanColumn().getOrdinal()));
         for (Tag tag : task.getTags()) {
-            int index = tags.indexOf(tag);
-            jList_tags.addSelectionInterval(index, index);
+            for (int i = 0; i < tags.size(); i++) {
+                Tag t = tags.get(i);
+                if (t.getId().equals(tag.getId())) {
+                    jList_tags.addSelectionInterval(i, i);
+                    break;
+                }
+            }
         }
         for (SubTask subTask : task.getSubTasks()) {
             rootPanel_subTasks.getTableModel().addRow(new Object[]{subTask.getContent(), subTask.getCompleted()});
@@ -179,11 +195,7 @@ public class TaskDialog extends javax.swing.JDialog {
 
         jLabel_priority.setText(Utils.getTag("entity.task.priority") + "\t: ");
 
-        jComboBox_priority.setModel(new DefaultComboBoxModel<String>(new String[]{
-                Utils.getTag("entity.task.priority.low"),
-                Utils.getTag("entity.task.priority.normal"),
-                Utils.getTag("entity.task.priority.high")
-        }));
+        jComboBox_priority.setModel(new DefaultComboBoxModel<String>(Constants.priorities));
 
         jButton_save.setText(Utils.getTag("options.save"));
         jButton_save.addActionListener(new java.awt.event.ActionListener() {
@@ -303,15 +315,15 @@ public class TaskDialog extends javax.swing.JDialog {
     private void jButton_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
         if (this.task == null) {
             task = new Task();
-            task.setStatus(Task.Status.NONE.ordinal());
             task.setCreatedDate(Date.valueOf(LocalDate.now()));
         } else {
             task.setUpdatedDate(Date.valueOf(LocalDate.now()));
         }
         String taskContent = jTextArea_content.getText();
         task.setContent((taskContent.isEmpty()) ? Constants.defaultName : taskContent);
-        task.setPriority(Task.Priority.values()[jComboBox_priority.getSelectedIndex()].ordinal());
+        task.setPriority(jComboBox_priority.getSelectedIndex());
         task.setProgress((Integer) jSpinner_progress.getValue());
+        task.setStatus(jComboBox_priority.getSelectedIndex());
         final LocalDate deadline = datePicker_deadline.getDate();
         if (deadline != null) {
             task.setHasDeadLine(true);
@@ -321,6 +333,8 @@ public class TaskDialog extends javax.swing.JDialog {
         final int selectedTopicIndex = jComboBox_topic.getSelectedIndex();
         if (selectedTopicIndex > 0) {
             task.setTopic(topics.get(selectedTopicIndex - 1));
+        } else {
+            task.setTopic(null);
         }
 
         final int selectedKanbanColumnIndex = jComboBox_kanbanColumn.getSelectedIndex();
@@ -334,6 +348,8 @@ public class TaskDialog extends javax.swing.JDialog {
             for (int selectedTagIndex : selectedTagsIndices) {
                 task.getTags().add(tags.get(selectedTagIndex));
             }
+        } else {
+            task.setTags(null);
         }
 
         final int subtaskCount = rootPanel_subTasks.getTable().getRowCount();

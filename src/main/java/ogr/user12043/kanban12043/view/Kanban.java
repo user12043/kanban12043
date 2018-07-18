@@ -6,6 +6,7 @@ import ogr.user12043.kanban12043.dao.KanbanColumnDao;
 import ogr.user12043.kanban12043.model.KanbanColumn;
 import ogr.user12043.kanban12043.model.Tag;
 import ogr.user12043.kanban12043.model.Task;
+import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class Kanban extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_bottomInfo;
     private javax.swing.JLabel jLabel_content;
     private javax.swing.JMenuItem jMenuItem_delete;
+    private javax.swing.JMenuItem jMenuItem_edit;
     private javax.swing.JPanel jPanel_tags;
     private javax.swing.JPopupMenu jPopupMenu_kanban;
     private javax.swing.JSeparator jSeparator;
@@ -58,7 +60,7 @@ public class Kanban extends javax.swing.JPanel {
             jPanel_tags.add(panel, c);
             counter++;
         }
-        jLabel_bottomInfo.setText(task.getPriority() + " | " + ((task.getTopic() != null) ? (task.getTopic().getName() + " | ") : "") + task.getCreatedDate().toLocalDate());
+        jLabel_bottomInfo.setText(Constants.priorities[task.getPriority()] + " | " + ((task.getTopic() != null) ? (task.getTopic().getName() + " | ") : "") + task.getCreatedDate().toLocalDate());
 
         if (task.getTopic() != null) {
             setForeground(task.getTopic().getForegroundColor());
@@ -80,6 +82,7 @@ public class Kanban extends javax.swing.JPanel {
     private void initComponents() {
 
         jPopupMenu_kanban = new javax.swing.JPopupMenu();
+        jMenuItem_edit = new javax.swing.JMenuItem();
         jMenuItem_delete = new javax.swing.JMenuItem();
         jLabel_content = new javax.swing.JLabel();
         jSeparator = new javax.swing.JSeparator();
@@ -87,6 +90,14 @@ public class Kanban extends javax.swing.JPanel {
         jLabel_bottomInfo = new javax.swing.JLabel();
 
         jPopupMenu_kanban.setLabel(Utils.getTag("options"));
+
+        jMenuItem_edit.setText(Utils.getTag("options.edit"));
+        jMenuItem_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_editActionPerformed(evt);
+            }
+        });
+        jPopupMenu_kanban.add(jMenuItem_edit);
 
         jMenuItem_delete.setText(Utils.getTag("options.delete"));
         jMenuItem_delete.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +163,17 @@ public class Kanban extends javax.swing.JPanel {
              * property in @OneToMany is true. So the task will be deleted on kanbanColumn save
              */
             kanbanColumnDao.save(kanbanColumn);
+            Main.mainPane.initializeBoard(false);
         }
-        Main.mainPane.initializeBoard(false);
     }//GEN-LAST:event_jMenuItem_deleteActionPerformed
+
+    private void jMenuItem_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_editActionPerformed
+        if (task != null) {
+            TaskDialog taskDialog = new TaskDialog(Main.mainPane, true);
+            taskDialog.setTask(task);
+            taskDialog.setTitle(Utils.getTag("options.edit"));
+            taskDialog.setVisible(true);
+            Main.mainPane.initializeBoard(false);
+        }
+    }//GEN-LAST:event_jMenuItem_editActionPerformed
 }
