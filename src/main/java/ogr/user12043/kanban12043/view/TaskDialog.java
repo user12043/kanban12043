@@ -2,10 +2,7 @@ package ogr.user12043.kanban12043.view;
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
-import ogr.user12043.kanban12043.dao.KanbanColumnDao;
-import ogr.user12043.kanban12043.dao.TagDao;
-import ogr.user12043.kanban12043.dao.TaskDao;
-import ogr.user12043.kanban12043.dao.TopicDao;
+import ogr.user12043.kanban12043.dao.*;
 import ogr.user12043.kanban12043.model.*;
 import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
@@ -24,13 +21,13 @@ import java.util.Vector;
 public class TaskDialog extends javax.swing.JDialog {
     private Task task;
 
-    private TopicDao topicDao = Constants.context.getBean("topicDao", TopicDao.class);
+    private TopicDao topicDao = DaoUtil.getTopicDao();
     private List<Topic> topics = topicDao.findAll();
 
-    private KanbanColumnDao kanbanColumnDao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
+    private KanbanColumnDao kanbanColumnDao = DaoUtil.getKanbanColumnDao();
     private List<KanbanColumn> kanbanColumns = kanbanColumnDao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
 
-    private TagDao tagDao = Constants.context.getBean("tagDao", TagDao.class);
+    private TagDao tagDao = DaoUtil.getTagDao();
     private List<Tag> tags = tagDao.findAll();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -311,7 +308,8 @@ public class TaskDialog extends javax.swing.JDialog {
         } else {
             task.setUpdatedDate(Date.valueOf(LocalDate.now()));
         }
-        task.setContent(jTextArea_content.getText());
+        String taskContent = jTextArea_content.getText();
+        task.setContent((taskContent.isEmpty()) ? Constants.defaultName : taskContent);
         task.setPriority(Task.Priority.values()[jComboBox_priority.getSelectedIndex()].ordinal());
         task.setProgress((Integer) jSpinner_progress.getValue());
         final LocalDate deadline = datePicker_deadline.getDate();
@@ -343,15 +341,15 @@ public class TaskDialog extends javax.swing.JDialog {
             task.setSubTasks(new ArrayList<>());
             for (int i = 0; i < subtaskCount; i++) {
                 SubTask subTask = new SubTask();
-                final String content = (String) rootPanel_subTasks.getTableModel().getValueAt(i, 0);
+                final String subTaskContent = (String) rootPanel_subTasks.getTableModel().getValueAt(i, 0);
                 final Boolean completed = (Boolean) rootPanel_subTasks.getTableModel().getValueAt(i, 1);
-                subTask.setContent(content);
+                subTask.setContent((subTaskContent.isEmpty()) ? Constants.defaultName : subTaskContent);
                 subTask.setCompleted(completed);
                 task.getSubTasks().add(subTask);
             }
         }
 
-        TaskDao taskDao = Constants.context.getBean("taskDao", TaskDao.class);
+        TaskDao taskDao = DaoUtil.getTaskDao();
         taskDao.save(task);
         dispose();
     }//GEN-LAST:event_jButton_saveActionPerformed

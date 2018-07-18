@@ -1,9 +1,11 @@
 package ogr.user12043.kanban12043.view.settings;
 
 import ogr.user12043.kanban12043.Main;
+import ogr.user12043.kanban12043.dao.DaoUtil;
+import ogr.user12043.kanban12043.dao.TaskDao;
 import ogr.user12043.kanban12043.dao.TopicDao;
+import ogr.user12043.kanban12043.model.Task;
 import ogr.user12043.kanban12043.model.Topic;
-import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
 import ogr.user12043.kanban12043.view.settings.partial.TopicView;
 import org.apache.logging.log4j.LogManager;
@@ -21,8 +23,9 @@ import java.util.List;
  */
 public class TopicSettings extends javax.swing.JPanel {
     private static final Logger LOGGER = LogManager.getLogger(TopicSettings.class);
-    private final TopicDao dao = Constants.context.getBean("topicDao", TopicDao.class);
+    private final TopicDao topicDao = DaoUtil.getTopicDao();
     private List<Topic> topics = new ArrayList<>();
+    private TaskDao taskDao = DaoUtil.getTaskDao();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ogr.user12043.kanban12043.view.settings.partial.RootPanel rootPanel;
     // End of variables declaration//GEN-END:variables
@@ -48,7 +51,7 @@ public class TopicSettings extends javax.swing.JPanel {
     }
 
     private void refreshTable() {
-        topics = dao.findAll(new Sort(Sort.Direction.ASC, "id"));
+        topics = topicDao.findAll(new Sort(Sort.Direction.ASC, "id"));
         DefaultTableModel tableModel = Utils.generateTableModelFromList(topics, Topic.class, false);
         rootPanel.setTableModel(tableModel);
     }
@@ -80,7 +83,14 @@ public class TopicSettings extends javax.swing.JPanel {
             return;
         }
         if (Utils.confirmDialog(this)) {
-            dao.delete(topics.get(index));
+            Topic topic = topics.get(index);
+
+            // First delete the topic from associated tasks
+            for (Task task : topic.getTasks()) {
+                task.setTopic(null);
+                taskDao.save(task);
+            }
+            topicDao.delete(topic);
             refreshTable();
         }
     }

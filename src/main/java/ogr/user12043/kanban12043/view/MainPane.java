@@ -1,9 +1,9 @@
 package ogr.user12043.kanban12043.view;
 
+import ogr.user12043.kanban12043.dao.DaoUtil;
 import ogr.user12043.kanban12043.dao.KanbanColumnDao;
 import ogr.user12043.kanban12043.dao.TaskViewDao;
 import ogr.user12043.kanban12043.model.*;
-import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
 import ogr.user12043.kanban12043.view.settings.SettingsDialog;
 import org.springframework.data.domain.Sort;
@@ -38,7 +38,7 @@ public class MainPane extends javax.swing.JFrame {
         initComponents();
         setSize(800, 600);
         setTitle(Utils.getTag("title"));
-        initializeBoard();
+        initializeBoard(true);
         pack();
     }
 
@@ -63,7 +63,10 @@ public class MainPane extends javax.swing.JFrame {
         jPanel_viewButtonsPanel.add(button, getConstraints());
         viewButtons.add(button);
         int index = viewButtons.size() - 1;
-        button.addActionListener(e -> setActiveView(index, false));
+        button.addActionListener(e -> {
+            activeViewIndex = index;
+            initializeBoard(false);
+        });
         revalidate();
     }
 
@@ -78,52 +81,57 @@ public class MainPane extends javax.swing.JFrame {
         Font activeFont = viewButtons.get(activeViewIndex).getFont();
         viewButtons.get(activeViewIndex).setFont(new Font(activeFont.getName(), Font.BOLD, activeFont.getSize() + 4));
 
-        // Clear current content
-        jPanel_mainContentPanel.removeAll();
-
+        // Display active view
+        TaskView taskView = taskViews.get(activeViewIndex);
         // Do filtering according to task views
-        for (TaskView taskView : taskViews) {
-            for (KanbanColumn kanbanColumn : taskView.getKanbanColumns()) {
-                final List<Task> tasks = kanbanColumn.getTasks();
-                final List<Tag> tags = taskView.getTags();
-                final List<Topic> topics = taskView.getTopics();
-                for (ListIterator<Task> iterator = tasks.listIterator(); iterator.hasNext(); ) {
-                    Task task = iterator.next();
-                    boolean remove = false;
+        List<KanbanColumn> kanbanColumns = taskView.getKanbanColumns();
 
-                    // Filter tags
-                    for (Tag tag : task.getTags()) {
-                        if (tags.indexOf(tag) == -1) {
-                            remove = true;
-                        }
-                    }
+        // Get all columns if no column specified
+        if (kanbanColumns.size() == 0) {
+            KanbanColumnDao kanbanColumnDao = DaoUtil.getKanbanColumnDao();
+            kanbanColumns = kanbanColumnDao.findAll();
+        }
 
-                    // Filter topics
-                    if (topics.indexOf(task.getTopic()) == -1) {
+        for (KanbanColumn kanbanColumn : kanbanColumns) {
+            final List<Task> tasks = kanbanColumn.getTasks();
+            final List<Tag> tags = taskView.getTags();
+            final List<Topic> topics = taskView.getTopics();
+            for (ListIterator<Task> iterator = tasks.listIterator(); iterator.hasNext(); ) {
+                Task task = iterator.next();
+                boolean remove = false;
+
+                // Filter tags
+                for (Tag tag : task.getTags()) {
+                    if ((tags.size() > 0) && (tags.indexOf(tag) == -1)) {
                         remove = true;
                     }
-
-                    if (remove) {
-                        iterator.remove();
-                    }
                 }
 
-                KanbanContainer container = new KanbanContainer(kanbanColumn.getName());
-                for (Task task : tasks) {
-                    container.addKanban(new Kanban(task));
+                // Filter topics
+                if ((topics.size() > 0) && (topics.indexOf(task.getTopic()) == -1)) {
+                    remove = true;
                 }
-                addContent(container);
+
+                if (remove) {
+                    iterator.remove();
+                }
             }
+
+            KanbanContainer container = new KanbanContainer(kanbanColumn.getName());
+            for (Task task : tasks) {
+                container.addKanban(new Kanban(task));
+            }
+            addContent(container);
         }
+
     }
 
-    public void initializeBoard() {
+    public void initializeBoard(boolean first) {
         // Clear content
-        jPanel_viewButtonsPanel.removeAll();
-        jPanel_mainContentPanel.removeAll();
-        viewButtons.clear();
-        final TaskViewDao taskViewDao = Constants.context.getBean("taskViewDao", TaskViewDao.class);
-        final KanbanColumnDao kanbanColumnDao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
+        clearBoard();
+
+        final TaskViewDao taskViewDao = DaoUtil.getTaskViewDao();
+        final KanbanColumnDao kanbanColumnDao = DaoUtil.getKanbanColumnDao();
         List<TaskView> taskViews = taskViewDao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
         List<KanbanColumn> kanbanColumns;
         if (taskViews.isEmpty()) {
@@ -142,9 +150,15 @@ public class MainPane extends javax.swing.JFrame {
             for (TaskView taskView : taskViews) {
                 addViewButton(taskView);
             }
-            setActiveView(activeViewIndex, true);
+            setActiveView(activeViewIndex, first);
         }
 
+    }
+
+    public void clearBoard() {
+        jPanel_mainContentPanel.removeAll();
+        jPanel_viewButtonsPanel.removeAll();
+        viewButtons.clear();
     }
 
     /**
@@ -248,11 +262,11 @@ public class MainPane extends javax.swing.JFrame {
     private void jButton_settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_settingsActionPerformed
         SettingsDialog settingsDialog = new SettingsDialog(this, true);
         settingsDialog.setVisible(true);
-        initializeBoard();
+        initializeBoard(false);
     }//GEN-LAST:event_jButton_settingsActionPerformed
 
     private void jButton_addTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_addTaskActionPerformed
-        KanbanColumnDao kanbanColumnDao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
+        KanbanColumnDao kanbanColumnDao = DaoUtil.getKanbanColumnDao();
         final long quantity = kanbanColumnDao.count();
         if (quantity < 1) {
             Utils.errorDialog(this, Utils.getTag("messages.error.noColumn"));
@@ -261,6 +275,6 @@ public class MainPane extends javax.swing.JFrame {
         final TaskDialog taskDialog = new TaskDialog(this, true);
         taskDialog.setTitle(Utils.getTag("options.add"));
         taskDialog.setVisible(true);
-        initializeBoard();
+        initializeBoard(false);
     }//GEN-LAST:event_jButton_addTaskActionPerformed
 }

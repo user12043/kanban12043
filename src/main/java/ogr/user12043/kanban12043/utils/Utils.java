@@ -35,6 +35,7 @@ public class Utils {
             Constants.context = new ClassPathXmlApplicationContext("application-context.xml");
         } catch (BeansException e) {
             logger.error("Error creating context", e);
+            Utils.errorDialog(null, Utils.getTag("messages.error.createContextError") + "\n" + e.getCause().toString());
             System.exit(1);
         }
     }

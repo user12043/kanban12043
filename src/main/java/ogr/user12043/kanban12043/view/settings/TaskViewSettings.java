@@ -1,9 +1,9 @@
 package ogr.user12043.kanban12043.view.settings;
 
 import ogr.user12043.kanban12043.Main;
+import ogr.user12043.kanban12043.dao.DaoUtil;
 import ogr.user12043.kanban12043.dao.TaskViewDao;
 import ogr.user12043.kanban12043.model.TaskView;
-import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
 import ogr.user12043.kanban12043.view.settings.partial.TaskViewView;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class TaskViewSettings extends javax.swing.JPanel {
     private static final Logger LOGGER = LogManager.getLogger(TaskViewSettings.class);
-    private final TaskViewDao dao = Constants.context.getBean("taskViewDao", TaskViewDao.class);
+    private final TaskViewDao dao = DaoUtil.getTaskViewDao();
     private List<TaskView> taskViews = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_down;

@@ -1,5 +1,6 @@
 package ogr.user12043.kanban12043.view.settings.partial;
 
+import ogr.user12043.kanban12043.dao.DaoUtil;
 import ogr.user12043.kanban12043.dao.TagDao;
 import ogr.user12043.kanban12043.model.Tag;
 import ogr.user12043.kanban12043.utils.Constants;
@@ -39,7 +40,7 @@ public class TagView extends javax.swing.JDialog {
         jTextField_name.selectAll();
 //        jButton_color.setBackground(new Color(tag.getColor()));
         jButton_color.setBackground(tag.getColor());
-        jCheckBox_isDefault.setSelected(tag.isDefault());
+        jCheckBox_isDefault.setSelected(tag.getDefault());
     }
 
     /**
@@ -142,15 +143,12 @@ public class TagView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_saveActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
-        final TagDao dao = Constants.context.getBean("tagDao", TagDao.class);
+        final TagDao dao = DaoUtil.getTagDao();
         if (tag == null) {
             tag = new Tag();
         }
         String name = jTextField_name.getText();
-        if (name.isEmpty()) {
-            name = Constants.defaultName;
-        }
-        tag.setName(name);
+        tag.setName((name.isEmpty()) ? Constants.defaultName : name);
 //        tag.setColor(jButton_color.getBackground().getRGB());
         tag.setColor(jButton_color.getBackground());
         tag.setDefault(jCheckBox_isDefault.isSelected());

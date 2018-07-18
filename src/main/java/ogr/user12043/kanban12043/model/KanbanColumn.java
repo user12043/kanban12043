@@ -30,10 +30,7 @@ public class KanbanColumn {
     @Column(name = "ORDINAL")
     private Integer ordinal; // Change sort property "ordinal" on KanbanColumnSettings.refreshTable when change this property's name
 
-    @ManyToMany(targetEntity = TaskView.class, mappedBy = "kanbanColumns")
-    private List<TaskView> taskViews;
-
-    @OneToMany(targetEntity = Task.class, mappedBy = "kanbanColumn", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kanbanColumn", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Task> tasks;
 
@@ -67,14 +64,6 @@ public class KanbanColumn {
 
     public void setOrdinal(Integer order) {
         this.ordinal = order;
-    }
-
-    public List<TaskView> getTaskViews() {
-        return taskViews;
-    }
-
-    public void setTaskViews(List<TaskView> taskViews) {
-        this.taskViews = taskViews;
     }
 
     public List<Task> getTasks() {

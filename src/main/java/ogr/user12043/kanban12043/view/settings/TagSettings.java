@@ -1,9 +1,11 @@
 package ogr.user12043.kanban12043.view.settings;
 
 import ogr.user12043.kanban12043.Main;
+import ogr.user12043.kanban12043.dao.DaoUtil;
 import ogr.user12043.kanban12043.dao.TagDao;
+import ogr.user12043.kanban12043.dao.TaskDao;
 import ogr.user12043.kanban12043.model.Tag;
-import ogr.user12043.kanban12043.utils.Constants;
+import ogr.user12043.kanban12043.model.Task;
 import ogr.user12043.kanban12043.utils.Utils;
 import ogr.user12043.kanban12043.view.settings.partial.TagView;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +23,8 @@ import java.util.List;
  */
 public class TagSettings extends javax.swing.JPanel {
     private static final Logger LOGGER = LogManager.getLogger(TagSettings.class);
-    private final TagDao dao = Constants.context.getBean("tagDao", TagDao.class);
+    private final TagDao tagDao = DaoUtil.getTagDao();
+    private final TaskDao taskDao = DaoUtil.getTaskDao();
     private List<Tag> tags = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ogr.user12043.kanban12043.view.settings.partial.RootPanel rootPanel;
@@ -48,7 +51,7 @@ public class TagSettings extends javax.swing.JPanel {
     }
 
     private void refreshTable() {
-        tags = dao.findAll(new Sort(Sort.Direction.ASC, "id"));
+        tags = tagDao.findAll(new Sort(Sort.Direction.ASC, "id"));
         DefaultTableModel tableModel = Utils.generateTableModelFromList(tags, Tag.class, false);
         rootPanel.setTableModel(tableModel);
     }
@@ -80,7 +83,15 @@ public class TagSettings extends javax.swing.JPanel {
             return;
         }
         if (Utils.confirmDialog(this)) {
-            dao.delete(tags.get(index));
+            Tag tag = tags.get(index);
+
+            // First delete the tag from associated tasks
+            List<Task> tasks = tag.getTasks();
+            for (Task task : tasks) {
+                task.getTags().remove(tag);
+                taskDao.save(task);
+            }
+            tagDao.delete(tag);
             refreshTable();
         }
     }

@@ -1,5 +1,6 @@
 package ogr.user12043.kanban12043.view.settings.partial;
 
+import ogr.user12043.kanban12043.dao.DaoUtil;
 import ogr.user12043.kanban12043.dao.TopicDao;
 import ogr.user12043.kanban12043.model.Topic;
 import ogr.user12043.kanban12043.utils.Constants;
@@ -41,7 +42,7 @@ public class TopicView extends javax.swing.JDialog {
         jTextField_name.selectAll();
         jButton_foregroundColor.setBackground(topic.getForegroundColor());
         jButton_backgroundColor.setBackground(topic.getBackgroundColor());
-        jCheckBox_isDefault.setSelected(topic.isDefault());
+        jCheckBox_isDefault.setSelected(topic.getDefault());
     }
 
     /**
@@ -160,15 +161,12 @@ public class TopicView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_saveActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
-        final TopicDao dao = Constants.context.getBean("topicDao", TopicDao.class);
+        final TopicDao dao = DaoUtil.getTopicDao();
         if (topic == null) {
             topic = new Topic();
         }
         String name = jTextField_name.getText();
-        if (name.isEmpty()) {
-            name = Constants.defaultName;
-        }
-        topic.setName(name);
+        topic.setName((name.isEmpty()) ? Constants.defaultName : name);
         topic.setForegroundColor(jButton_foregroundColor.getBackground());
         topic.setBackgroundColor(jButton_backgroundColor.getBackground());
         topic.setDefault(jCheckBox_isDefault.isSelected());

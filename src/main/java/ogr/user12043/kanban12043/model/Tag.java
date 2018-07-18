@@ -1,6 +1,8 @@
 package ogr.user12043.kanban12043.model;
 
 import ogr.user12043.kanban12043.utils.DisplayField;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.awt.*;
@@ -30,10 +32,8 @@ public class Tag {
     @DisplayField(key = "entity.common.isDefault")
     private Boolean isDefault;
 
-    @ManyToMany(targetEntity = TaskView.class, mappedBy = "tags")
-    private List<TaskView> taskViews;
-
-    @ManyToMany(targetEntity = Task.class, mappedBy = "tags")
+    @ManyToMany(mappedBy = "tags")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Task> tasks;
 
     public Integer getId() {
@@ -60,20 +60,12 @@ public class Tag {
         this.color = color;
     }
 
-    public Boolean isDefault() {
+    public Boolean getDefault() {
         return isDefault;
     }
 
     public void setDefault(Boolean aDefault) {
         isDefault = aDefault;
-    }
-
-    public List<TaskView> getTaskViews() {
-        return taskViews;
-    }
-
-    public void setTaskViews(List<TaskView> taskViews) {
-        this.taskViews = taskViews;
     }
 
     public List<Task> getTasks() {

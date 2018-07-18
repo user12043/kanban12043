@@ -1,10 +1,11 @@
 package ogr.user12043.kanban12043.view;
 
 import ogr.user12043.kanban12043.Main;
-import ogr.user12043.kanban12043.dao.TaskDao;
+import ogr.user12043.kanban12043.dao.DaoUtil;
+import ogr.user12043.kanban12043.dao.KanbanColumnDao;
+import ogr.user12043.kanban12043.model.KanbanColumn;
 import ogr.user12043.kanban12043.model.Tag;
 import ogr.user12043.kanban12043.model.Task;
-import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
 
 import javax.swing.*;
@@ -15,8 +16,8 @@ import java.awt.*;
  * Part of project: kanban12043
  */
 public class Kanban extends javax.swing.JPanel {
-    private TaskDao taskDao = Constants.context.getBean("taskDao", TaskDao.class);
     private Task task;
+    private KanbanColumnDao kanbanColumnDao = DaoUtil.getKanbanColumnDao();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_bottomInfo;
     private javax.swing.JLabel jLabel_content;
@@ -49,14 +50,24 @@ public class Kanban extends javax.swing.JPanel {
             JPanel panel = new JPanel();
             panel.setBackground(tag.getColor());
             GridBagConstraints c = new GridBagConstraints();
-            c.gridx = counter;
-            c.gridy = 0;
+            c.gridx = 0;
+            c.gridy = counter;
             c.weightx = 1.0;
             c.weighty = 1.0;
-            jPanel_tags.add(panel);
+            c.fill = GridBagConstraints.BOTH;
+            jPanel_tags.add(panel, c);
             counter++;
         }
         jLabel_bottomInfo.setText(task.getPriority() + " | " + ((task.getTopic() != null) ? (task.getTopic().getName() + " | ") : "") + task.getCreatedDate().toLocalDate());
+
+        if (task.getTopic() != null) {
+            setForeground(task.getTopic().getForegroundColor());
+            setBackground(task.getTopic().getBackgroundColor());
+            jLabel_content.setForeground(task.getTopic().getForegroundColor());
+            jLabel_content.setBackground(task.getTopic().getBackgroundColor());
+            jLabel_bottomInfo.setForeground(task.getTopic().getForegroundColor());
+            jLabel_bottomInfo.setBackground(task.getTopic().getBackgroundColor());
+        }
     }
 
     /**
@@ -92,25 +103,22 @@ public class Kanban extends javax.swing.JPanel {
 
         jLabel_content.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_content.setText("initial");
-        jLabel_content.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel_tags.setLayout(new java.awt.GridBagLayout());
 
         jLabel_bottomInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_bottomInfo.setText("initial");
-        jLabel_bottomInfo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel_tags, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jPanel_tags, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel_content, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                        .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                                         .addComponent(jSeparator, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addContainerGap())
         );
@@ -118,22 +126,33 @@ public class Kanban extends javax.swing.JPanel {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jPanel_tags, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel_content, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(4, 4, 4)
-                                                .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel_content, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
+                        .addComponent(jPanel_tags, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_deleteActionPerformed
         if (task != null) {
-            taskDao.delete(task);
+            /*
+             * Since the OneToMany association between KanbanColumn and Task is bidirectional, deleting directly the task will not do the job.
+             * Nothing happening on:
+             * taskDao.delete(task)
+             * So deleting operation must be done on parent of the association (KanbanColumn)
+             */
+            KanbanColumn kanbanColumn = task.getKanbanColumn();
+            kanbanColumn.getTasks().remove(task); // Now task is not have any column.
+            /*
+             * The
+             * orphanRemoval = true
+             * property in @OneToMany is true. So the task will be deleted on kanbanColumn save
+             */
+            kanbanColumnDao.save(kanbanColumn);
         }
-        Main.mainPane.initializeBoard();
+        Main.mainPane.initializeBoard(false);
     }//GEN-LAST:event_jMenuItem_deleteActionPerformed
 }

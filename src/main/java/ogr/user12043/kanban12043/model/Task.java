@@ -12,7 +12,7 @@ import java.util.List;
  * Created by user12043 on 06.07.2018 - 11:10
  * Part of project: kanban12043
  */
-@Entity
+@Entity(name = "TASK")
 public class Task {
     @Id
     @SequenceGenerator(name = "seq_task", allocationSize = 1)
@@ -20,12 +20,12 @@ public class Task {
     @Column(name = "ID")
     private Integer id;
 
-    @ManyToOne(targetEntity = KanbanColumn.class)
-    @JoinColumn(name = "KANBAN_COLUMN", referencedColumnName = "ID")
+    @ManyToOne
+    @JoinColumn(name = "KANBAN_COLUMN")
     private KanbanColumn kanbanColumn;
 
-    @ManyToOne(targetEntity = Topic.class)
-    @JoinColumn(name = "TOPIC", referencedColumnName = "ID")
+    @ManyToOne
+    @JoinColumn(name = "TOPIC")
     private Topic topic;
 
     @Column(name = "CONTENT")
@@ -58,14 +58,15 @@ public class Task {
     @Column(name = "STATUS")
     private Integer status;
 
-    @ManyToMany(targetEntity = Tag.class)
+    @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Tag> tags;
 
     @Column(name = "PROGRESS")
     private Integer progress;
 
-    @OneToMany(targetEntity = SubTask.class, mappedBy = "rootTask")
+    @OneToMany(mappedBy = "rootTask", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<SubTask> subTasks;
 
     public Integer getId() {

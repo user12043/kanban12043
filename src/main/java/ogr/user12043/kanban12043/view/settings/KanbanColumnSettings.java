@@ -1,9 +1,9 @@
 package ogr.user12043.kanban12043.view.settings;
 
 import ogr.user12043.kanban12043.Main;
+import ogr.user12043.kanban12043.dao.DaoUtil;
 import ogr.user12043.kanban12043.dao.KanbanColumnDao;
 import ogr.user12043.kanban12043.model.KanbanColumn;
-import ogr.user12043.kanban12043.utils.Constants;
 import ogr.user12043.kanban12043.utils.Utils;
 import ogr.user12043.kanban12043.view.settings.partial.KanbanColumnView;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class KanbanColumnSettings extends javax.swing.JPanel {
     private static final Logger LOGGER = LogManager.getLogger(KanbanColumnSettings.class);
-    private final KanbanColumnDao dao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
+    private final KanbanColumnDao dao = DaoUtil.getKanbanColumnDao();
     private List<KanbanColumn> kanbanColumns = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_down;

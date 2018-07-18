@@ -32,17 +32,17 @@ public class TaskView {
     @DisplayField(key = "entity.common.backgroundColor")
     private Color backgroundColor;
 
-    @ManyToMany(targetEntity = KanbanColumn.class)
+    @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @OrderColumn(name = "id")
     private List<KanbanColumn> kanbanColumns;
 
-    @ManyToMany(targetEntity = Topic.class)
+    @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @OrderColumn(name = "id")
     private List<Topic> topics;
 
-    @ManyToMany(targetEntity = Tag.class)
+    @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @OrderColumn(name = "id")
     private List<Tag> tags;

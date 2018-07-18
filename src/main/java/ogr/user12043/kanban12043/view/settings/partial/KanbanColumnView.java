@@ -1,5 +1,6 @@
 package ogr.user12043.kanban12043.view.settings.partial;
 
+import ogr.user12043.kanban12043.dao.DaoUtil;
 import ogr.user12043.kanban12043.dao.KanbanColumnDao;
 import ogr.user12043.kanban12043.model.KanbanColumn;
 import ogr.user12043.kanban12043.utils.Constants;
@@ -127,15 +128,12 @@ public class KanbanColumnView extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_cancelActionPerformed
 
     private void jButton_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
-        final KanbanColumnDao dao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
+        final KanbanColumnDao dao = DaoUtil.getKanbanColumnDao();
         if (kanbanColumn == null) {
             kanbanColumn = new KanbanColumn();
         }
         String name = jTextField_name.getText();
-        if (name.isEmpty()) {
-            name = Constants.defaultName;
-        }
-        kanbanColumn.setName(name);
+        kanbanColumn.setName((name.isEmpty()) ? Constants.defaultName : name);
         kanbanColumn.setColumnLimit((Integer) jSpinner_limit.getValue());
         kanbanColumn.setOrdinal(currentOrdinal);
 

@@ -16,8 +16,8 @@ public class SubTask {
     @Column(name = "ID")
     private Integer id;
 
-    @ManyToOne(targetEntity = Task.class)
-    @JoinColumn(name = "ROOT_TASK", referencedColumnName = "ID")
+    @ManyToOne
+    @JoinColumn(name = "ROOT_TASK")
     private Task rootTask;
 
     @Column(name = "CONTENT")

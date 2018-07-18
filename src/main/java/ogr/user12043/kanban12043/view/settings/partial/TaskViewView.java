@@ -1,9 +1,6 @@
 package ogr.user12043.kanban12043.view.settings.partial;
 
-import ogr.user12043.kanban12043.dao.KanbanColumnDao;
-import ogr.user12043.kanban12043.dao.TagDao;
-import ogr.user12043.kanban12043.dao.TaskViewDao;
-import ogr.user12043.kanban12043.dao.TopicDao;
+import ogr.user12043.kanban12043.dao.*;
 import ogr.user12043.kanban12043.model.KanbanColumn;
 import ogr.user12043.kanban12043.model.Tag;
 import ogr.user12043.kanban12043.model.TaskView;
@@ -81,7 +78,7 @@ public class TaskViewView extends javax.swing.JDialog {
 
     private ListModel<String> kanbanColumnsListModel() {
         DefaultListModel<String> model = new DefaultListModel<>();
-        KanbanColumnDao kanbanColumnDao = Constants.context.getBean("kanbanColumnDao", KanbanColumnDao.class);
+        KanbanColumnDao kanbanColumnDao = DaoUtil.getKanbanColumnDao();
         kanbanColumns = kanbanColumnDao.findAll(new Sort(Sort.Direction.ASC, "id"));
         for (KanbanColumn column : kanbanColumns) {
             model.addElement(column.getName());
@@ -91,7 +88,7 @@ public class TaskViewView extends javax.swing.JDialog {
 
     private ListModel<String> topicsListModel() {
         DefaultListModel<String> model = new DefaultListModel<>();
-        TopicDao dao = Constants.context.getBean("topicDao", TopicDao.class);
+        TopicDao dao = DaoUtil.getTopicDao();
         topics = dao.findAll(new Sort(Sort.Direction.ASC, "id"));
         for (Topic topic : topics) {
             model.addElement(topic.getName());
@@ -101,7 +98,7 @@ public class TaskViewView extends javax.swing.JDialog {
 
     private ListModel<String> tagsListModel() {
         DefaultListModel<String> model = new DefaultListModel<>();
-        TagDao dao = Constants.context.getBean("tagDao", TagDao.class);
+        TagDao dao = DaoUtil.getTagDao();
         tags = dao.findAll(new Sort(Sort.Direction.ASC, "id"));
         for (Tag tag : tags) {
             model.addElement(tag.getName());
@@ -206,22 +203,22 @@ public class TaskViewView extends javax.swing.JDialog {
                                                         .addComponent(jLabel_backgroundColor, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jLabel_kanbanColumns, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                                         .addComponent(jLabel_topics, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                        .addComponent(jLabel_tags, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jTextField_name)
-                                                        .addComponent(jButton_foregroundColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jButton_backgroundColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jScrollPane_kanbanColumns)
-                                                        .addComponent(jScrollPane_topics)
-                                                        .addComponent(jScrollPane_tags))
+                                                        .addComponent(jLabel_tags, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(jButton_foregroundColor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jButton_backgroundColor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jScrollPane_kanbanColumns, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                        .addComponent(jScrollPane_topics, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                        .addComponent(jScrollPane_tags, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                        .addComponent(jTextField_name, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
+                                .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jTextField_name, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel_name, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,7 +242,7 @@ public class TaskViewView extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel_tags, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jScrollPane_tags, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jButton_save)
                                         .addComponent(jButton_cancel))
@@ -260,15 +257,12 @@ public class TaskViewView extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_cancelActionPerformed
 
     private void jButton_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
-        final TaskViewDao dao = Constants.context.getBean("taskViewDao", TaskViewDao.class);
+        final TaskViewDao dao = DaoUtil.getTaskViewDao();
         if (taskView == null) {
             taskView = new TaskView();
         }
         String name = jTextField_name.getText();
-        if (name.isEmpty()) {
-            name = Constants.defaultName;
-        }
-        taskView.setName(name);
+        taskView.setName((name.isEmpty()) ? Constants.defaultName : name);
         taskView.setForegroundColor(jButton_foregroundColor.getBackground());
         taskView.setBackgroundColor(jButton_backgroundColor.getBackground());
         taskView.setKanbanColumns(new ArrayList<>());
