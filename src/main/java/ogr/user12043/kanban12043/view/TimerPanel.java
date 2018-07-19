@@ -14,6 +14,7 @@ public class TimerPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_minute;
     private javax.swing.JLabel jLabel_second;
     private javax.swing.JLabel jLabel_separate;
+    // End of variables declaration//GEN-END:variables
 
     /**
      * Creates new form TimerPanel
@@ -95,5 +96,4 @@ public class TimerPanel extends javax.swing.JPanel {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    // End of variables declaration//GEN-END:variables
 }
