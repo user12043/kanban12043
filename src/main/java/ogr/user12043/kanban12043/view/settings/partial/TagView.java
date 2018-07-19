@@ -149,7 +149,6 @@ public class TagView extends javax.swing.JDialog {
         }
         String name = jTextField_name.getText();
         tag.setName((name.isEmpty()) ? Constants.defaultName : name);
-//        tag.setColor(jButton_color.getBackground().getRGB());
         tag.setColor(jButton_color.getBackground());
         tag.setDefault(jCheckBox_isDefault.isSelected());
 

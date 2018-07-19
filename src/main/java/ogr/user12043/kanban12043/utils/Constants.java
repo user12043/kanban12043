@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
  */
 public class Constants {
     public static final String settingsFileName = "config.json";
+    public static final String logFileName = "logs/kanban12043.log";
     public static final String languageDirectory = "lang";
     public static final String defaultName = "unnamed";
     public static final String[] themes = new String[]{

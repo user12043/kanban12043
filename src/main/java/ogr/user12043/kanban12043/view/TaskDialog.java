@@ -208,6 +208,12 @@ public class TaskDialog extends javax.swing.JDialog {
 
         jList_tags.setModel(tagsComboBoxModel());
         jScrollPane_tags.setViewportView(jList_tags);
+        for (int i = 0; i < tags.size(); i++) {
+            Tag tag = tags.get(i);
+            if (tag.getDefault()) {
+                jList_tags.addSelectionInterval(i, i);
+            }
+        }
 
         jLabel_tags.setText(Utils.getTag("entity.tags") + "\t: ");
 
@@ -308,6 +314,13 @@ public class TaskDialog extends javax.swing.JDialog {
                                 .addComponent(jButton_save)
                                 .addContainerGap())
         );
+
+        for (int i = 0; i < topics.size(); i++) {
+            Topic topic = topics.get(i);
+            if (topic.getDefault()) {
+                jComboBox_topic.setSelectedIndex(i + 1);
+            }
+        }
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

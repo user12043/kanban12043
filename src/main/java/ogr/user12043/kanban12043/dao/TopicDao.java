@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Part of project: kanban12043
  */
 public interface TopicDao extends JpaRepository<Topic, Integer> {
+    Topic findByIsDefault(Boolean isDefault);
 }

@@ -180,9 +180,6 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>${maven-jar-plugin.version}</version>
         <configuration>
-          <excludes>
-            <exclude>lang/lang_tr_TR.properties</exclude>
-          </excludes>
           <archive>
             <manifest>
               <mainClass>${project.main-class}</mainClass>
@@ -195,6 +192,25 @@
         </configuration>
       </plugin>
     </plugins>
+
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+        <targetPath>${project.build.outputDirectory}</targetPath>
+        <includes>
+          <include>**</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>${project.basedir}/lang</directory>
+        <targetPath>${project.build.directory}/lang</targetPath>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
 
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>

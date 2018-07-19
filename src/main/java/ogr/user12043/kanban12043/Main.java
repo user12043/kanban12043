@@ -20,6 +20,9 @@ public class Main {
 
     public static void main(String args[]) {
         try {
+            // Clean previous log file
+            Utils.cleanLogFile();
+
             // Read properties
             Properties.initializeProperties();
 

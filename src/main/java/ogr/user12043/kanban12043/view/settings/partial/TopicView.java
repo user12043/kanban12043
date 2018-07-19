@@ -169,7 +169,17 @@ public class TopicView extends javax.swing.JDialog {
         topic.setName((name.isEmpty()) ? Constants.defaultName : name);
         topic.setForegroundColor(jButton_foregroundColor.getBackground());
         topic.setBackgroundColor(jButton_backgroundColor.getBackground());
-        topic.setDefault(jCheckBox_isDefault.isSelected());
+
+        if (jCheckBox_isDefault.isSelected()) {
+            // Look for other default topic and make non-default it if exists
+            Topic t = dao.findByIsDefault(true);
+            if (t != null) {
+                t.setDefault(false);
+                dao.save(t);
+            }
+
+            topic.setDefault(true);
+        }
 
         dao.save(topic);
         dispose();

@@ -27,6 +27,13 @@ import java.util.List;
 public class Utils {
     private static final Logger logger = LogManager.getLogger(Utils.class);
 
+    public static void cleanLogFile() {
+        File file = new File(Constants.logFileName);
+        if (file.exists() && file.delete()) {
+            logger.info("Log file deleted.");
+        }
+    }
+
     /**
      * Build the spring context
      */
