@@ -29,6 +29,7 @@ public class MainPane extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_mainContentPanel;
     private javax.swing.JPanel jPanel_toolbar;
     private javax.swing.JPanel jPanel_viewButtonsPanel;
+    private ogr.user12043.kanban12043.view.TimerPanel timerPanel1;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -87,7 +88,7 @@ public class MainPane extends javax.swing.JFrame {
         List<KanbanColumn> kanbanColumns = taskView.getKanbanColumns();
 
         // Get all columns if no column specified
-        if (kanbanColumns.size() == 0) {
+        if (kanbanColumns.isEmpty()) {
             KanbanColumnDao kanbanColumnDao = DaoUtil.getKanbanColumnDao();
             kanbanColumns = kanbanColumnDao.findAll();
         }
@@ -101,15 +102,22 @@ public class MainPane extends javax.swing.JFrame {
                 boolean remove = false;
 
                 // Filter tags
-                for (Tag tag : task.getTags()) {
-                    if ((tags.size() > 0) && (tags.indexOf(tag) == -1)) {
-                        remove = true;
+                if (!tags.isEmpty()) {
+                    for (Tag tag : task.getTags()) {
+                        for (Tag t : tags) {
+                            remove = !t.getId().equals(tag.getId());
+                        }
                     }
                 }
 
                 // Filter topics
-                if ((topics.size() > 0) && (topics.indexOf(task.getTopic()) == -1)) {
+                if (!topics.isEmpty()) {
                     remove = true;
+                    for (Topic t : topics) {
+                        if (t.getId().equals(task.getTopic().getId())) {
+                            remove = false;
+                        }
+                    }
                 }
 
                 if (remove) {
@@ -175,6 +183,7 @@ public class MainPane extends javax.swing.JFrame {
         jPanel_toolbar = new javax.swing.JPanel();
         jButton_settings = new javax.swing.JButton();
         jButton_addTask = new javax.swing.JButton();
+        timerPanel1 = new ogr.user12043.kanban12043.view.TimerPanel();
         jPanel_viewButtonsPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -210,7 +219,9 @@ public class MainPane extends javax.swing.JFrame {
         jPanel_toolbarLayout.setHorizontalGroup(
                 jPanel_toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_toolbarLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(5, 5, 5)
+                                .addComponent(timerPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                                 .addComponent(jButton_addTask)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton_settings)
@@ -218,12 +229,16 @@ public class MainPane extends javax.swing.JFrame {
         );
         jPanel_toolbarLayout.setVerticalGroup(
                 jPanel_toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_toolbarLayout.createSequentialGroup()
+                        .addGroup(jPanel_toolbarLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel_toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton_settings)
-                                        .addComponent(jButton_addTask))
-                                .addContainerGap())
+                                        .addComponent(jButton_addTask)
+                                        .addComponent(jButton_settings))
+                                .addGap(23, 23, 23))
+                        .addGroup(jPanel_toolbarLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(timerPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel_viewButtonsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
@@ -238,7 +253,7 @@ public class MainPane extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel_title)
-                                                .addGap(0, 303, Short.MAX_VALUE))
+                                                .addGap(0, 0, Short.MAX_VALUE))
                                         .addComponent(jPanel_toolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jPanel_viewButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jPanel_mainContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -253,7 +268,7 @@ public class MainPane extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel_viewButtonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel_mainContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                                .addComponent(jPanel_mainContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                                 .addContainerGap())
         );
 

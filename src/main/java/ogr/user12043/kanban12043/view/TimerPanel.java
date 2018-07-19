@@ -1,5 +1,7 @@
 package ogr.user12043.kanban12043.view;
 
+import javax.swing.*;
+
 /**
  * Created by user12043 on 19.07.2018 - 13:42
  * Part of project: kanban12043
@@ -50,6 +52,11 @@ public class TimerPanel extends javax.swing.JPanel {
         jLabel_separate.setText(":");
 
         jButton_start.setText("Start");
+        jButton_start.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_startActionPerformed(evt);
+            }
+        });
 
         jButton_shortBreak.setText("Short Break");
 
@@ -62,11 +69,11 @@ public class TimerPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
+                                .addGap(0, 0, 0)
                                 .addComponent(jLabel_minute)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(0, 0, 0)
                                 .addComponent(jLabel_separate)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(0, 0, 0)
                                 .addComponent(jLabel_second)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton_start)
@@ -80,12 +87,6 @@ public class TimerPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel_minute)
-                                        .addComponent(jLabel_second)
-                                        .addComponent(jLabel_separate)))
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -94,6 +95,19 @@ public class TimerPanel extends javax.swing.JPanel {
                                         .addComponent(jButton_longBreak)
                                         .addComponent(jButton_stop))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel_minute)
+                                        .addComponent(jLabel_separate)
+                                        .addComponent(jLabel_second))
+                                .addGap(0, 2, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_startActionPerformed
+        Timer timer = new Timer(5, null);
+        timer.addActionListener(e -> {
+            System.out.println("GEBER");
+        });
+    }//GEN-LAST:event_jButton_startActionPerformed
 }
