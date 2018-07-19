@@ -16,7 +16,8 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Created by user12043 on 05.07.2018 - 09:38 Part of project: kanban12043
+ * Created by user12043 on 05.07.2018 - 09:38
+ * Part of project: kanban12043
  */
 public class TaskDialog extends javax.swing.JDialog {
     private Task task;

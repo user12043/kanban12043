@@ -7,7 +7,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Created by user12043 on 14.07.2018 - 17:06 Part of project: kanban12043
+ * Created by user12043 on 14.07.2018 - 17:06
+ * Part of project: kanban12043
  */
 public class AppSettings extends javax.swing.JPanel {
 

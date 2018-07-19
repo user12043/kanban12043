@@ -1,7 +1,8 @@
 package ogr.user12043.kanban12043.view;
 
 /**
- * @author ME99735
+ * Created by user12043 on 19.07.2018 - 13:42
+ * Part of project: kanban12043
  */
 public class TimerPanel extends javax.swing.JPanel {
 
