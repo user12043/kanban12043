@@ -30,7 +30,7 @@ public class Tag {
 
     @Column(name = "IS_DEFAULT")
     @DisplayField(key = "entity.common.isDefault")
-    private Boolean isDefault;
+    private Boolean isDefault = Boolean.FALSE;
 
     @ManyToMany(mappedBy = "tags")
     @LazyCollection(LazyCollectionOption.FALSE)

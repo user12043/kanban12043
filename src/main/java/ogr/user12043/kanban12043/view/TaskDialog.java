@@ -80,9 +80,12 @@ public class TaskDialog extends javax.swing.JDialog {
                     break;
                 }
             }
+        } else {
+            jComboBox_topic.setSelectedIndex(0);
         }
 
         jComboBox_kanbanColumn.setSelectedIndex((task.getKanbanColumn().getOrdinal()));
+        jList_tags.setSelectedIndices(new int[]{});
         for (Tag tag : task.getTags()) {
             for (int i = 0; i < tags.size(); i++) {
                 Tag t = tags.get(i);

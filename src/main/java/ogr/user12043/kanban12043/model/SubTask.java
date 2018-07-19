@@ -26,7 +26,7 @@ public class SubTask {
 
     @Column(name = "COMPLETED")
     @DisplayField(key = "entity.subTask.completed")
-    private Boolean completed;
+    private Boolean completed = Boolean.FALSE;
 
     public Integer getId() {
         return id;

@@ -49,7 +49,7 @@ public class Task {
     private Date deadLine;
 
     @Column(name = "HAS_DEAD_LINE")
-    private Boolean hasDeadLine;
+    private Boolean hasDeadLine = Boolean.FALSE;
 
     @Column(name = "FINISH_DATE")
     @DisplayField(key = "entity.task.finishedDate")
@@ -179,12 +179,5 @@ public class Task {
 
     public void setSubTasks(List<SubTask> subTasks) {
         this.subTasks = subTasks;
-    }
-
-    // Task statuses
-    public enum Status {
-        NONE,
-        CANCELLED,
-        COMPLETED
     }
 }

@@ -7,6 +7,8 @@ import ogr.user12043.kanban12043.view.MainPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -37,6 +39,18 @@ public class Main {
 
             // Set theme
             Utils.setTheme(Properties.theme);
+
+            // Set font
+            java.util.Enumeration keys = UIManager.getDefaults().keys();
+            while (keys.hasMoreElements()) {
+                Object key = keys.nextElement();
+                Object value = UIManager.get(key);
+                if (value instanceof javax.swing.plaf.FontUIResource) {
+                    FontUIResource defaultFontUIResource = (FontUIResource) value;
+                    FontUIResource newFontUIResource = new FontUIResource(defaultFontUIResource.getName(), defaultFontUIResource.getStyle(), 16);
+                    UIManager.put(key, newFontUIResource);
+                }
+            }
 
             // Close context on window close
             mainPane.addWindowListener(new WindowAdapter() {

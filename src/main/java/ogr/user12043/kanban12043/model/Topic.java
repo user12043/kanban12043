@@ -34,7 +34,7 @@ public class Topic {
 
     @Column(name = "IS_DEFAULT")
     @DisplayField(key = "entity.common.isDefault")
-    private Boolean isDefault;
+    private Boolean isDefault = Boolean.FALSE;
 
     @OneToMany(mappedBy = "topic")
     @LazyCollection(LazyCollectionOption.FALSE)
