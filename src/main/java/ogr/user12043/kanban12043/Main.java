@@ -34,23 +34,23 @@ public class Main {
             // Initialize context
             Utils.buildContext();
 
-            // Create GUI
-            mainPane = new MainPane();
-
-            // Set theme
-            Utils.setTheme(Properties.theme);
-
-            // Set font
+            // Set font size
             java.util.Enumeration keys = UIManager.getDefaults().keys();
             while (keys.hasMoreElements()) {
                 Object key = keys.nextElement();
                 Object value = UIManager.get(key);
                 if (value instanceof javax.swing.plaf.FontUIResource) {
                     FontUIResource defaultFontUIResource = (FontUIResource) value;
-                    FontUIResource newFontUIResource = new FontUIResource(defaultFontUIResource.getName(), defaultFontUIResource.getStyle(), 16);
+                    FontUIResource newFontUIResource = new FontUIResource(defaultFontUIResource.getName(), defaultFontUIResource.getStyle(), Properties.fontSize);
                     UIManager.put(key, newFontUIResource);
                 }
             }
+
+            // Set theme
+            Utils.setTheme(Properties.theme);
+
+            // Create GUI
+            mainPane = new MainPane();
 
             // Close context on window close
             mainPane.addWindowListener(new WindowAdapter() {
@@ -75,6 +75,9 @@ public class Main {
                 if (arg.equals(("-" + Constants.args_languageArgumentName))) {
                     i++;
                     Properties.lang = args[i];
+                } else if (arg.equals(("-" + Constants.args_themeArgumentName))) {
+                    i++;
+                    Properties.theme = Integer.parseInt(args[i]);
                 } else {
                     logger.error("Invalid argument: " + arg);
                     System.exit(1);

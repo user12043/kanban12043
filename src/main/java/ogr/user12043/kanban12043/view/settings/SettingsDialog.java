@@ -52,6 +52,7 @@ public class SettingsDialog extends javax.swing.JDialog {
         jTabbedPane_settings = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(Utils.getImage("settings.png", getClass()));
         setLocationByPlatform(true);
         setResizable(false);
 

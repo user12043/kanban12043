@@ -19,6 +19,7 @@ public class Properties {
     //<editor-fold desc="Property fields" defaultstate="collapsed">
     public static String lang = "en-US";
     public static int theme = 1;
+    public static int fontSize = 16;
     //</editor-fold>
 
     // Read properties from file
@@ -31,6 +32,9 @@ public class Properties {
             }
             if (jsonObject.has(Constants.args_themeArgumentName)) {
                 theme = jsonObject.getInt(Constants.args_themeArgumentName);
+            }
+            if (jsonObject.has(Constants.args_fontSizeArgumentName)) {
+                fontSize = jsonObject.getInt(Constants.args_fontSizeArgumentName);
             }
         } catch (JSONException | IOException e) {
             logger.warn("Failed to read configuration file (\"" + Constants.settingsFileName + "\")! Using default settings");
@@ -61,6 +65,7 @@ public class Properties {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.args_languageArgumentName, lang);
             jsonObject.put(Constants.args_themeArgumentName, theme);
+            jsonObject.put(Constants.args_fontSizeArgumentName, fontSize);
             Writer writer = jsonObject.write(new FileWriter(file), 2, 0);
             writer.close();
         } catch (IOException e) {

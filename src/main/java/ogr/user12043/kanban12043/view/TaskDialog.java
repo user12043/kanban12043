@@ -163,13 +163,13 @@ public class TaskDialog extends javax.swing.JDialog {
 
         jScrollPane_content = new javax.swing.JScrollPane();
         jTextArea_content = new javax.swing.JTextArea();
-        jComboBox_topic = new javax.swing.JComboBox<>();
+        jComboBox_topic = Utils.getComboBox();
         jLabel_topic = new javax.swing.JLabel();
         jLabel_kanbanColumn = new javax.swing.JLabel();
-        jComboBox_kanbanColumn = new javax.swing.JComboBox<>();
+        jComboBox_kanbanColumn = Utils.getComboBox();
         rootPanel_subTasks = new ogr.user12043.kanban12043.view.settings.partial.RootPanel();
         jLabel_priority = new javax.swing.JLabel();
-        jComboBox_priority = new javax.swing.JComboBox<>();
+        jComboBox_priority = Utils.getComboBox();
         jButton_save = new javax.swing.JButton();
         jLabel_progress = new javax.swing.JLabel();
         jSpinner_progress = Utils.getSpinner(0, 100);

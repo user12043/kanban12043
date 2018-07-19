@@ -64,6 +64,7 @@ public class KanbanContainer extends javax.swing.JPanel {
         jLabel_name.setText(getName());
         jLabel_name.setToolTipText("");
 
+        jScrollPane_content.setBorder(null);
         jScrollPane_content.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane_content.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
@@ -83,7 +84,7 @@ public class KanbanContainer extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel_name, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                        .addComponent(jLabel_name, javax.swing.GroupLayout.DEFAULT_SIZE, 4, Short.MAX_VALUE)
                         .addComponent(jScrollPane_content)
         );
         layout.setVerticalGroup(

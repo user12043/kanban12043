@@ -13,6 +13,7 @@ public class Constants {
     public static final String settingsFileName = "config.json";
     public static final String logFileName = "logs/kanban12043.log";
     public static final String languageDirectory = "lang";
+    public static final String iconsDirectory = "icon";
     public static final String defaultName = "unnamed";
     public static final String[] themes = new String[]{
             "javax.swing.plaf.nimbus.NimbusLookAndFeel",
@@ -21,9 +22,14 @@ public class Constants {
             "com.seaglasslookandfeel.SeaGlassLookAndFeel",
             "com.alee.laf.WebLookAndFeel"
     };
+    public static final String[] languages = new String[]{
+            "en-US",
+            "tr-TR"
+    };
     //<editor-fold desc="Argument names">
     public static final String args_languageArgumentName = "lang";
     public static final String args_themeArgumentName = "theme";
+    public static final String args_fontSizeArgumentName = "fontSize";
     //</editor-fold>
     // General fields of application
     public static ClassPathXmlApplicationContext context;

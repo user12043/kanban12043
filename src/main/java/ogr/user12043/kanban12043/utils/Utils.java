@@ -132,7 +132,7 @@ public class Utils {
         try {
             tag = getLangResource().getString(key);
         } catch (Exception e) {
-            logger.error("Can not get tag from lang resource for key: " + key);
+            logger.error("Can not get tag from lang resource for key: " + key + ", for locale: " + Properties.lang);
             tag = Constants.defaultName;
         }
         return tag;
@@ -225,6 +225,11 @@ public class Utils {
         return (i == 0);
     }
 
+    public static void infoDialog(Component parent, String message) {
+        String[] options = new String[]{getTag("options.ok")};
+        JOptionPane.showOptionDialog(parent, message, getTag("messages.info"), JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+    }
+
     public static Color selectColor(Dialog parent, Color initialColor) {
         JColorChooser chooser = new JColorChooser(initialColor);
         JDialog dialog = new JDialog(parent, true);
@@ -248,7 +253,7 @@ public class Utils {
             String className = Constants.themes[themeIndex];
             Class.forName(className);
             UIManager.setLookAndFeel(className);
-            SwingUtilities.updateComponentTreeUI(Main.mainPane);
+//            SwingUtilities.updateComponentTreeUI(Main.mainPane);
         } catch (ClassNotFoundException e) {
             Utils.errorDialog(Main.mainPane, Utils.getTag("messages.error.theme.themeNotFound"));
             Properties.updateProperty(Constants.args_themeArgumentName, 1);
@@ -294,5 +299,29 @@ public class Utils {
         });
 
         return spinner;
+    }
+
+    public static JComboBox getComboBox() {
+        JComboBox comboBox = new JComboBox();
+        comboBox.addMouseWheelListener(e -> {
+            JComboBox source = (JComboBox) e.getSource();
+            final int index = source.getSelectedIndex() + e.getWheelRotation();
+            if (index >= 0 && index < source.getItemCount()) {
+                source.setSelectedIndex(index);
+            }
+        });
+        return comboBox;
+    }
+
+    public static Image getImage(String name, Class clazz) {
+        ImageIcon imageIcon = new ImageIcon(name);
+        if (imageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+            // Get image from jar file
+            URL resource = clazz.getClassLoader().getResource(Constants.iconsDirectory + "/" + name);
+            if (resource != null) {
+                imageIcon = new ImageIcon(resource);
+            }
+        }
+        return imageIcon.getImage();
     }
 }
