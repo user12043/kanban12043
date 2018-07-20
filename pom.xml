@@ -193,7 +193,7 @@
       </plugin>
     </plugins>
 
-    <resources>
+    <!--<resources>
       <resource>
         <directory>${project.basedir}/src/main/resources</directory>
         <targetPath>${project.build.outputDirectory}</targetPath>
@@ -216,7 +216,7 @@
           <include>*.wav</include>
         </includes>
       </resource>
-    </resources>
+    </resources>-->
 
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>

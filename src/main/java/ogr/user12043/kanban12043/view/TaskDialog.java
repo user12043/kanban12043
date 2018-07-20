@@ -356,7 +356,13 @@ public class TaskDialog extends javax.swing.JDialog {
 
         final int selectedKanbanColumnIndex = jComboBox_kanbanColumn.getSelectedIndex();
         if (selectedKanbanColumnIndex > -1) {
-            task.setKanbanColumn(kanbanColumns.get(selectedKanbanColumnIndex));
+            final KanbanColumn selectedKanbanColumn = kanbanColumns.get(selectedKanbanColumnIndex);
+            final Integer limit = selectedKanbanColumn.getColumnLimit();
+            if (limit > 0 && (selectedKanbanColumn.getTasks().size() >= limit)) {
+                Utils.errorDialog(this, Utils.getTag("messages.error.reachedColumnLimit"));
+                return;
+            }
+            task.setKanbanColumn(selectedKanbanColumn);
         }
 
         final int[] selectedTagsIndices = jList_tags.getSelectedIndices();
