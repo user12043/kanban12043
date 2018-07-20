@@ -16,44 +16,42 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jLabel_minute" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Component id="jLabel_separate" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Component id="jLabel_second" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jButton_start" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton_start" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton_shortBreak" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton_longBreak" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton_stop" min="-2" max="-2" attributes="0"/>
+              <Component id="jButton_shortBreak" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButton_longBreak" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jButton_stop" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton_start" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton_shortBreak" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton_longBreak" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton_stop" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="35" max="32767" attributes="0"/>
+          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+              <Component id="jLabel_minute" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel_separate" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel_second" alignment="3" min="-2" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel_minute" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel_separate" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel_second" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jButton_shortBreak" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jButton_start" pref="30" max="32767" attributes="0"/>
+                      <Component id="jButton_longBreak" alignment="0" pref="30" max="32767" attributes="0"/>
+                      <Component id="jButton_stop" alignment="0" pref="30" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,27 +88,41 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton_start">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Start"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_startActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton_shortBreak">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Short Break"/>
-      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="Utils.getColorableButton()"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jButton_start.setIcon(startIcon());"/>
+        <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="jButton_start.setSize(normalButtonSize, normalButtonSize);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jButton_longBreak">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Long Break"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_longBreakActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="Utils.getColorableButton()"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jButton_longBreak.setIcon(longBreakIcon());"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jButton_stop">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Stop"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_stopActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="Utils.getColorableButton()"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jButton_stop.setIcon(stopIcon());"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton_shortBreak">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_shortBreakActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="Utils.getColorableButton()"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jButton_shortBreak.setIcon(shortBreakIcon());"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

@@ -22,8 +22,7 @@ public class Main {
 
     public static void main(String args[]) {
         try {
-            // Clean previous log file
-            Utils.cleanLogFile();
+            logger.info("Working dir: " + System.getProperty("user.dir"));
 
             // Read properties
             Properties.initializeProperties();

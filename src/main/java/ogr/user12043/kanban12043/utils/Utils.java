@@ -6,6 +6,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -26,13 +29,6 @@ import java.util.List;
  */
 public class Utils {
     private static final Logger logger = LogManager.getLogger(Utils.class);
-
-    public static void cleanLogFile() {
-        File file = new File(Constants.logFileName);
-        if (file.exists() && file.delete()) {
-            logger.info("Log file deleted.");
-        }
-    }
 
     /**
      * Build the spring context
@@ -56,7 +52,11 @@ public class Utils {
      */
     public static String readFile(String fileName) throws IOException {
         StringBuilder builder;
-        try (FileReader reader = new FileReader(fileName)) {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            return "";
+        }
+        try (FileReader reader = new FileReader(file)) {
             builder = new StringBuilder();
             while (reader.ready()) {
                 builder.append((char) reader.read());
@@ -274,6 +274,7 @@ public class Utils {
         // Prevent theme's colors
         button.setContentAreaFilled(false);
         button.setOpaque(true);
+        button.setBorderPainted(false);
         return button;
     }
 
@@ -317,11 +318,27 @@ public class Utils {
         ImageIcon imageIcon = new ImageIcon(name);
         if (imageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
             // Get image from jar file
-            URL resource = clazz.getClassLoader().getResource(Constants.iconsDirectory + "/" + name);
+            URL resource = clazz.getClassLoader().getResource(Constants.resourceDirectory + "/" + name);
             if (resource != null) {
                 imageIcon = new ImageIcon(resource);
             }
         }
         return imageIcon.getImage();
+    }
+
+    public static AudioInputStream getAudioStream(String name, Class clazz) throws IOException, UnsupportedAudioFileException {
+        AudioInputStream inputStream;
+        BufferedInputStream bufferedInputStream;
+        final String path = Constants.resourceDirectory + "/" + name;
+
+        File audioFile = new File(path);
+        if (audioFile.exists()) {
+            bufferedInputStream = new BufferedInputStream(new FileInputStream(audioFile));
+        } else {
+            bufferedInputStream = new BufferedInputStream(clazz.getClassLoader().getResourceAsStream(path));
+        }
+
+        inputStream = AudioSystem.getAudioInputStream(bufferedInputStream);
+        return inputStream;
     }
 }

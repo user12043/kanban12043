@@ -13,7 +13,7 @@ public class Constants {
     public static final String settingsFileName = "config.json";
     public static final String logFileName = "logs/kanban12043.log";
     public static final String languageDirectory = "lang";
-    public static final String iconsDirectory = "icon";
+    public static final String resourceDirectory = "resources";
     public static final String defaultName = "unnamed";
     public static final String[] themes = new String[]{
             "javax.swing.plaf.nimbus.NimbusLookAndFeel",
@@ -26,24 +26,28 @@ public class Constants {
             "en-US",
             "tr-TR"
     };
-    //<editor-fold desc="Argument names">
+    //<editor-fold desc="Argument names" defaultstate="collapsed">
     public static final String args_languageArgumentName = "lang";
     public static final String args_themeArgumentName = "theme";
     public static final String args_fontSizeArgumentName = "fontSize";
     //</editor-fold>
-    // General fields of application
+
+    //<editor-fold desc="General fields of application" defaultstate="collapsed">
+    public static final int POMODORO_INTERVAL = 25;
+    public static final int SHORT_BREAK_INTERVAL = 5;
+    public static final int LONG_BREAK_INTERVAL = 15;
     public static ClassPathXmlApplicationContext context;
     public static Locale locale;
     public static ResourceBundle langResourceBundle;
-    public static String[] priorities = new String[]{
+    public static final String[] priorities = new String[]{
             Utils.getTag("entity.task.priority.low"),
             Utils.getTag("entity.task.priority.normal"),
             Utils.getTag("entity.task.priority.high")
     };
-
-    public static String[] statuses = new String[]{
+    public static final String[] statuses = new String[]{
             Utils.getTag("entity.task.status.none"),
             Utils.getTag("entity.task.status.cancelled"),
             Utils.getTag("entity.task.status.completed")
     };
+    //</editor-fold>
 }

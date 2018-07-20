@@ -45,6 +45,9 @@ public class Properties {
     public static void updateProperty(String key, Object value) {
         try {
             String fileContent = Utils.readFile(Constants.settingsFileName);
+            if (fileContent.isEmpty()) {
+                return;
+            }
             JSONObject jsonObject = new JSONObject(fileContent);
             jsonObject.put(key, value);
             Writer writer = jsonObject.write(new FileWriter(Constants.settingsFileName), 2, 0);
