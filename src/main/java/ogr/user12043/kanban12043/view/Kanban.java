@@ -21,12 +21,12 @@ public class Kanban extends javax.swing.JPanel {
     private KanbanColumnDao kanbanColumnDao = DaoUtil.getKanbanColumnDao();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_bottomInfo;
-    private javax.swing.JLabel jLabel_content;
     private javax.swing.JMenuItem jMenuItem_delete;
     private javax.swing.JMenuItem jMenuItem_edit;
     private javax.swing.JPanel jPanel_tags;
     private javax.swing.JPopupMenu jPopupMenu_kanban;
     private javax.swing.JSeparator jSeparator;
+    private javax.swing.JTextArea jTextArea_content;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -46,7 +46,7 @@ public class Kanban extends javax.swing.JPanel {
      * Set kanban components' content from data
      */
     private void setFields() {
-        jLabel_content.setText(task.getContent());
+        jTextArea_content.setText(task.getContent());
         int counter = 0;
         for (Tag tag : task.getTags()) {
             JPanel panel = new JPanel();
@@ -65,8 +65,8 @@ public class Kanban extends javax.swing.JPanel {
         if (task.getTopic() != null) {
             setForeground(task.getTopic().getForegroundColor());
             setBackground(task.getTopic().getBackgroundColor());
-            jLabel_content.setForeground(task.getTopic().getForegroundColor());
-            jLabel_content.setBackground(task.getTopic().getBackgroundColor());
+            jTextArea_content.setForeground(task.getTopic().getForegroundColor());
+            jTextArea_content.setBackground(task.getTopic().getBackgroundColor());
             jLabel_bottomInfo.setForeground(task.getTopic().getForegroundColor());
             jLabel_bottomInfo.setBackground(task.getTopic().getBackgroundColor());
         }
@@ -84,10 +84,10 @@ public class Kanban extends javax.swing.JPanel {
         jPopupMenu_kanban = new javax.swing.JPopupMenu();
         jMenuItem_edit = new javax.swing.JMenuItem();
         jMenuItem_delete = new javax.swing.JMenuItem();
-        jLabel_content = new javax.swing.JLabel();
         jSeparator = new javax.swing.JSeparator();
         jPanel_tags = new javax.swing.JPanel();
         jLabel_bottomInfo = new javax.swing.JLabel();
+        jTextArea_content = new javax.swing.JTextArea();
 
         jPopupMenu_kanban.setLabel(Utils.getTag("options"));
 
@@ -110,15 +110,21 @@ public class Kanban extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 0));
         setComponentPopupMenu(jPopupMenu_kanban);
-        setMinimumSize(new java.awt.Dimension(200, 100));
-
-        jLabel_content.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_content.setText("initial");
 
         jPanel_tags.setLayout(new java.awt.GridBagLayout());
 
+        jLabel_bottomInfo.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel_bottomInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_bottomInfo.setText("initial");
+
+        jTextArea_content.setEditable(false);
+        jTextArea_content.setColumns(20);
+        jTextArea_content.setLineWrap(true);
+        jTextArea_content.setRows(5);
+        jTextArea_content.setText("initial");
+        jTextArea_content.setWrapStyleWord(true);
+        jTextArea_content.setBorder(null);
+        jTextArea_content.setInheritsPopupMenu(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -128,22 +134,22 @@ public class Kanban extends javax.swing.JPanel {
                                 .addComponent(jPanel_tags, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel_content, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                        .addComponent(jSeparator, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addComponent(jSeparator, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTextArea_content, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel_content, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(4, 4, 4)
+                                .addComponent(jTextArea_content, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel_bottomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
-                        .addComponent(jPanel_tags, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel_tags, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
