@@ -38,7 +38,7 @@ public class MainPane extends javax.swing.JFrame {
     public MainPane() {
         initComponents();
         setSize(800, 600);
-        setTitle(Utils.getTag("title"));
+        setTitle("kanban12043");
         initializeBoard(true);
         pack();
     }
