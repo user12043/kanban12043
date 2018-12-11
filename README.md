@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/user12043/kanban12043.svg?branch=master)](https://travis-ci.org/user12043/kanban12043)
+
 ![kanban12043](https://github.com/user12043/kanban12043/blob/master/src/main/resources/resources/main.png)
 
 # kanban12043
