@@ -55,7 +55,7 @@ public class AppSettings extends javax.swing.JPanel {
 
         jLabel_theme.setText(Utils.getTag("settings.theme") + "\t:");
 
-        jComboBox_theme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Nimbus", "Metal", "Darcula", "Seaglass", "WebLaF"}));
+        jComboBox_theme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Nimbus", "Metal", "Seaglass"}));
         jComboBox_theme.setSelectedIndex(Properties.theme);
 
         jButton_apply.setText(Utils.getTag("options.saveChanges"));

@@ -77,12 +77,10 @@
     <Component class="javax.swing.JComboBox" name="jComboBox_theme">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="3">
             <StringItem index="0" value="Nimbus"/>
             <StringItem index="1" value="Metal"/>
-            <StringItem index="2" value="Darcula"/>
-            <StringItem index="3" value="Seaglass"/>
-            <StringItem index="4" value="WebLaF"/>
+            <StringItem index="2" value="Seaglass"/>
           </StringArray>
         </Property>
         <Property name="selectedIndex" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
