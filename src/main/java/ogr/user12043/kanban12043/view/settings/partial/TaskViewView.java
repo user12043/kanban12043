@@ -79,7 +79,7 @@ public class TaskViewView extends javax.swing.JDialog {
     private ListModel<String> kanbanColumnsListModel() {
         DefaultListModel<String> model = new DefaultListModel<>();
         KanbanColumnDao kanbanColumnDao = DaoUtil.getKanbanColumnDao();
-        kanbanColumns = kanbanColumnDao.findAll(new Sort(Sort.Direction.ASC, "id"));
+        kanbanColumns = kanbanColumnDao.findAll(Sort.by("id").ascending());
         for (KanbanColumn column : kanbanColumns) {
             model.addElement(column.getName());
         }
@@ -89,7 +89,7 @@ public class TaskViewView extends javax.swing.JDialog {
     private ListModel<String> topicsListModel() {
         DefaultListModel<String> model = new DefaultListModel<>();
         TopicDao dao = DaoUtil.getTopicDao();
-        topics = dao.findAll(new Sort(Sort.Direction.ASC, "id"));
+        topics = dao.findAll(Sort.by("id").ascending());
         for (Topic topic : topics) {
             model.addElement(topic.getName());
         }
@@ -99,7 +99,7 @@ public class TaskViewView extends javax.swing.JDialog {
     private ListModel<String> tagsListModel() {
         DefaultListModel<String> model = new DefaultListModel<>();
         TagDao dao = DaoUtil.getTagDao();
-        tags = dao.findAll(new Sort(Sort.Direction.ASC, "id"));
+        tags = dao.findAll(Sort.by("id").ascending());
         for (Tag tag : tags) {
             model.addElement(tag.getName());
         }

@@ -51,7 +51,7 @@ public class TopicSettings extends javax.swing.JPanel {
     }
 
     private void refreshTable() {
-        topics = topicDao.findAll(new Sort(Sort.Direction.ASC, "id"));
+        topics = topicDao.findAll(Sort.by("id").ascending());
         DefaultTableModel tableModel = Utils.generateTableModelFromList(topics, Topic.class, false);
         rootPanel.setTableModel(tableModel);
     }

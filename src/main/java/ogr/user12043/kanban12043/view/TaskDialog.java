@@ -26,7 +26,7 @@ public class TaskDialog extends javax.swing.JDialog {
     private List<Topic> topics = topicDao.findAll();
 
     private KanbanColumnDao kanbanColumnDao = DaoUtil.getKanbanColumnDao();
-    private List<KanbanColumn> kanbanColumns = kanbanColumnDao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
+    private List<KanbanColumn> kanbanColumns = kanbanColumnDao.findAll(Sort.by("ordinal", "id").ascending());
 
     private TagDao tagDao = DaoUtil.getTagDao();
     private List<Tag> tags = tagDao.findAll();

@@ -140,10 +140,10 @@ public class MainPane extends javax.swing.JFrame {
 
         final TaskViewDao taskViewDao = DaoUtil.getTaskViewDao();
         final KanbanColumnDao kanbanColumnDao = DaoUtil.getKanbanColumnDao();
-        List<TaskView> taskViews = taskViewDao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
+        List<TaskView> taskViews = taskViewDao.findAll(Sort.by("ordinal", "id").ascending());
         List<KanbanColumn> kanbanColumns;
         if (taskViews.isEmpty()) {
-            kanbanColumns = kanbanColumnDao.findAll(new Sort(Sort.Direction.ASC, "ordinal", "id"));
+            kanbanColumns = kanbanColumnDao.findAll(Sort.by("ordinal", "id").ascending());
             for (KanbanColumn kanbanColumn : kanbanColumns) {
                 KanbanContainer container = new KanbanContainer(kanbanColumn.getName());
                 final List<Task> tasks = kanbanColumn.getTasks();

@@ -51,7 +51,7 @@ public class TagSettings extends javax.swing.JPanel {
     }
 
     private void refreshTable() {
-        tags = tagDao.findAll(new Sort(Sort.Direction.ASC, "id"));
+        tags = tagDao.findAll(Sort.by("id").ascending());
         DefaultTableModel tableModel = Utils.generateTableModelFromList(tags, Tag.class, false);
         rootPanel.setTableModel(tableModel);
     }
