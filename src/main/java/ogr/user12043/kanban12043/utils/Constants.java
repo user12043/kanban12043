@@ -18,9 +18,7 @@ public class Constants {
     public static final String[] themes = new String[]{
             "javax.swing.plaf.nimbus.NimbusLookAndFeel",
             "javax.swing.plaf.metal.MetalLookAndFeel",
-            "com.bulenkov.darcula.DarculaLaf",
             "com.seaglasslookandfeel.SeaGlassLookAndFeel",
-            "com.alee.laf.WebLookAndFeel"
     };
     public static final String[] languages = new String[]{
             "en-US",

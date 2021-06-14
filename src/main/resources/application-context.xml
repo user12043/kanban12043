@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+       xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
   <!--These are no longer necessary because of spring-data-jpa-->
   <!--<context:component-scan base-package="ogr.user12043.kanban12043"/>
   <tx:annotation-driven/>-->
 
   <import resource="jpa-context.xml"/>
+
+  <context:component-scan base-package="ogr.user12043.kanban12043.dao">
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+  </context:component-scan>
 
   <!--DAO classes' location for spring-data-jpa-->
   <jpa:repositories base-package="ogr.user12043.kanban12043.dao"/>

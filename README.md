@@ -26,14 +26,7 @@ Language files under <code>lang/</code> folder are being used in application
 <li> Application resources (icons, sounds) can be customized. Just replace the files in <code>resources/</code> folder</li>
 
 ### Included themes
-
-- Darcula: https://github.com/bulenkov/Darcula
-
-- WebLaF: https://github.com/mgarin/weblaf
-
 - Seaglass: https://github.com/khuxtable/seaglass
-> Darcula and WebLaF are not included in maven (pom.xml). Their jar files must be in <code>${project.basedir}/lib/</code> folder (named "darcula.jar" and "weblaf-complete-1.28.jar").
-
 ##
 
 #### Date picker library used in app
