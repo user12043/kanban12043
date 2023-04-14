@@ -19,7 +19,7 @@
     <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
     <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
     <maven-dependency-plugin.version>3.1.0</maven-dependency-plugin.version>
-    <json-version>20210307</json-version>
+    <json-version>20230227</json-version>
     <spring-version>5.3.8</spring-version>
     <spring-data-jpa-version>2.5.1</spring-data-jpa-version>
     <hibernate-version>5.5.0.Final</hibernate-version>
